@@ -8,26 +8,26 @@ class myException : std::exception {
 
 class Magician {
 public:
-  void riskyMagic() noexcept(false) { // marked as possibly throwing
+  void throwing_function() noexcept(false) { // marked as possibly throwing
     if (_magic < 500) {
       throw myException();
     }
   }
-  void magic() noexcept { /** do magic */ }
-  void badMagic() noexcept {
+  void exceptionless_func() noexcept { }
+  void bad_func() noexcept {
     // putting a throw-statement here will NOT break compilation
     // even if it violates the noexcept specifier
     throw myException();
   }
 
   // the same as noexcept(false)
-  void unspecifiedMagic() { /** do magic **/  }
+  void unspecified_func() {  }
 
   // deprecated since C++11 but the same as noexcept
-  void oldMagic() throw() { /** do magic **/  }
+  void old_syntax_func() throw() { }
 
   // deprecated since C++11 but the same as noexcept(false)
-  void oldriskyMagic() throw(myException) { throw myException(); }
+  void old_syntax_throwing_func() throw(myException) { throw myException(); }
 
 private:
   int _magic{1000};
@@ -36,11 +36,11 @@ private:
 int main(int argc, char **argv) {
   Magician m;
 
-  static_assert(noexcept(m.magic()), "not throwing");
-  static_assert(!noexcept(m.riskyMagic()), "not throwing");
-  static_assert(!noexcept(m.unspecifiedMagic()), "possibly throwing");
-  static_assert(noexcept(m.badMagic()),
-                "bad magic pretends to be not throwing");
-  static_assert(noexcept(m.oldMagic()), "not throwing");
-  static_assert(!noexcept(m.oldriskyMagic()), "possibly throwing");
+  static_assert(noexcept(m.exceptionless_func()), "not throwing");
+  static_assert(!noexcept(m.throwing_function()), "not throwing");
+  static_assert(!noexcept(m.unspecified_func()), "possibly throwing");
+  static_assert(noexcept(m.bad_func()),
+                "bad func pretends to be not throwing");
+  static_assert(noexcept(m.old_syntax_func()), "not throwing");
+  static_assert(!noexcept(m.old_syntax_throwing_func()), "possibly throwing");
 }
