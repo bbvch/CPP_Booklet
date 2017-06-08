@@ -15,7 +15,7 @@ public:
   }
   void magic() noexcept { /** do magic */ }
   void badMagic() noexcept {
-    // putting a throw-statement inside this function will NOT break compilation
+    // putting a throw-statement here will NOT break compilation
     // even if it violates the noexcept specifier
     throw myException();
   }
@@ -23,8 +23,10 @@ public:
   // the same as noexcept(false)
   void unspecifiedMagic() { /** do magic **/  }
 
+  // deprecated since C++11 but the same as noexcept
   void oldMagic() throw() { /** do magic **/  }
 
+  // deprecated since C++11 but the same as noexcept(false)
   void oldriskyMagic() throw(myException) { throw myException(); }
 
 private:
