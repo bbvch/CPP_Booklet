@@ -1,5 +1,7 @@
 #include <atomic>
 #include <iostream>
+#include <unordered_map>
+#include <cassert>
 // emtpy dummy functions for use below
 namespace {
 
@@ -50,4 +52,37 @@ void fall_through(int i) {
   }
 }
 
-int main(int argc, char **argv) {}
+struct[[nodiscard]] demon{}; // Demons need to be kept and named
+struct ghost {};             // Ghosts can be free
+
+demon summon_demon() { return demon(); }
+
+// summoned ghosts need to be kept
+[[nodiscard]] ghost summon_ghost() {
+  return ghost();
+}
+
+void summon() {
+  auto d = summon_demon(); // OK
+  auto g = summon_ghost(); // OK
+
+  summon_demon(); // Compiler Warning
+  summon_ghost(); // Compiler Warning
+}
+
+
+
+[[maybe_unused]] void f([[maybe_unused]] bool thing1,
+                        [[maybe_unused]] bool thing2)
+{
+   [[maybe_unused]]bool b = thing1 && thing2;
+
+   assert(b); // in release mode, assert is compiled out, and b is unused
+              // no warning because it is declared [[maybe_unused]]
+   assert(thing1 && thing2);// parameters thing1 and thing2 are not used, no warning
+}
+
+
+int main(int argc, char **argv) {
+
+}
