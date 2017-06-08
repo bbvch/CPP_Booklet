@@ -1,15 +1,22 @@
 #include <atomic>
 #include <iostream>
+// emtpy dummy functions for use below
+namespace {
 
-[[noreturn]] void alwaysThrow() { throw 123; };
+void foo() {}
+void bar() {}
+}
+
+[[noreturn]] void always_throw() { throw 123; };
 
 void opaque_func(int *p){/* do something with p */};
 
-[[carries_dependency]] void transparend_func(int *p) {
-  /* do something with p */
+[[carries_dependency]] void transparent_func(int *p){
+    /* do something with p */
 }
 
-[[deprecated("Don't use black_magic; use white_magic instead")]] void black_magic() {}
+    [[deprecated("black magic is no longer used")]] void black_magic(){}[
+        [deprecated]] void ancient_magic() {}
 
 void white_magic();
 
@@ -25,10 +32,22 @@ void illustrate_carries_dependency() {
                          // compiler might construct a memory fence here
 
   if (atomic)
-    transparend_func(atomic); // marked as to work in the same memory-dependency
+    transparent_func(atomic); // marked as to work in the same memory-dependency
                               // tree, compiler can omit the memory fence
 }
 
-int main(int argc, char **argv) {
-    black_magic();
+void fall_through(int i) {
+  switch (i) {
+  case 0:
+  case 1:
+  case 2: // until here implicit [[fallthrough]]
+    foo();
+    [[fallthrough]]; // don't forget the semicolon
+  case 3:
+    bar();
+  default: // compiler might issue a warning, depending on the flags set
+    break;
+  }
 }
+
+int main(int argc, char **argv) {}
