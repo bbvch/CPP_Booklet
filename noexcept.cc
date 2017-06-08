@@ -13,20 +13,17 @@ public:
       throw myException();
     }
   }
-  void magic() noexcept { /** do some magic */
-  }
-
+  void magic() noexcept { /** do magic */ }
   void badMagic() noexcept {
     // putting a throw-statement inside this function will NOT break compilation
     // even if it violates the noexcept specifier
     throw myException();
   }
 
-  void unspecifiedMagic() { /** do some magic **/
-  }                         // same as noexcept(false)
+  // the same as noexcept(false)
+  void unspecifiedMagic() { /** do magic **/  }
 
-  void oldMagic() throw() { /** do some magic **/
-  }
+  void oldMagic() throw() { /** do magic **/  }
 
   void oldriskyMagic() throw(myException) { throw myException(); }
 
