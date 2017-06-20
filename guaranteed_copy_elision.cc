@@ -15,6 +15,6 @@ A f() { return A{}; }
 
 int main()
 {
-	// OK, because of copy elision. Copy/Move constructing an anonymous A is not neccessary
+    // OK, because of copy elision. Copy/Move constructing an anonymous A is not neccessary
     A a = f();
 }
