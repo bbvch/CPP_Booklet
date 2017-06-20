@@ -16,14 +16,13 @@ int main(int argc, char **argv) {
     obj.non_const_a() += v;
   }; // OK, passing by ref
 
-  const MutableClass const_obj;
-  const auto const_func = [&const_obj](int v) {
-    return const_obj.const_a() + v;
-  }; // OK,implicitely constexpr
-  // line below not yet supported by clang 3.9 but by nightly build from 8. 6.
-  // 2017
-  // constexpr const auto constexpr_func = [&const_obj](int v) { return
-  // const_obj.const_a() + v; }; // OK, same as above
+  constexpr int c{1000};
+
+  // explicitely constexpr lambda
+  const auto constexpr_func = [&c](int v) constexpr { return c + v; };
+
+  // implicitely constexpr, no warning if no longer constexpr
+  const auto const_func = [&c](int v) { return c + v; };
 
   return 0;
 }
