@@ -6,10 +6,10 @@ class myException : std::exception {
 };
 }
 
-class Magician {
+class A {
 public:
   void throwing_function() noexcept(false) { // marked as possibly throwing
-    if (_magic < 500) {
+    if (_a < 500) {
       throw myException();
     }
   }
@@ -30,17 +30,17 @@ public:
   void old_syntax_throwing_func() throw(myException) { throw myException(); }
 
 private:
-  int _magic{1000};
+  int _a{1000};
 };
 
 int main(int argc, char **argv) {
-  Magician m;
+  A a;
 
-  static_assert(noexcept(m.exceptionless_func()), "not throwing");
-  static_assert(!noexcept(m.throwing_function()), "not throwing");
-  static_assert(!noexcept(m.unspecified_func()), "possibly throwing");
-  static_assert(noexcept(m.bad_func()),
+  static_assert(noexcept(a.exceptionless_func()), "not throwing");
+  static_assert(!noexcept(a.throwing_function()), "not throwing");
+  static_assert(!noexcept(a.unspecified_func()), "possibly throwing");
+  static_assert(noexcept(a.bad_func()),
                 "bad func pretends to be not throwing");
-  static_assert(noexcept(m.old_syntax_func()), "not throwing");
-  static_assert(!noexcept(m.old_syntax_throwing_func()), "possibly throwing");
+  static_assert(noexcept(a.old_syntax_func()), "not throwing");
+  static_assert(!noexcept(a.old_syntax_throwing_func()), "possibly throwing");
 }
