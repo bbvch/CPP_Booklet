@@ -1,3 +1,4 @@
 *.exe
 *.s
 *.autosave
+bin/
