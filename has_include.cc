@@ -4,6 +4,7 @@
     #define OPEN_SHARED LoadLibrary
 #else
     #pragma error("loading shared libraries not supported");
+#endif
 
 int main(int, char**)
 {
