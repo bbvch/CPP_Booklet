@@ -2,3 +2,10 @@
 *.s
 *.autosave
 bin/
+*.vcxproj
+*.vcxproj.filters
+*.user
+CMakeCache.txt
+CMakeFiles
+Makefile
+cmake_install.cmake
