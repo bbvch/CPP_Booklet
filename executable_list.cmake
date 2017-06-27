@@ -1,3 +1,4 @@
+add_executable(alignment alignment.cc)
 add_executable(class_inheritance_keywords class_inheritance_keywords.cc)
 add_executable(class_keywords class_keywords.cc)
 add_executable(constexpr constexpr.cc)
