@@ -1,6 +1,9 @@
 struct Dummy {
   Dummy() = default;
 
+  // Error compiler does not know how to default this
+  // Dummy(int x) = default;
+
   Dummy(const Dummy &) = default;
   Dummy &operator=(const Dummy &rhs) = default;
 };
