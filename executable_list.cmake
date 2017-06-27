@@ -1,5 +1,6 @@
 add_executable(class_inheritance_keywords class_inheritance_keywords.cc)
 add_executable(class_keywords class_keywords.cc)
+add_executable(constexpr constexpr.cc)
 add_executable(constexpr_if constexpr_if.cc)
 add_executable(constexpr_lambda constexpr_lambda.cc)
 add_executable(decltype decltype.cc)
