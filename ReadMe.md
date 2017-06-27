@@ -1,9 +1,9 @@
-All examples tested and compiled with clang 3.9 and g++ 7.1 using https://godbolt.org/ 
+All examples tested and compiled with g++ 7.1 using https://godbolt.org/ 
 
 # Cmake 
 The CMakeLists.txt file will genreate an executable for each *.cc file 
 ## rebuilding the CMakeLists 
-execute generate_cmakelists.sh in a bash shell to rebuild the cmakelist file
+execute generate_cmakelists.sh in a bash shell to rebuild the list of files to compile 
 
 
 # Compiling:
