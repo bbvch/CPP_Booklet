@@ -1,5 +1,6 @@
 add_executable(constexpr_if constexpr_if.cc)
 add_executable(constexpr_lambda constexpr_lambda.cc)
+add_executable(decltype decltype.cc)
 add_executable(guaranteed_copy_elision guaranteed_copy_elision.cc)
 add_executable(has_include has_include.cc)
 add_executable(hex_float_literals hex_float_literals.cc)
