@@ -60,7 +60,7 @@ int main(int argc, char **argv) {
   std::cout << store.access<0>() << std::endl; // 1000
   std::cout << store.access<1>() << std::endl; // 64
   std::cout << store.access<2>() << std::endl; // "Hello World"
-  for (const auto &v : store.access<3>()) { // vector returned
+  for (const auto &v : store.access<3>()) {    // vector returned
     std::cout << v << ", ";
   }
   std::cout << std::endl;

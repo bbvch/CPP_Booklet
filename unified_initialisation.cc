@@ -50,6 +50,4 @@ int main(int, char **) {
     std::vector<std::string> m_data;
   };
   Bar bar{"A", "B", "C", "D"};
-
-
 }
