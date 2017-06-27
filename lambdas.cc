@@ -36,13 +36,13 @@ int main(int, char **) {
     return x * y;
   });
 
-
   // initialized lambda captures
-    auto init_function = [&r = x, x = x + 1 ]()->int {
-      r += 2;
-      return x + 2;
-    };
+  auto init_function = [&r = x, x = x + 1 ]()->int {
+    r += 2;
+    return x + 2;
+  };
 
-    const auto auto_param_function = [](const auto& a, const auto& b) { return a *b; };
-
+  const auto auto_param_function = [](const auto &a, const auto &b) {
+    return a * b;
+  };
 }

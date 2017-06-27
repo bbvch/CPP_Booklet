@@ -23,19 +23,16 @@ public:
 };
 
 struct Base {
-  explicit Base(int z) {};
-    Base() = default;
+  explicit Base(int z){};
+  Base() = default;
 };
 struct InheritingCtor : public Base {
   using Base::Base; // alle vererbten Konstruktoren
   // aufnehmen
-  InheritingCtor(int x, int y) {}; // neue Überladung
+  InheritingCtor(int x, int y){}; // neue Überladung
 };
-
 
 int main(int, char **) {
   InheritingCtor d1(5, 10); // neuen Konstruktor verwenden
   InheritingCtor d2(42);    // mit using eingeführten Konstruktor
-
-
 }
