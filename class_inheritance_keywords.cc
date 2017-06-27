@@ -32,7 +32,10 @@ struct InheritingCtor : public Base {
   InheritingCtor(int x, int y) {}; // neue Überladung
 };
 
+
 int main(int, char **) {
   InheritingCtor d1(5, 10); // neuen Konstruktor verwenden
   InheritingCtor d2(42);    // mit using eingeführten Konstruktor
+
+
 }

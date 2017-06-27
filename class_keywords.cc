@@ -25,4 +25,18 @@ struct NonContrstructableByValue {
   void f(double) = delete; // verhindert f.foo(3.14)
 };
 
-int main(int, char **) {}
+struct ExplicitCtor
+{
+// bool Konvertierung
+explicit operator bool () {return true;}
+};
+
+
+
+int main(int, char **) {
+
+    ExplicitCtor myBool;
+    if (myBool) {  }; // OK
+    int a = (myBool)?3:4; // OK
+    //int b = myBool + a; // Error, nur Konvertierungen
+}
