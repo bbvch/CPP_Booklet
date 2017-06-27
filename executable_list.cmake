@@ -18,5 +18,6 @@ add_executable(selection_statements_with_initializers selection_statements_with_
 add_executable(standard_attributes standard_attributes.cc)
 add_executable(static_assert static_assert.cc)
 add_executable(structured_bindings structured_bindings.cc)
+add_executable(trailing_return_types trailing_return_types.cc)
 add_executable(type_inference_and_auto type_inference_and_auto.cc)
 add_executable(unified_initialisation unified_initialisation.cc)
