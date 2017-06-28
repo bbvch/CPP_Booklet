@@ -3,6 +3,7 @@
 * of the C++ Booklet (https://goo.gl/VJ4T3A)
 * published by bvv software services AG (c) 2017
 *
+* This example illustrates the usage of static_asserts
 **/
 
 static_assert((sizeof(long) == 8), "64 bit code not supported!");
@@ -15,5 +16,7 @@ int main(int, char **) {
 
   Dummy<int> di; // OK
 
-  // Dummy<short> ds; // Error zur Übersetzungszeit!
+#ifdef EXPECT_FAILED_COMPILATION
+  Dummy<short> ds; // Assert on compile tile
+#endif
 }
