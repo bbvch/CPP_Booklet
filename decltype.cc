@@ -1,8 +1,9 @@
 /**
-* Example for section @section @title
+* Example for section 2.2.2
 * of the C++ Booklet (https://goo.gl/VJ4T3A)
 * published by bvv software services AG (c) 2017
 *
+*  This example illustrates the use of decltype
 **/
 
 #include <string>
@@ -10,16 +11,17 @@
 int main(int, char **) {
   const std::string &other{"Abracadabra"};
   const std::string &name();
-  {}
-  decltype(name()) n1(other); // n1 erhält den Typ
-  // const std::string& (initialisierung mit referenz)
+
+  // using decltype to "copy" the type from an existing object
+  decltype(name()) n1(other); // n1 containts the type 'const std::string&'
+
   std::string s1;
-  decltype(s1) s2; // s2 erhält den Typ std::string
+  decltype(s1) s2; // s2 contains the type std::string
   struct Foo {
     int i;
   };
   Foo foo;
-  decltype(foo.i) j;      // j erhält den Typ int
-  decltype((foo.i)) k(j); // k erhält den Typ int&, weil
-                          // (foo.i) ein Ausdruck ist und  eine Adresse hat
+  decltype(foo.i) j;      // j contains type int
+  decltype((foo.i)) k(j); // k contains type int&, because
+                          // (foo.i) is an expression which has an adress
 }
