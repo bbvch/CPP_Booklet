@@ -13,9 +13,16 @@ Either set the `$CC` and `$CXX` environment variables or use `cmake -DCMAKE_CXX_
 As soon as more and more compilers are able to compile the full C++17 feature set they will be added.
 If you find one missing, raise an issue on github for it. https://github.com/bernedom/CPP17_Snippets
 
+## building and compiling
+'$>cmake .'
+'$make
+
+Some examples contain code that is intentionally to fail to compile. Usually this is done to illustrate some C++ feature. To compile the sources to allow for such failure use. Note the use of the -i flags else make stops on the first failure
+'$>make clean
+'$>make CXX_FLAGS+=-DEXPECT_FAILED_COMPILATION -i
+
 ## rebuilding the list of targets 
 execute generate_cmakelists.sh in a bash shell to rebuild the list of files to compile 
-
 
 # Compiling by hand:
 clang: `$>clang++ -std=c++1z file.cc -o file.exe`
