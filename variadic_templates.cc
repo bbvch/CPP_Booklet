@@ -3,6 +3,7 @@
 * of the C++ Booklet (https://goo.gl/VJ4T3A)
 * published by bvv software services AG (c) 2017
 *
+* This example illustrates the usage of variadic templates
 **/
 
 #include <iostream>
@@ -12,21 +13,22 @@ struct Dummy {
   char c;
 };
 
+// variadic template function definition
 template <typename... Args> void aFunction(Args... args) {
-  // f(args...);
+
 }
 
+// variadic template class definition
 template <typename... Args> class aClass {
-  // Klasseninhalt
+
 };
 
-int sum() { return 0; } // Rekursionsende
+int sum() { return 0; } // End of recursion
 template <typename T, typename... US> int sum(T t, US... us) {
-  return t + sum(us...); // Rekursion
+  return t + sum(us...); // recursion popping the first template argument
 }
 template <typename... US> int sumSquares(US... us) {
-  return sum(us * us...); // ein komplexer Ausdruck
-  // von Unpack "..."
+  return sum(us * us...); // calls sum<typename T, typename ...US>
 }
 
 int main(int, char **) {
