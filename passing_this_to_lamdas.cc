@@ -3,6 +3,7 @@
 * of the C++ Booklet (https://goo.gl/VJ4T3A)
 * published by bvv software services AG (c) 2017
 *
+* This example illustrates how 'this' can be passed to a lambda function
 **/
 
 #include <iostream>
@@ -38,6 +39,7 @@ public:
     // deleting the copy ctor will break compilation
   }
 
+  // before C++17 the following workaround was used to pass 'this'
   void pre14_workararound_for_passing_this() {
     const auto &tmp = *this; // creating a reference to this
     const auto func = [tmp]() {
