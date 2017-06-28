@@ -9,7 +9,7 @@
 
 struct NonDeriveable final {};
 
-#ifdef DOES_NOT_COMPILE
+#ifdef EXPECT_FAILED_COMPILATION
 // Error cannot derive from Base because of final
 struct Derived : NonDeriveable {};
 #endif
@@ -17,13 +17,20 @@ struct Derived : NonDeriveable {};
 struct BaseWithFinalMembers {
   virtual void foo(int) final;
   virtual void bar();
+  void nonVirtual();
 };
 struct Derived2 : public BaseWithFinalMembers {
 
-#ifdef DOES_NOT_COMPILE
-  void foo(int) override; // Error because of foo() being 'final' in base class
+#ifdef EXPECT_FAILED_COMPILATION
+  void foo(int) override; // error because of foo() being 'final' in base class
+
+  // error does not override any function of base class
+  void nonexistant() override;
+
+  // error nonVirtual is not marked virtual in the base class
+  void nonVirtual() override;
 #endif
-  void bar() override;
+  void bar() override; // explicitely override bar
 };
 
 class DelegatingCtor {
@@ -39,15 +46,7 @@ struct Base {
 
   Base() = default;
   // explicit to avoid implicit conversion from ptr-types
-  // this cannot be marked default, because of the argument
   explicit Base(int z){};
-
-  virtual ~Base() = default; // destructor can be defaulted too
-
-protected:
-  Base(Base&& other) = default; // protect move, but use default implementation
-  Base(const Base& other) = default; // protect copy, but use default implementation
-
 };
 struct InheritingCtor : public Base {
   using Base::Base;               // Inherit all ctors from Base

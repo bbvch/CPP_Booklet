@@ -1,47 +1,61 @@
 /**
-* Example for section @section @title
+* Example for section 2.4
 * of the C++ Booklet (https://goo.gl/VJ4T3A)
 * published by bvv software services AG (c) 2017
 *
+*  This example illustrates the
 **/
 
 struct Dummy {
   Dummy() = default;
+  // specify destructor as virtual but use default implementation
+  virtual ~Dummy() = default;
 
-  // Error compiler does not know how to default this
-  // Dummy(int x) = default;
+#ifdef EXPECT_FAILED_COMPILATION
+  Dummy(int x) = default; // error this is not a default constructur
+#endif
 
-  Dummy(const Dummy &) = default;
+protected:
+  // protect move, but use default implementation
+  Dummy(Dummy &&other) = default;
+
+  // protect copy, but use default implementation
+  Dummy(const Dummy &other) = default;
+  // also protect assignemt operator
   Dummy &operator=(const Dummy &rhs) = default;
 };
 
 struct DummyNonCopyable {
   DummyNonCopyable() = default;
-  // verhindert das Kopieren
+
+  // disables copying the object through construction
   DummyNonCopyable(const Dummy &) = delete;
-  // verhindert Zuweisungen
+  // disables copying the object through assignement
   DummyNonCopyable &operator=(const Dummy &rhs) = delete;
 };
 
 struct NonDefaultConstructible {
+  // this struct can only be constructed through a move or copy
   NonDefaultConstructible() = delete;
 };
 
-struct NonContrstructableByValue {
+struct NonContstructableByValue {
   void f(int){};
-  void f(double) = delete; // verhindert f.foo(3.14)
+  void f(double) = delete; // prevents f.foo(3.14)
 };
 
-struct ExplicitCtor {
-  // bool Konvertierung
+struct ExplicitConversion {
+  // Conversion to bool overwritten
   explicit operator bool() { return true; }
 };
 
 int main(int, char **) {
 
-  ExplicitCtor myBool;
+  ExplicitConversion myBool;
   if (myBool) {
   };                        // OK
   int a = (myBool) ? 3 : 4; // OK
-                            // int b = myBool + a; // Error, nur Konvertierungen
+#ifdef EXPECT_FAILED_COMPILATION
+  int b = myBool + a; // Error, only conversion allowed
+#endif
 }
