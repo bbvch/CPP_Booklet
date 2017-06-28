@@ -5,8 +5,8 @@
 *
 **/
 
-// this is how NULL used to be defined, in modern C++ NULL is often defined as
-// nullptr
+// this is how NULL used to be defined. NULL was never a language keyword, but
+// always a predefined macro
 #define NULL 0
 
 void foo(const char *dummy) {
@@ -17,17 +17,26 @@ void foo(const char *dummy) {
 }
 void foo(int i) {}
 
+void bar(const char *c) {}
+void bar(const float *f) {}
+
 int main(int, char **) {
 
   const char *dummy = nullptr; // OK
-  // bool valid = nullptr;        // error, except if direct initialisation
-  // enabled during compilation
-  // int value = nullptr;         // Error!
+#ifdef EXPECT_FAILED_COMPILATION
+  // error, except if direct initialisation enabled during compilation
+  bool valid = nullptr;
+  int value = nullptr; // Error, assigning a pointer type to int
+#endif
   int anInt{42};
   int *ptrTo_anInt = &anInt;
   ptrTo_anInt = nullptr; // OK
 
-  foo(NULL);    // ruft foo(int) auf
-  foo(nullptr); // ruft die bestmögliche Entsprechung für
-                // foo(T*) auf, hier foo(const char*)
+  foo(NULL);    // calls foo(int)
+  foo(nullptr); // calls foo(const char*), because it matches the ptr type
+
+#ifdef EXPECT_FAILED_COMPILATION
+  bar(nullptr); // ambigous call to bar(const int*) or bar(const float*)
+#endif
+  bar(static_cast<const float *>(nullptr)); // force pointer type
 }
