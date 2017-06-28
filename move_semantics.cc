@@ -3,10 +3,12 @@
 * of the C++ Booklet (https://goo.gl/VJ4T3A)
 * published by bvv software services AG (c) 2017
 *
+* This example illustrates the use of the move semantics introduced in C++11
 **/
 
 #include <vector>
 
+// swaps two variables using move semantics
 template <typename T> void swap(T &a, T &b) {
   T tmp(std::move(a));
   a = std::move(b);
@@ -14,53 +16,52 @@ template <typename T> void swap(T &a, T &b) {
 }
 
 struct Dummy {
-  int *data;
+
   Dummy() : data(nullptr) {}
   Dummy(int myInt) : data(new int) { *data = myInt; };
 
   ~Dummy() { delete data; }
-  // verhindert das Kopieren
-  Dummy(const Dummy &) = delete;
-  Dummy &operator=(const Dummy &) = delete;
-  // unterstützt das Verschieben
-  Dummy(Dummy &&other) // Move constructor
-      : data(other.data) {
-    other.data = nullptr;
-  }
-  Dummy &operator=(Dummy &&other) // Move operator
-  {
+
+  // Move constructor, Object can be moved without new allocation of data
+  Dummy(Dummy &&other) : data(other.data) { other.data = nullptr; }
+  // move-assignement. Note that internal deletion of data first
+  Dummy &operator=(Dummy &&other) {
     if (data)
       delete data;
     data = other.data;
     other.data = nullptr;
     return *this;
   }
+
+  // prevent copying, because of the internal allocation of 'data'
+  Dummy(const Dummy &) = delete;
+  Dummy &operator=(const Dummy &) = delete;
+
+  int *data;
 };
 
 int main(int, char **) {
 
-  // Beispiele mit verschiebbaren Objekten
-  // in Standard-Containern
-  // Verwendung bei einem Standard-Container
-  std::vector<Dummy> vd1;    // leerer Vektor
-  vd1.push_back(Dummy(100)); // temporäres Objekt dem
-  // Vektor übergeben
-  vd1.emplace_back(200); // Variante ohne temporäres
-  // Objekt
-  Dummy di1(300);                // nicht temporäres Objekt
-  vd1.push_back(std::move(di1)); // Inhalt von di1 in
-  // Vektor verschieben
-  // Nur ein komplettes Objekt erzeugen und dessen
-  // Inhalt auf verschiedene Art und Weise weiterreichen
-  std::vector<Dummy> vd2[3]; // Array aus 3 leeren
-  // Vektoren
-  vd2[0].push_back(Dummy(500)); // ein Element in
-  // Vektor 0 einfügen
-  vd2[1] = std::move(vd2[0]);                    // Vektor verschieben
-  std::swap(vd2[1], vd2[2]);                     // Vektoren tauschen
-  std::vector<Dummy> result = std::move(vd2[2]); // Element herausholen
+  // Examples of moveable objects used in standard containers
 
-  int x = 20;
-  int y = 40;
-  swap(x, y);
+  std::vector<Dummy> vd1;
+
+  // move a temporary object into the vector
+  // Since C++17 this guaranteed to be a move, see 'guaranteed copy elision'
+  vd1.push_back(Dummy(100));
+
+  vd1.emplace_back(200); // emplace without the temporary object
+
+  Dummy di1(300);
+  // Move di1 into the vector. that 'di1' is no longer accessible after the call
+  vd1.push_back(std::move(di1));
+
+  std::vector<Dummy> vd2[3]; // three empty vectors in an array
+  vd2[0].push_back(Dummy(500));
+  vd2[1] = std::move(vd2[0]); // move the whole vector
+  std::swap(vd2[1], vd2[2]);  // swap two vectors
+
+  // retrieve an element. the vector does not change its size
+  std::vector<Dummy> result = std::move(vd2[2]);
+
 }
