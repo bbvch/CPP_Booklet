@@ -1,32 +1,37 @@
 /**
-* Example for section @section @title
+* Example for section 2.14
 * of the C++ Booklet (https://goo.gl/VJ4T3A)
 * published by bvv software services AG (c) 2017
 *
+* this example illustrates the usage of alignof, alignas and offsetof operators
 **/
 
 #include <cstddef>
 #include <iostream>
 
 struct C {
-  char a;
-  char b;
-};
+  char a; // size: 1, alignment: 1, offest 0
+  char b; // size: 1, alignment: 1, offset 1
+};        // sizeof(C): 2, alignof(C): 1
+
 struct I {
-  int n;
-  char c;
-};
+  int n;  // size: 4, alignment: 4, offset 0
+  char c; // size: 1, alignment: 1, offset 4
+  // + three bytes padding because of alignment 4 of in n
+}; // sizeof(I): 8, alignof(I): 4
 
 struct S {
-  int a;
-  int b;
-  int c;
-};
+  int a; // size: 4, alignment: 4, offset 0
+  int b; // size: 4, alignment: 4, offset 4
+  int c; // size: 4, alignment: 4, offset 8
+};       // sizeof(S): 12, alignof(S): 4
+
 struct X {
-  int a;
-  alignas(16) int b;
-  int c;
-};
+  int a;             // size: 4, alignment: 4, offset 0
+  alignas(16) int b; // size: 4, alignment: 16, offset 4
+  int c;             // size: 4, alignment: 4, offset 20
+  // + 8 bytes padding because the forced alignment of b
+}; // sizeof(X): 32, alignof(X): 16 (forced by alignas of b)
 
 int main(int, char **) {
 
