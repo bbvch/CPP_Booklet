@@ -1,3 +1,10 @@
+/**
+* Example for section @section @title
+* of the C++ Booklet (https://goo.gl/VJ4T3A)
+* published by bvv software services AG (c) 2017
+*
+**/
+
 // this is how NULL used to be defined, in modern C++ NULL is often defined as
 // nullptr
 #define NULL 0

@@ -1,3 +1,10 @@
+/**
+* Example for section @section @title
+* of the C++ Booklet (https://goo.gl/VJ4T3A)
+* published by bvv software services AG (c) 2017
+*
+**/
+
 constexpr double pi{3.1416}; // für floating-point-Typen
 constexpr int square(int x) { return x * x; }
 float fArray[square(5)]; // für Arraygrössen

@@ -1,3 +1,10 @@
+/**
+* Example for section @section @title
+* of the C++ Booklet (https://goo.gl/VJ4T3A)
+* published by bvv software services AG (c) 2017
+*
+**/
+
 #include <iostream>
 
 int main() {
