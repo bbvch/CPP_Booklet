@@ -7,7 +7,7 @@ use  https://godbolt.org/ to test various other compilers
 
 
 # Building with CMake
-CMake will generate a makefile that will genreate an executable for each *.cc file. At the moment (27. June 2017) only gcc 7.1.0 is C++17 feature complete, so CMake will only genreate makefiles if gcc 7.1.0 or newer is available. 
+CMake will generate a makefile that will genreate an executable for each *.cc file. At the moment (27. June 2017) only gcc 7.0.1 is C++17 feature complete, so CMake will only genreate makefiles if gcc 7.0.1 or newer is available. 
 Either set the `$CC` and `$CXX` environment variables or use `cmake -DCMAKE_CXX_COMPILER=/usr/bin/g++-7` to specify the compiler to use.
 
 As soon as more and more compilers are able to compile the full C++17 feature set they will be added.
