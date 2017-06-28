@@ -3,6 +3,7 @@
 * of the C++ Booklet (https://goo.gl/VJ4T3A)
 * published by bvv software services AG (c) 2017
 *
+* This exmaple illustrates the use of the __has_include preprocessor directive
 **/
 
 #if __has_include(<unistd.h>)
