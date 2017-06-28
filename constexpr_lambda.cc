@@ -1,8 +1,11 @@
 /**
-* Example for section @section @title
+* Example for section 2.11.3
 * of the C++ Booklet (https://goo.gl/VJ4T3A)
 * published by bvv software services AG (c) 2017
 *
+*  This example illustrates the use of constant expression lambdas an the use of
+*the mutable keyword
+* in that context
 **/
 
 class MutableClass {
@@ -15,13 +18,6 @@ private:
 };
 
 int main(int argc, char **argv) {
-  MutableClass obj;
-  auto non_const_func = [obj](int v) mutable {
-    obj.non_const_a() += v;
-  }; // Needs mutable keyword to access non_const_a()
-  auto non_const_func_with_ref = [&obj](int v) {
-    obj.non_const_a() += v;
-  }; // OK, passing by ref
 
   constexpr int c{1000};
 
@@ -30,6 +26,19 @@ int main(int argc, char **argv) {
 
   // implicitely constexpr, no warning if no longer constexpr
   const auto const_func = [&c](int v) { return c + v; };
+
+
+  MutableClass obj;
+  // an explicitely non-constexpr labmda that takes obj by value and modifies it
+  // Needs mutable keyword to access non_const_a()
+  auto non_const_func = [obj](int v) mutable {
+    obj.non_const_a() += v;
+  };
+
+  // if obj is passed by reference the mutable keyword is no longer needed
+  auto non_const_func_with_ref = [&obj](int v) {
+    obj.non_const_a() += v;
+  };
 
   return 0;
 }
