@@ -1,8 +1,9 @@
 /**
-* Example for section @section @title
+* Example for section 2.11.2
 * of the C++ Booklet (https://goo.gl/VJ4T3A)
 * published by bvv software services AG (c) 2017
 *
+* This example illustrates the use of constexpr if
 **/
 
 #include <algorithm>
@@ -10,6 +11,7 @@
 #include <iostream>
 #include <vector>
 
+// Here Constexpr is used to facilitate template specialisation 'in-place'
 template <typename T> class NameByType {
 public:
   std::string to_string() {
@@ -25,27 +27,31 @@ public:
   }
 };
 
+// A fixed size storage class that can return differnt types by using auto and
+// constexpr if
 class MixedStorage {
 public:
   template <std::size_t N> auto access() {
     if
-      constexpr(N == 0) { return a; }
+      constexpr(N == 0) { return a; } // int
     if
-      constexpr(N == 1) { return b; }
+      constexpr(N == 1) { return b; } // char
     if
-      constexpr(N == 2) { return c; }
+      constexpr(N == 2) { return c; } // string
     if
-      constexpr(N == 3) { return d; }
-    else if
+      constexpr(N == 3) { return d; } // vector
+    else if                           // return a fixed size array of size N
       constexpr(N > 3) { // Condition needs explicit specification or else
                          // return type cannot be deducted correctly
         std::array<int, N> r;
-        int seed = 0;
-        for (auto &i : r) {
-          i = seed++;
-        }
         return std::move(r);
       }
+
+#ifdef EXPECT_FAILED_COMPILATION
+    else {
+      return 123;
+    }
+#endif
   }
 
 private:
