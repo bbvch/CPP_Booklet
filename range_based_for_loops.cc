@@ -9,7 +9,7 @@ int main(int, char **) {
 
   std::vector<int> v{1, 2, 3, 4};
 
-  for (const &i : v) {
+  for (const auto  &i : v) {
     // do something
   }
 }
