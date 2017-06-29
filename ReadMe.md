@@ -18,18 +18,6 @@ As soon as more and more compilers are able to compile the full C++17 feature se
 If you find one missing, raise an issue on github for it. https://github.com/bernedom/CPP_Booklet
 
 ## building and compiling
-<<<<<<< Updated upstream
-'$>cmake .'
-'$>make
-
-Or 
-'$>cmake .
-'$>cmake --build . --target all 
-
-### building and compiling with non-feature complete compilers
-As most make tools (GNU make, nmake) exit if a target fails to build additional options have to be passed to make to continue even on a failed target
-for GNU make use '$>make -i' for nmake use '$>nmake -I' if using cmake to build use '$>cmake --build . --target all 
-
 `$>cmake .
 `$>make
 
@@ -42,20 +30,13 @@ As most make tools (GNU make, nmake) exit if a target fails to build additional 
 for GNU make use `$>make -i` for nmake use `$>nmake -I` if using cmake to build use `$>cmake --build . --target all 
 
 ### Including intentionally broken code
->>>>>>> Stashed changes
 Some examples contain code that is intentionally to fail to compile. Usually this is done to illustrate some C++ feature. To compile the sources to allow for such failure use. Note the use of the -i flags else make stops on the first failure
 `$>make clean
 `$>make CXX_FLAGS+=-DEXPECT_FAILED_COMPILATION -i
 
 Or if using cmake directly to build
-'$>cmake --build . --target all -- CXX_FLAGS+=-DEXPECT_FAILED_COMPILATION -i 
-
-<<<<<<< Updated upstream
-=======
-Or if using cmake directly to build
 `$>cmake --build . --target all -- CXX_FLAGS+=-DEXPECT_FAILED_COMPILATION -i 
 
->>>>>>> Stashed changes
 ## rebuilding the list of targets 
 execute generate_cmakelists.sh in a bash shell to rebuild the list of files to compile 
 
