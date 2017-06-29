@@ -1,5 +1,5 @@
 cmake_minimum_required (VERSION 2.6)
-project (CPP17_Snippets)
+project (CPP_Booklet)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 message("Compiler is: ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION}")
