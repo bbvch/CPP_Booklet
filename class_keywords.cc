@@ -1,10 +1,10 @@
 /**
-* Example for section 2.4
-* of the C++ Booklet (https://goo.gl/VJ4T3A)
-* published by bvv software services AG (c) 2017
-*
-*  This example illustrates the
-**/
+ * Example for section 2.4
+ * of the C++ Booklet (https://goo.gl/VJ4T3A)
+ * published by bvv software services AG (c) 2017
+ *
+ *  This example illustrates the
+ **/
 
 struct Dummy {
   Dummy() = default;
@@ -18,6 +18,7 @@ struct Dummy {
 protected:
   // protect move, but use default implementation
   Dummy(Dummy &&other) = default;
+  Dummy &operator=(Dummy &&other) = default;
 
   // protect copy, but use default implementation
   Dummy(const Dummy &other) = default;
