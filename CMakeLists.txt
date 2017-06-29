@@ -14,7 +14,7 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   endif()	
   add_compile_options(-std=c++17)
 else()
-  message(WARNING "your compiler is not yet able to compile all examples underthe C++17 standard, some compilations may fail")
+  message(WARNING "your compiler is not yet able to compile all examples under the C++17 standard, some compilations may fail")
 endif()
 
 include(executable_list.cmake)
