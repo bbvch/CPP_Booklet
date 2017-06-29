@@ -4,6 +4,7 @@
 bin/
 *.vcxproj
 *.vcxproj.filters
+*.sln
 *.user
 CMakeCache.txt
 CMakeFiles

@@ -1,16 +1,16 @@
 /**
-* Example for section @section @title
-* of the C++ Booklet (https://goo.gl/VJ4T3A)
-* published by bvv software services AG (c) 2017
-*
-* This example illustrates the unified syntax for initializing stuff in
-*C++11/14/17
-**/
+ * Example for section @section @title
+ * of the C++ Booklet (https://goo.gl/VJ4T3A)
+ * published by bvv software services AG (c) 2017
+ *
+ * This example illustrates the unified syntax for initializing stuff in
+ *C++11/14/17
+ **/
 
 #include <string>
 #include <vector>
 
-class Klass {
+struct Klass {
 public:
   Klass(int x, const std::string &s) : _x(x), _s(s) {}
 
@@ -24,7 +24,7 @@ private:
 
 int main(int, char **) {
 
-  // simple initializing usion {}
+  // simple initializing using {}
   Klass k{123, "b"};
   int x{42};
 
@@ -36,8 +36,8 @@ int main(int, char **) {
 
   // initializing of aggregates
   struct Data {
-    int a;
-    double b;
+    int a{0};
+    double b{0};
     std::string c;
   };
   Data data{7, 3.14, "Seven Pies!"};
