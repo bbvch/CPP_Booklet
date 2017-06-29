@@ -3,8 +3,8 @@ These are examples illustrating the use of some of the C++11/14/17 features used
 # Supported Compilers
 
  * g++ 7.0.1 - All examples compile and run
+ * clang 4.0.0 - All examples compile and run
  * MSVC 14.1 (Visual Studio 2017) - C++14 complete, missing most of the C++17 features 
- * clang 3.9 - C++14 complete but missing a few C++17 features
  
 
 Tip: use  https://godbolt.org/ to test various other compilers
