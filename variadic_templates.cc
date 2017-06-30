@@ -30,6 +30,20 @@ std::string reorder_and_concat(T t, Args... args) {
   return to_be_sorted + reorder_and_concat(args...);
 }
 
+// using foldable expression for simple operator +
+/*
+ * Supported operators are
+ * - boolean (&&, ||, <, >, ==, !=)
+ * - mathematical (+, -, *, /, %)
+ * - bitwise (&, |, ^, >>, <<)
+ * - memory (de-)referencing and obiect concatenation (.*, ->*)
+ * - assignement = and combinations such as /=, &=...
+ * - unpacking (,) [can be used to forward to normals functions]
+ */
+template <typename... Args> auto fold_using_add(Args &&... args) {
+  return (... + args);
+}
+
 int main(int, char **) {
   aFunction(42, 1.14159, "Hello", Dummy());
   aFunction(1, 2, 3, 4, 5);
@@ -47,4 +61,9 @@ int main(int, char **) {
   // returns ABCJKLXYZ
   std::cout << reorder_and_concat("CBA", std::string("KLJ"), "ZYX") << "\n"
             << std::endl;
+
+  std::cout << fold_using_add(1) << "\n";       // 1
+  std::cout << fold_using_add(1, 2, 3) << "\n"; // 6
+  std::cout << fold_using_add(1, 4.5f, 99.999L)
+            << "\n"; // 105.499L (internal cast to double)
 }
