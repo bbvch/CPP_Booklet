@@ -1,10 +1,10 @@
 /**
-* Example for section @section @title
-* of the C++ Booklet (https://goo.gl/VJ4T3A)
-* published by bvv software services AG (c) 2017
-*
-* This example illustrates the usage of variadic templates
-**/
+ * Example for section @section @title
+ * of the C++ Booklet (https://goo.gl/VJ4T3A)
+ * published by bvv software services AG (c) 2017
+ *
+ * This example illustrates the usage of variadic templates
+ **/
 
 #include <algorithm>
 #include <iostream>
@@ -30,7 +30,7 @@ std::string reorder_and_concat(T t, Args... args) {
   return to_be_sorted + reorder_and_concat(args...);
 }
 
-// using foldable expression for simple operator +
+// using fold expression for simple operator +
 /*
  * Supported operators are
  * - boolean (&&, ||, <, >, ==, !=)
