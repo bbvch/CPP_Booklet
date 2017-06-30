@@ -8,6 +8,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <memory>
 
 struct Dummy {
   int x;
@@ -44,6 +45,15 @@ template <typename... Args> auto fold_using_add(Args &&... args) {
   return (... + args);
 }
 
+// helper function
+const auto print = [](const auto &obj) {
+  std::cout << "Unpacked: " << obj << "\n";
+};
+
+template <typename... Args> void unpack(Args... args) {
+  (print(std::forward<Args>(args)), ...);
+}
+
 int main(int, char **) {
   aFunction(42, 1.14159, "Hello", Dummy());
   aFunction(1, 2, 3, 4, 5);
@@ -66,4 +76,6 @@ int main(int, char **) {
   std::cout << fold_using_add(1, 2, 3) << "\n"; // 6
   std::cout << fold_using_add(1, 4.5f, 99.999L)
             << "\n"; // 105.499L (internal cast to double)
+
+  unpack("ABC", 55, 1.345f);
 }
