@@ -6,6 +6,7 @@
 * This example illustrates the usage of variadic templates
 **/
 
+#include <algorithm>
 #include <iostream>
 
 struct Dummy {
@@ -14,21 +15,19 @@ struct Dummy {
 };
 
 // variadic template function definition
-template <typename... Args> void aFunction(Args... args) {
-
-}
+template <typename... Args> void aFunction(Args... args) {}
 
 // variadic template class definition
-template <typename... Args> class aClass {
+template <typename... Args> class aClass {};
 
-};
+std::string reorder_and_concat() { return std::string(); } // End of recursion
 
-int sum() { return 0; } // End of recursion
-template <typename T, typename... US> int sum(T t, US... us) {
-  return t + sum(us...); // recursion popping the first template argument
-}
-template <typename... US> int sumSquares(US... us) {
-  return sum(us * us...); // calls sum<typename T, typename ...US>
+// recursion popping the first template argument and concatenating
+template <typename T, typename... Args>
+std::string reorder_and_concat(T t, Args... args) {
+  std::string to_be_sorted(t);
+  std::sort(to_be_sorted.begin(), to_be_sorted.end());
+  return to_be_sorted + reorder_and_concat(args...);
 }
 
 int main(int, char **) {
@@ -39,7 +38,13 @@ int main(int, char **) {
   aClass<char, char, double, std::string> ac2;
   aClass<> ac3;
 
-  std::cout << sumSquares(1) << std::endl;
-  std::cout << sumSquares(1, 2) << std::endl;
-  std::cout << sumSquares(1, 2, 3) << std::endl;
+  // returns "ABC"
+  std::cout << reorder_and_concat("CBA") << "\n";
+
+  // returns ABCJKL
+  std::cout << reorder_and_concat("CBA", "KLJ") << "\n";
+
+  // returns ABCJKLXYZ
+  std::cout << reorder_and_concat("CBA", std::string("KLJ"), "ZYX") << "\n"
+            << std::endl;
 }
