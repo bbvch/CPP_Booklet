@@ -40,9 +40,22 @@ std::string reorder_and_concat(T t, Args... args) {
  * - memory (de-)referencing and obiect concatenation (.*, ->*)
  * - assignement = and combinations such as /=, &=...
  * - unpacking (,) [can be used to forward to normals functions]
+ *
+ * folds can be written left or right associative as well as as
+ * unary or as binary operators. Note that in a binary fold the operators annot
+ * be mixed
  */
-template <typename... Args> auto fold_using_add(Args &&... args) {
-  return (... + args);
+
+template <typename... Args> auto binary_left_fold(Args &&... args) {
+  return (10 + ... + args);
+}
+
+template <typename... Args> auto unary_left_fold(Args &&... args) {
+  return (... - args);
+}
+
+template <typename... Args> auto unary_right_fold(Args &&... args) {
+  return (args - ...);
 }
 
 // helper function
@@ -69,13 +82,15 @@ int main(int, char **) {
   std::cout << reorder_and_concat("CBA", "KLJ") << "\n";
 
   // returns ABCJKLXYZ
-  std::cout << reorder_and_concat("CBA", std::string("KLJ"), "ZYX") << "\n"
-            << std::endl;
+  std::cout << reorder_and_concat("CBA", std::string("KLJ"), "ZYX") << "\n";
 
-  std::cout << fold_using_add(1) << "\n";       // 1
-  std::cout << fold_using_add(1, 2, 3) << "\n"; // 6
-  std::cout << fold_using_add(1, 4.5f, 99.999L)
-            << "\n"; // 105.499L (internal cast to double)
+  std::cout << binary_left_fold(1) << "\n";       // 11 (10 + 1)
+  std::cout << binary_left_fold(1, 2, 3) << "\n"; // 16 (10 + 1 + 2 +3)
 
+  // 115.499L (internal cast to double) (10 + 1+ 4.5f + 99.9999L)
+  std::cout << binary_left_fold(1, 4.5f, 99.999L) << "\n";
+
+  std::cout << unary_left_fold(10, 3, 2) << "\n";  // (10 - 3) -2 = 5
+  std::cout << unary_right_fold(10, 3, 2) << "\n"; // 10 - (3 -2) = 9
   unpack("ABC", 55, 1.345f);
 }
