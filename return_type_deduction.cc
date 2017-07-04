@@ -7,6 +7,7 @@
  **/
 
 #include <vector>
+#include <utility>
 
 template <typename T, typename U> auto add(T t, U u) {
   // return type deducted from operator+(T, U)
@@ -16,7 +17,7 @@ template <typename T, typename U> auto add(T t, U u) {
 // C++11 Version
 template <typename Container, typename Index>
 auto assignValue11(Container &&cont, Index idx)
-    -> decltype(forward<Container>(cont)[idx]) {
+    -> decltype(std::forward<Container>(cont)[idx]) {
 
   return std::forward<Container>(cont)[idx];
 }
