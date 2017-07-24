@@ -1,7 +1,7 @@
 /**
 * Example for section @section @title
 * of the C++ Booklet (https://goo.gl/VJ4T3A)
-* published by bvv software services AG (c) 2017
+* published by bbv software services AG (c) 2017
 *
 * This example illustrates the use of the 'auto' keyword and type infrence
 **/

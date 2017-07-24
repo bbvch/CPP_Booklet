@@ -1,7 +1,7 @@
 /**
  * Example for section 2.3
  * of the C++ Booklet (https://goo.gl/VJ4T3A)
- * published by bvv software services AG (c) 2017
+ * published by bbv software services AG (c) 2017
  *
  * this examples illustrates the extended syntax available for enums since C++11
  **/
