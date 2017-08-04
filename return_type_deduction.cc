@@ -6,8 +6,8 @@
  * This example illustrates the usage of return type deduction
  **/
 
-#include <vector>
 #include <utility>
+#include <vector>
 
 template <typename T, typename U> auto add(T t, U u) {
   // return type deducted from operator+(T, U)

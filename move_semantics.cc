@@ -63,5 +63,4 @@ int main(int, char **) {
 
   // retrieve an element. the vector does not change its size
   std::vector<Dummy> result = std::move(vd2[2]);
-
 }

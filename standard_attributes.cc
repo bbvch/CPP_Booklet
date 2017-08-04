@@ -26,7 +26,6 @@ void bar() {}
 // generates a compiler warning if called
 [[deprecated]] void ancient_magic() {}
 
-
 void fall_through(int i) {
   switch (i) {
   case 0:

@@ -14,7 +14,7 @@ auto fac(int n) -> int { return n <= 1 ? 1 : n * fac(n - 1); }
 int main(int, char **) {
   auto x = 42; // x is an int
 #ifdef EXPECT_FAILED_COMPILATION
-   x = "fortytwo"; // Error, because x is already an int
+  x = "fortytwo"; // Error, because x is already an int
 #endif
   std::vector<int> vec{1000, 1001, 1002, 1003};
   auto it0 = vec.begin();  // it0 is a vector<T>::iterator

@@ -17,7 +17,7 @@ int main() {
   float f1 = 0xA.1p3f;
 
   // = decimal 0.5 omitting value in front of decimal separator
-  float f2 =0x.1p3;
+  float f2 = 0x.1p3;
 
   // = decimal 80 omitting value after decimal separator
   float f3 = 0xA.p3;

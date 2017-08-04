@@ -7,7 +7,8 @@
 **/
 
 namespace A::B::C {
-void doMagic() { /* Magic! */}
+void doMagic() { /* Magic! */
+}
 }
 
 int main(int argc, char **argv) {
