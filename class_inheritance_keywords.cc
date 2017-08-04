@@ -5,6 +5,9 @@
 *
 * This example illustrates the use of the keywords final and override
 * as well as inheting and delegating constructors
+*
+* SPDX-License-Identifier: GPL-3.0
+*
 **/
 
 struct NonDeriveable final {};

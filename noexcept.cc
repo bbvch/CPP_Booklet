@@ -3,6 +3,9 @@
 * of the C++ Booklet (https://goo.gl/VJ4T3A)
 * published by bbv software services AG (c) 2017
 *
+*
+* SPDX-License-Identifier: GPL-3.0
+*
 **/
 
 #include <exception>

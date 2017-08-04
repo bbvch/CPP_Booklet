@@ -4,6 +4,9 @@
 * published by bbv software services AG (c) 2017
 *
 * This example illustrates the usage of lambda functions
+*
+* SPDX-License-Identifier: GPL-3.0
+*
 **/
 
 #include <algorithm>

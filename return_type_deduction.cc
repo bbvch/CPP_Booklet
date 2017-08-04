@@ -1,13 +1,16 @@
 /**
- * Example for section @section @title
- * of the C++ Booklet (https://goo.gl/VJ4T3A)
- * published by bbv software services AG (c) 2017
- *
- * This example illustrates the usage of return type deduction
- **/
+* Example for section @section @title
+* of the C++ Booklet (https://goo.gl/VJ4T3A)
+* published by bbv software services AG (c) 2017
+*
+* This example illustrates the usage of return type deduction
+*
+* SPDX-License-Identifier: GPL-3.0
+*
+**/
 
-#include <vector>
 #include <utility>
+#include <vector>
 
 template <typename T, typename U> auto add(T t, U u) {
   // return type deducted from operator+(T, U)

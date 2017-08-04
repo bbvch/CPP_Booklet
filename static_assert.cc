@@ -4,6 +4,9 @@
 * published by bbv software services AG (c) 2017
 *
 * This example illustrates the usage of static_asserts
+*
+* SPDX-License-Identifier: GPL-3.0
+*
 **/
 
 static_assert((sizeof(long) == 8), "64 bit code not supported!");

@@ -3,7 +3,11 @@
 * of the C++ Booklet (https://goo.gl/VJ4T3A)
 * published by bbv software services AG (c) 2017
 *
-*  This example illustrates the use of initializer statements in selection statements
+*  This example illustrates the use of initializer statements in selection
+*statements
+*
+* SPDX-License-Identifier: GPL-3.0
+*
 **/
 
 #include <cstdlib>

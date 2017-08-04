@@ -4,6 +4,9 @@
 * published by bbv software services AG (c) 2017
 *
 *  This example illustrates the copy elision which became mandatory in c++17
+*
+* SPDX-License-Identifier: GPL-3.0
+*
 **/
 
 class A {

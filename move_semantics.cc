@@ -4,6 +4,9 @@
 * published by bbv software services AG (c) 2017
 *
 * This example illustrates the use of the move semantics introduced in C++11
+*
+* SPDX-License-Identifier: GPL-3.0
+*
 **/
 
 #include <vector>
@@ -63,5 +66,4 @@ int main(int, char **) {
 
   // retrieve an element. the vector does not change its size
   std::vector<Dummy> result = std::move(vd2[2]);
-
 }
