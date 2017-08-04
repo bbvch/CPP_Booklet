@@ -4,6 +4,9 @@
 * published by bbv software services AG (c) 2017
 *
 * This exampple illustrates the use of a range based for loop
+*
+* SPDX-License-Identifier: GPL-3.0
+*
 **/
 
 #include <vector>

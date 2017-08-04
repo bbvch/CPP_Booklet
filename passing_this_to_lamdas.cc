@@ -4,6 +4,9 @@
 * published by bbv software services AG (c) 2017
 *
 * This example illustrates how 'this' can be passed to a lambda function
+*
+* SPDX-License-Identifier: GPL-3.0
+*
 **/
 
 #include <iostream>

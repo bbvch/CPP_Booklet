@@ -4,6 +4,9 @@
 * published by bbv software services AG (c) 2017
 *
 * This example illustrates the use of constexpr if
+*
+* SPDX-License-Identifier: GPL-3.0
+*
 **/
 
 #include <algorithm>

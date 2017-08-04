@@ -6,6 +6,9 @@
 *  This example illustrates the use of constant expression lambdas an the use of
 *the mutable keyword
 * in that context
+*
+* SPDX-License-Identifier: GPL-3.0
+*
 **/
 
 class MutableClass {
@@ -27,18 +30,13 @@ int main(int argc, char **argv) {
   // implicitely constexpr, no warning if no longer constexpr
   const auto const_func = [&c](int v) { return c + v; };
 
-
   MutableClass obj;
   // an explicitely non-constexpr labmda that takes obj by value and modifies it
   // Needs mutable keyword to access non_const_a()
-  auto non_const_func = [obj](int v) mutable {
-    obj.non_const_a() += v;
-  };
+  auto non_const_func = [obj](int v) mutable { obj.non_const_a() += v; };
 
   // if obj is passed by reference the mutable keyword is no longer needed
-  auto non_const_func_with_ref = [&obj](int v) {
-    obj.non_const_a() += v;
-  };
+  auto non_const_func_with_ref = [&obj](int v) { obj.non_const_a() += v; };
 
   return 0;
 }

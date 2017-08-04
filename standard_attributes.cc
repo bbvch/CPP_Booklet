@@ -4,6 +4,9 @@
 * published by bbv software services AG (c) 2017
 *
 * This example illustrates the usage of standard-attributes
+*
+* SPDX-License-Identifier: GPL-3.0
+*
 **/
 
 #include <atomic>
@@ -25,7 +28,6 @@ void bar() {}
 
 // generates a compiler warning if called
 [[deprecated]] void ancient_magic() {}
-
 
 void fall_through(int i) {
   switch (i) {
