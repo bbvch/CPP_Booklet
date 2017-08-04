@@ -6,6 +6,9 @@
 *  This example illustrates the use of constant expression lambdas an the use of
 *the mutable keyword
 * in that context
+*
+* SPDX-License-Identifier: GPL-3.0
+*
 **/
 
 class MutableClass {

@@ -4,6 +4,9 @@
 * published by bbv software services AG (c) 2017
 *
 * This example illustrates the usage of standard-attributes
+*
+* SPDX-License-Identifier: GPL-3.0
+*
 **/
 
 #include <atomic>

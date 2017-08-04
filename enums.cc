@@ -4,6 +4,9 @@
 * published by bbv software services AG (c) 2017
 *
 * this examples illustrates the extended syntax available for enums since C++11
+*
+* SPDX-License-Identifier: GPL-3.0
+*
 **/
 
 // non scoped enum

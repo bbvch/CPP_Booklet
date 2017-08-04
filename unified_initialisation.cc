@@ -5,6 +5,9 @@
 *
 * This example illustrates the unified syntax for initializing stuff in
 * C++11/14/17
+*
+* SPDX-License-Identifier: GPL-3.0
+*
 **/
 
 #include <string>

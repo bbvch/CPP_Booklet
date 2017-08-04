@@ -5,6 +5,9 @@
 *
 *  This example illustrates the use of initializer statements in selection
 *statements
+*
+* SPDX-License-Identifier: GPL-3.0
+*
 **/
 
 #include <cstdlib>
