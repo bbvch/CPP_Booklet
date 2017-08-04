@@ -1,10 +1,10 @@
 /**
- * Example for section 2.4
- * of the C++ Booklet (https://goo.gl/VJ4T3A)
- * published by bbv software services AG (c) 2017
- *
- *  This example illustrates the
- **/
+* Example for section 2.4
+* of the C++ Booklet (https://goo.gl/VJ4T3A)
+* published by bbv software services AG (c) 2017
+*
+*  This example illustrates the
+**/
 
 struct Dummy {
   Dummy() = default;

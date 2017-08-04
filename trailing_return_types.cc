@@ -1,10 +1,10 @@
 /**
- * Example for section @section @title
- * of the C++ Booklet (https://goo.gl/VJ4T3A)
- * published by bbv software services AG (c) 2017
- *
- * This example illustrates the usage of trailing return types
- **/
+* Example for section @section @title
+* of the C++ Booklet (https://goo.gl/VJ4T3A)
+* published by bbv software services AG (c) 2017
+*
+* This example illustrates the usage of trailing return types
+**/
 
 struct A {
   struct B {

@@ -1,11 +1,11 @@
 /**
- * Example for section @section @title
- * of the C++ Booklet (https://goo.gl/VJ4T3A)
- * published by bbv software services AG (c) 2017
- *
- * This example illustrates the unified syntax for initializing stuff in
- *C++11/14/17
- **/
+* Example for section @section @title
+* of the C++ Booklet (https://goo.gl/VJ4T3A)
+* published by bbv software services AG (c) 2017
+*
+* This example illustrates the unified syntax for initializing stuff in
+* C++11/14/17
+**/
 
 #include <string>
 #include <vector>
