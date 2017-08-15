@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>/c/Code/CPP_Booklet/source/guaranteed_copy_elision.cc.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="cpp">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #c0c0c0; }
+body { font-family: monospace; color: #000000; background-color: #c0c0c0; }
+* { font-size: 1em; }
+.Type { color: #0000c0; background-color: #c0c0c0; padding-bottom: 1px; }
+.Comment { color: #008000; background-color: #c0c0c0; padding-bottom: 1px; }
+.Constant { color: #c00000; background-color: #c0c0c0; padding-bottom: 1px; }
+.Statement { color: #0000c0; background-color: #c0c0c0; padding-bottom: 1px; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="Comment">/*</span><span class="Comment">*</span>
+<span class="Comment">* Example for section </span><span class="Constant">4</span>
+<span class="Comment">* of the C++ Booklet (<a href="https://goo.gl/VJ4T3A)">https://goo.gl/VJ4T3A)</a></span>
+<span class="Comment">* published by bbv software services AG (c) </span><span class="Constant">2017</span>
+<span class="Comment">*</span>
+<span class="Comment">*  This example illustrates the copy elision which became mandatory in c++</span><span class="Constant">17</span>
+<span class="Comment">*</span>
+<span class="Comment">* SPDX-License-Identifier: GPL-</span><span class="Constant">3.0</span>
+<span class="Comment">*</span>
+<span class="Comment">*</span><span class="Comment">*/</span>
+
+<span class="Type">class</span> A {
+<span class="Statement">public</span>:
+  A() = <span class="Statement">default</span>;
+  A(<span class="Type">const</span> A &amp;rhs) = <span class="Statement">delete</span>;
+  A(<span class="Type">const</span> A &amp;&amp;rhs) = <span class="Statement">delete</span>;
+  ~A() = <span class="Statement">default</span>;
+
+<span class="Statement">private</span>:
+};
+
+<span class="Comment">// Without elision this is illegal, as it performs a copy/move of A which has</span>
+<span class="Comment">// deleted copy/move ctors</span>
+A f() { <span class="Statement">return</span> A{}; }
+
+<span class="Type">int</span> main() {
+  <span class="Comment">// OK, because of copy elision. Copy/Move constructing an anonymous A is not</span>
+  <span class="Comment">// neccessary</span>
+  A a = f();
+}
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

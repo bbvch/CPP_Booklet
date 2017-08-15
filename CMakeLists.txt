@@ -22,5 +22,12 @@ else()
   message(WARNING "your compiler is not yet able to compile all examples under the C++17 standard, some compilations may fail")
 endif()
 
-include(executable_list.cmake)
+file(GLOB SOURCE_FILES source/*.cc)
+
+foreach(CC_FILE ${SOURCE_FILES} )
+	get_filename_component(SOURCE_BASENAME ${CC_FILE} NAME)
+	string (REPLACE ".cc" "" EXE_NAME ${SOURCE_BASENAME})
+	add_executable(${EXE_NAME} ${CC_FILE})
+endforeach(CC_FILE ${SOURCE_FILES} )
+
 
