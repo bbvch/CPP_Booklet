@@ -3,7 +3,7 @@ These are examples illustrating the use of some of the C++11/14/17 features used
 # Supported Compilers
 
  * g++ 7.0.1 - All examples compile and run
- * clang 4.0.0 - All examples compile and run
+ * clang 5.0.0 - All examples compile and run
  * MSVC 14.1 (Visual Studio 2017) - C++14 complete, missing most of the C++17 features 
  
 
@@ -11,7 +11,7 @@ Tip: use  https://godbolt.org/ to test various other compilers
 
 
 # Building with CMake
-CMake will generate a makefile that will genreate an make target/executable for each *.cc file. At the moment (29. June 2017) only gcc 7.0.1 is C++17 feature complete. CMake will build makefiles for other compilers as well, but some examples will fail to compile.
+CMake will generate a makefile that will create an make target/executable for each *.cc file. At the moment (29. June 2017) only gcc 7.0.1 is C++17 feature complete. CMake will build makefiles for other compilers as well, but some examples will fail to compile.
 To specify a non-default compiler (i.e. g++7) to use  `$CC` and `$CXX` environment variables or use `cmake -DCMAKE_CXX_COMPILER=/usr/bin/g++-7` to specify the compiler to use.
 
 As soon as more and more compilers are able to compile the full C++17 feature set they will be added.
@@ -39,9 +39,6 @@ Some examples contain code that is intentionally to fail to compile. Usually thi
 
 Or if using cmake directly to build
 `$>cmake --build . --target all -- CXX_FLAGS+=-DEXPECT_FAILED_COMPILATION -i` 
-
-## rebuilding the list of targets 
-execute `./generate_cmakelists.sh` in a bash shell to rebuild the list of files to compile 
 
 # Compiling by hand:
 clang: `$>clang++ -std=c++1z file.cc -o file.exe`
