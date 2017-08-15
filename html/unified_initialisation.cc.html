@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>/c/Code/CPP_Booklet/source/unified_initialisation.cc.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="cpp">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #c0c0c0; }
+body { font-family: monospace; color: #000000; background-color: #c0c0c0; }
+* { font-size: 1em; }
+.Type { color: #0000c0; background-color: #c0c0c0; padding-bottom: 1px; }
+.Comment { color: #008000; background-color: #c0c0c0; padding-bottom: 1px; }
+.Constant { color: #c00000; background-color: #c0c0c0; padding-bottom: 1px; }
+.Statement { color: #0000c0; background-color: #c0c0c0; padding-bottom: 1px; }
+.PreProc { color: #c000c0; background-color: #c0c0c0; padding-bottom: 1px; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="Comment">/*</span><span class="Comment">*</span>
+<span class="Comment">* Example for section @section @title</span>
+<span class="Comment">* of the C++ Booklet (<a href="https://goo.gl/VJ4T3A)">https://goo.gl/VJ4T3A)</a></span>
+<span class="Comment">* published by bbv software services AG (c) </span><span class="Constant">2017</span>
+<span class="Comment">*</span>
+<span class="Comment">* This example illustrates the unified syntax for initializing stuff in</span>
+<span class="Comment">* C++</span><span class="Constant">11</span><span class="Comment">/</span><span class="Constant">14</span><span class="Comment">/</span><span class="Constant">17</span>
+<span class="Comment">*</span>
+<span class="Comment">* SPDX-License-Identifier: GPL-</span><span class="Constant">3.0</span>
+<span class="Comment">*</span>
+<span class="Comment">*</span><span class="Comment">*/</span>
+
+<span class="PreProc">#include </span><span class="Constant">&lt;string&gt;</span>
+<span class="PreProc">#include </span><span class="Constant">&lt;vector&gt;</span>
+
+<span class="Type">struct</span> Klass {
+<span class="Statement">public</span>:
+  Klass(<span class="Type">int</span> x, <span class="Type">const</span> std::string &amp;s) : _x(x), _s(s) {}
+
+<span class="Statement">private</span>:
+  <span class="Comment">// initialisation can be specified at the time of declaration</span>
+
+  <span class="Type">int</span> _x{<span class="Constant">999</span>};   <span class="Comment">// Value assignement through construction</span>
+  <span class="Type">int</span> _y = <span class="Constant">1000</span>; <span class="Comment">// values assignment</span>
+  std::string _s;
+};
+
+<span class="Type">int</span> main(<span class="Type">int</span>, <span class="Type">char</span> **) {
+
+  <span class="Comment">// simple initializing using {}</span>
+  Klass k{<span class="Constant">123</span>, <span class="Constant">&quot;b&quot;</span>};
+  <span class="Type">int</span> x{<span class="Constant">42</span>};
+
+<span class="PreProc">#ifdef EXPECT_FAILED_COMPILATION</span>
+  <span class="Type">int</span> fail{<span class="Constant">7</span><span class="Constant">.5f</span>}; <span class="Comment">// fails because of narrowing down from floata to int</span>
+<span class="PreProc">#endif</span>
+  std::vector&lt;<span class="Type">int</span>&gt; v{<span class="Constant">1</span>, <span class="Constant">2</span>, <span class="Constant">3</span>, <span class="Constant">4</span>}; <span class="Comment">// list initialisation</span>
+  std::vector&lt;<span class="Type">int</span>&gt; y = {<span class="Constant">0</span>, <span class="Constant">1</span>, <span class="Constant">2</span>, <span class="Constant">3</span>, <span class="Constant">4</span>};
+
+  <span class="Comment">// initializing of aggregates</span>
+  <span class="Type">struct</span> Data {
+    <span class="Type">int</span> a{<span class="Constant">0</span>};
+    <span class="Type">double</span> b{<span class="Constant">0</span>};
+    std::string c;
+  };
+  Data data{<span class="Constant">7</span>, <span class="Constant">3</span><span class="Constant">.14</span>, <span class="Constant">&quot;Seven Pies!&quot;</span>};
+<span class="PreProc">#ifdef EXPECT_FAILED_COMPILATION</span>
+  <span class="Comment">// Error narrowing from double to int</span>
+  Data data2{<span class="Constant">7</span><span class="Constant">.0</span>, <span class="Constant">3</span><span class="Constant">.14</span>, <span class="Constant">&quot;Seven Pies!&quot;</span>};
+<span class="PreProc">#endif</span>
+
+  <span class="Type">struct</span> MyType {
+    <span class="Comment">// the constructor makes a non-aggregate out of this struct</span>
+    MyType(<span class="Type">const</span> std::string &amp;msg, <span class="Type">int</span> x) : m_a(x), m_c(msg) {}
+    <span class="Type">int</span> m_a;
+    <span class="Type">double</span> m_b;
+    std::string m_c;
+  };
+  MyType myType{<span class="Constant">&quot;Fortytwo!&quot;</span>, <span class="Constant">42</span>};
+
+  <span class="Comment">// Example for a container-type with explicit list initialisation</span>
+  <span class="Type">struct</span> Bar {
+    <span class="Type">explicit</span> Bar(std::initializer_list&lt;std::string&gt; in) {
+      <span class="Statement">for</span> (<span class="Type">auto</span> &amp;s : in)
+        m_data.push_back(<span class="Constant">&quot;Bar &quot;</span> + s);
+    }
+    std::vector&lt;std::string&gt; m_data;
+  };
+  Bar bar{<span class="Constant">&quot;A&quot;</span>, <span class="Constant">&quot;B&quot;</span>, <span class="Constant">&quot;C&quot;</span>, <span class="Constant">&quot;D&quot;</span>};
+}
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

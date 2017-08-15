@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>/c/Code/CPP_Booklet/source/structured_bindings.cc.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="cpp">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #c0c0c0; }
+body { font-family: monospace; color: #000000; background-color: #c0c0c0; }
+* { font-size: 1em; }
+.Type { color: #0000c0; background-color: #c0c0c0; padding-bottom: 1px; }
+.Comment { color: #008000; background-color: #c0c0c0; padding-bottom: 1px; }
+.Constant { color: #c00000; background-color: #c0c0c0; padding-bottom: 1px; }
+.Statement { color: #0000c0; background-color: #c0c0c0; padding-bottom: 1px; }
+.PreProc { color: #c000c0; background-color: #c0c0c0; padding-bottom: 1px; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="Comment">/*</span><span class="Comment">*</span>
+<span class="Comment">* Example for section @section @title</span>
+<span class="Comment">* of the C++ Booklet (<a href="https://goo.gl/VJ4T3A)">https://goo.gl/VJ4T3A)</a></span>
+<span class="Comment">* published by bbv software services AG (c) </span><span class="Constant">2017</span>
+<span class="Comment">*</span>
+<span class="Comment">*</span>
+<span class="Comment">* SPDX-License-Identifier: GPL-</span><span class="Constant">3.0</span>
+<span class="Comment">*</span>
+<span class="Comment">*</span><span class="Comment">*/</span>
+
+<span class="PreProc">#include </span><span class="Constant">&lt;array&gt;</span>
+<span class="PreProc">#include </span><span class="Constant">&lt;map&gt;</span>
+<span class="PreProc">#include </span><span class="Constant">&lt;tuple&gt;</span>
+
+<span class="Type">struct</span> Packed {
+  <span class="Type">int</span> x;
+  <span class="Type">char</span> y;
+  <span class="Type">float</span> z;
+};
+
+<span class="Type">class</span> cls {
+<span class="Statement">public</span>:
+  <span class="Type">int</span> m;
+  <span class="Type">float</span> n;
+};
+
+<span class="Type">int</span> main() {
+  <span class="Type">auto</span> tuple = std::make_tuple(<span class="Constant">1</span>, <span class="Constant">'a'</span>, <span class="Constant">2</span><span class="Constant">.3</span>);
+  std::array&lt;<span class="Type">int</span>, <span class="Constant">3</span>&gt; a{<span class="Constant">1</span>, <span class="Constant">2</span>, <span class="Constant">3</span>};
+  Packed p;
+  cls cl;
+
+  <span class="Comment">// unpack the tuple into individual variables declared at the call site</span>
+  <span class="Type">const</span> <span class="Type">auto</span>[i, c, d] = tuple;
+  <span class="Comment">// also works with references</span>
+  <span class="Type">auto</span> &amp; [ ref_i, ref_c, ref_d ] = tuple;
+
+  <span class="Comment">// fixed size array also works</span>
+  <span class="Type">auto</span>[j, k, l] = a;
+
+  <span class="Comment">// structs and classes can also be bound</span>
+  <span class="Type">auto</span> &amp; [ x, y, z ] = p;
+  <span class="Type">auto</span>[m, n] = cl;
+
+  <span class="Comment">// extracting key &amp; value at the same time from a map</span>
+  std::map&lt;<span class="Type">int</span>, <span class="Type">float</span>&gt; map;
+  <span class="Statement">for</span> (<span class="Type">auto</span> &amp;&amp; [ k, v ] : map) {
+    <span class="Comment">// do something</span>
+  }
+
+  <span class="Statement">return</span> <span class="Constant">0</span>;
+}
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->
