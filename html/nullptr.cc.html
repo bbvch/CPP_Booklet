@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>/c/Code/CPP_Booklet/source/nullptr.cc.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="cpp">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #ffffff; background-color: #000000; }
+body { font-family: monospace; color: #ffffff; background-color: #000000; }
+* { font-size: 1em; }
+.Type { color: #00ff00; font-weight: bold; }
+.Comment { color: #00ffff; font-weight: bold; }
+.Constant { color: #ff40ff; font-weight: bold; }
+.Statement { color: #ffff00; font-weight: bold; }
+.PreProc { color: #8080ff; font-weight: bold; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="Comment">/*</span><span class="Comment">*</span>
+<span class="Comment">* Example for section @section @title</span>
+<span class="Comment">* of the C++ Booklet (<a href="https://goo.gl/VJ4T3A)">https://goo.gl/VJ4T3A)</a></span>
+<span class="Comment">* published by bbv software services AG (c) </span><span class="Constant">2017</span>
+<span class="Comment">*</span>
+<span class="Comment">*</span>
+<span class="Comment">* SPDX-License-Identifier: GPL-</span><span class="Constant">3.0</span>
+<span class="Comment">*</span>
+<span class="Comment">*</span><span class="Comment">*/</span>
+
+<span class="Comment">// this is how NULL used to be defined. NULL was never a language keyword, but</span>
+<span class="Comment">// always a predefined macro</span>
+<span class="PreProc">#define </span><span class="Constant">NULL</span><span class="PreProc"> </span><span class="Constant">0</span>
+
+<span class="Type">void</span> foo(<span class="Type">const</span> <span class="Type">char</span> *dummy) {
+
+  <span class="Statement">if</span> (dummy == <span class="Constant">nullptr</span>) {
+    <span class="Comment">// do something</span>
+  }
+}
+<span class="Type">void</span> foo(<span class="Type">int</span> i) {}
+
+<span class="Type">void</span> bar(<span class="Type">const</span> <span class="Type">char</span> *c) {}
+<span class="Type">void</span> bar(<span class="Type">const</span> <span class="Type">float</span> *f) {}
+
+<span class="Type">int</span> main(<span class="Type">int</span>, <span class="Type">char</span> **) {
+
+  <span class="Type">const</span> <span class="Type">char</span> *dummy = <span class="Constant">nullptr</span>; <span class="Comment">// OK</span>
+<span class="PreProc">#ifdef EXPECT_FAILED_COMPILATION</span>
+  <span class="Comment">// error, except if direct initialisation enabled during compilation</span>
+  <span class="Type">bool</span> valid = <span class="Constant">nullptr</span>;
+  <span class="Type">int</span> value = <span class="Constant">nullptr</span>; <span class="Comment">// Error, assigning a pointer type to int</span>
+<span class="PreProc">#endif</span>
+  <span class="Type">int</span> anInt{<span class="Constant">42</span>};
+  <span class="Type">int</span> *ptrTo_anInt = &amp;anInt;
+  ptrTo_anInt = <span class="Constant">nullptr</span>; <span class="Comment">// OK</span>
+
+  foo(<span class="Constant">NULL</span>);    <span class="Comment">// calls foo(int)</span>
+  foo(<span class="Constant">nullptr</span>); <span class="Comment">// calls foo(const char*), because it matches the ptr type</span>
+
+<span class="PreProc">#ifdef EXPECT_FAILED_COMPILATION</span>
+  bar(<span class="Constant">nullptr</span>); <span class="Comment">// ambigous call to bar(const int*) or bar(const float*)</span>
+<span class="PreProc">#endif</span>
+  bar(<span class="Statement">static_cast</span>&lt;<span class="Type">const</span> <span class="Type">float</span> *&gt;(<span class="Constant">nullptr</span>)); <span class="Comment">// force pointer type</span>
+}
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

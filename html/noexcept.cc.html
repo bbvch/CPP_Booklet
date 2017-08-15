@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>/c/Code/CPP_Booklet/source/noexcept.cc.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="cpp">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #ffffff; background-color: #000000; }
+body { font-family: monospace; color: #ffffff; background-color: #000000; }
+* { font-size: 1em; }
+.Type { color: #00ff00; font-weight: bold; }
+.Comment { color: #00ffff; font-weight: bold; }
+.Constant { color: #ff40ff; font-weight: bold; }
+.Statement { color: #ffff00; font-weight: bold; }
+.PreProc { color: #8080ff; font-weight: bold; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="Comment">/*</span><span class="Comment">*</span>
+<span class="Comment">* Example for section @section @title</span>
+<span class="Comment">* of the C++ Booklet (<a href="https://goo.gl/VJ4T3A)">https://goo.gl/VJ4T3A)</a></span>
+<span class="Comment">* published by bbv software services AG (c) </span><span class="Constant">2017</span>
+<span class="Comment">*</span>
+<span class="Comment">*</span>
+<span class="Comment">* SPDX-License-Identifier: GPL-</span><span class="Constant">3.0</span>
+<span class="Comment">*</span>
+<span class="Comment">*</span><span class="Comment">*/</span>
+
+<span class="PreProc">#include </span><span class="Constant">&lt;exception&gt;</span>
+
+<span class="Type">namespace</span> {
+<span class="Type">class</span> myException : std::exception {
+  <span class="Type">virtual</span> <span class="Type">const</span> <span class="Type">char</span> *what() <span class="Type">const</span> <span class="Statement">noexcept</span> { <span class="Statement">return</span> <span class="Constant">&quot;myException happened&quot;</span>; }
+};
+}
+
+<span class="Type">class</span> A {
+<span class="Statement">public</span>:
+  <span class="Type">void</span> throwing_function() <span class="Statement">noexcept</span>(<span class="Constant">false</span>) { <span class="Comment">// marked as possibly throwing</span>
+    <span class="Statement">if</span> (_a &lt; <span class="Constant">500</span>) {
+      <span class="Statement">throw</span> myException();
+    }
+  }
+  <span class="Type">void</span> exceptionless_func() <span class="Statement">noexcept</span> {}
+  <span class="Type">void</span> bad_func() <span class="Statement">noexcept</span> {
+    <span class="Comment">// putting a throw-statement here will NOT break compilation</span>
+    <span class="Comment">// even if it violates the noexcept specifier</span>
+    <span class="Statement">throw</span> myException();
+  }
+
+  <span class="Comment">// the same as noexcept(false)</span>
+  <span class="Type">void</span> unspecified_func() {}
+
+  <span class="Comment">// deprecated since C++</span><span class="Constant">11</span><span class="Comment"> but the same as noexcept</span>
+  <span class="Type">void</span> old_syntax_func() <span class="Statement">throw</span>() {}
+
+  <span class="Comment">// deprecated since C++</span><span class="Constant">11</span><span class="Comment"> but the same as noexcept(false)</span>
+  <span class="Comment">// dynamic exception specifications are no longer allowe in C++</span><span class="Constant">17</span>
+  <span class="Comment">// void old_syntax_throwing_func() throw(myException) { throw myException(); }</span>
+
+<span class="Statement">private</span>:
+  <span class="Type">int</span> _a{<span class="Constant">1000</span>};
+};
+
+<span class="Type">int</span> main(<span class="Type">int</span> argc, <span class="Type">char</span> **argv) {
+  A a;
+
+  <span class="Statement">static_assert</span>(<span class="Statement">noexcept</span>(a.exceptionless_func()), <span class="Constant">&quot;not throwing&quot;</span>);
+  <span class="Statement">static_assert</span>(!<span class="Statement">noexcept</span>(a.throwing_function()), <span class="Constant">&quot;not throwing&quot;</span>);
+  <span class="Statement">static_assert</span>(!<span class="Statement">noexcept</span>(a.unspecified_func()), <span class="Constant">&quot;possibly throwing&quot;</span>);
+  <span class="Statement">static_assert</span>(<span class="Statement">noexcept</span>(a.bad_func()), <span class="Constant">&quot;bad func pretends to be not throwing&quot;</span>);
+  <span class="Statement">static_assert</span>(<span class="Statement">noexcept</span>(a.old_syntax_func()), <span class="Constant">&quot;not throwing&quot;</span>);
+  <span class="Comment">// static_assert(!noexcept(a.old_syntax_throwing_func()), </span><span class="Constant">&quot;possibly</span>
+  <span class="Comment">// throwing</span><span class="Constant">&quot;);</span>
+}
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

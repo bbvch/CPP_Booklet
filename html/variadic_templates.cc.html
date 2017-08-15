@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>/c/Code/CPP_Booklet/source/variadic_templates.cc.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="cpp">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #ffffff; background-color: #000000; }
+body { font-family: monospace; color: #ffffff; background-color: #000000; }
+* { font-size: 1em; }
+.Type { color: #00ff00; font-weight: bold; }
+.Comment { color: #00ffff; font-weight: bold; }
+.Constant { color: #ff40ff; font-weight: bold; }
+.Special { color: #ff6060; font-weight: bold; }
+.Statement { color: #ffff00; font-weight: bold; }
+.PreProc { color: #8080ff; font-weight: bold; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="Comment">/*</span><span class="Comment">*</span>
+<span class="Comment">* Example for section @section @title</span>
+<span class="Comment">* of the C++ Booklet (<a href="https://goo.gl/VJ4T3A)">https://goo.gl/VJ4T3A)</a></span>
+<span class="Comment">* published by bbv software services AG (c) </span><span class="Constant">2017</span>
+<span class="Comment">*</span>
+<span class="Comment">* This example illustrates the usage of variadic templates</span>
+<span class="Comment">*</span>
+<span class="Comment">* SPDX-License-Identifier: GPL-</span><span class="Constant">3.0</span>
+<span class="Comment">*</span>
+<span class="Comment">*</span><span class="Comment">*/</span>
+
+<span class="PreProc">#include </span><span class="Constant">&lt;algorithm&gt;</span>
+<span class="PreProc">#include </span><span class="Constant">&lt;iostream&gt;</span>
+<span class="PreProc">#include </span><span class="Constant">&lt;memory&gt;</span>
+
+<span class="Type">struct</span> Dummy {
+  <span class="Type">int</span> x;
+  <span class="Type">char</span> c;
+};
+
+<span class="Comment">// variadic template function definition</span>
+<span class="Type">template</span> &lt;<span class="Type">typename</span>... Args&gt; <span class="Type">void</span> aFunction(Args... args) {}
+
+<span class="Comment">// variadic template class definition</span>
+<span class="Type">template</span> &lt;<span class="Type">typename</span>... Args&gt; <span class="Type">class</span> aClass {};
+
+std::string reorder_and_concat() { <span class="Statement">return</span> std::string(); } <span class="Comment">// End of recursion</span>
+
+<span class="Comment">// recursion popping the first template argument and concatenating</span>
+<span class="Type">template</span> &lt;<span class="Type">typename</span> T, <span class="Type">typename</span>... Args&gt;
+std::string reorder_and_concat(T t, Args... args) {
+  std::string to_be_sorted(t);
+  std::sort(to_be_sorted.begin(), to_be_sorted.end());
+  <span class="Statement">return</span> to_be_sorted + reorder_and_concat(args...);
+}
+
+<span class="Comment">// using fold expression for simple operator +</span>
+<span class="Comment">/*</span>
+<span class="Comment"> * Supported operators are</span>
+<span class="Comment"> * - boolean (&amp;&amp;, ||, &lt;, &gt;, ==, !=)</span>
+<span class="Comment"> * - mathematical (+, -, *, /, %)</span>
+<span class="Comment"> * - bitwise (&amp;, |, ^, &gt;&gt;, &lt;&lt;)</span>
+<span class="Comment"> * - memory (de-)referencing and obiect concatenation (.*, -&gt;*)</span>
+<span class="Comment"> * - assignement = and combinations such as /=, &amp;=...</span>
+<span class="Comment"> * - unpacking (,) [can be used to forward to normals functions]</span>
+<span class="Comment"> *</span>
+<span class="Comment"> * folds can be written left or right associative as well as as</span>
+<span class="Comment"> * unary or as binary operators. Note that in a binary fold the operators annot</span>
+<span class="Comment"> * be mixed</span>
+<span class="Comment"> </span><span class="Comment">*/</span>
+
+<span class="Type">template</span> &lt;<span class="Type">typename</span>... Args&gt; <span class="Type">auto</span> binary_left_fold(Args &amp;&amp;... args) {
+  <span class="Statement">return</span> (<span class="Constant">10</span> + ... + args);
+}
+
+<span class="Type">template</span> &lt;<span class="Type">typename</span>... Args&gt; <span class="Type">auto</span> unary_left_fold(Args &amp;&amp;... args) {
+  <span class="Statement">return</span> (... - args);
+}
+
+<span class="Type">template</span> &lt;<span class="Type">typename</span>... Args&gt; <span class="Type">auto</span> unary_right_fold(Args &amp;&amp;... args) {
+  <span class="Statement">return</span> (args - ...);
+}
+
+<span class="Comment">// helper function</span>
+<span class="Type">const</span> <span class="Type">auto</span> print = [](<span class="Type">const</span> <span class="Type">auto</span> &amp;obj) {
+  std::cout &lt;&lt; <span class="Constant">&quot;Unpacked: &quot;</span> &lt;&lt; obj &lt;&lt; <span class="Constant">&quot;</span><span class="Special">\n</span><span class="Constant">&quot;</span>;
+};
+
+<span class="Type">template</span> &lt;<span class="Type">typename</span>... Args&gt; <span class="Type">void</span> unpack(Args... args) {
+  (print(std::forward&lt;Args&gt;(args)), ...);
+}
+
+<span class="Type">int</span> main(<span class="Type">int</span>, <span class="Type">char</span> **) {
+  aFunction(<span class="Constant">42</span>, <span class="Constant">1</span><span class="Constant">.14159</span>, <span class="Constant">&quot;Hello&quot;</span>, Dummy());
+  aFunction(<span class="Constant">1</span>, <span class="Constant">2</span>, <span class="Constant">3</span>, <span class="Constant">4</span>, <span class="Constant">5</span>);
+
+  aClass&lt;std::string, <span class="Type">int</span>&gt; ac1;
+  aClass&lt;<span class="Type">char</span>, <span class="Type">char</span>, <span class="Type">double</span>, std::string&gt; ac2;
+  aClass&lt;&gt; ac3;
+
+  <span class="Comment">// returns </span><span class="Constant">&quot;ABC&quot;</span>
+  std::cout &lt;&lt; reorder_and_concat(<span class="Constant">&quot;CBA&quot;</span>) &lt;&lt; <span class="Constant">&quot;</span><span class="Special">\n</span><span class="Constant">&quot;</span>;
+
+  <span class="Comment">// returns ABCJKL</span>
+  std::cout &lt;&lt; reorder_and_concat(<span class="Constant">&quot;CBA&quot;</span>, <span class="Constant">&quot;KLJ&quot;</span>) &lt;&lt; <span class="Constant">&quot;</span><span class="Special">\n</span><span class="Constant">&quot;</span>;
+
+  <span class="Comment">// returns ABCJKLXYZ</span>
+  std::cout &lt;&lt; reorder_and_concat(<span class="Constant">&quot;CBA&quot;</span>, std::string(<span class="Constant">&quot;KLJ&quot;</span>), <span class="Constant">&quot;ZYX&quot;</span>) &lt;&lt; <span class="Constant">&quot;</span><span class="Special">\n</span><span class="Constant">&quot;</span>;
+
+  std::cout &lt;&lt; binary_left_fold(<span class="Constant">1</span>) &lt;&lt; <span class="Constant">&quot;</span><span class="Special">\n</span><span class="Constant">&quot;</span>;       <span class="Comment">// </span><span class="Constant">11</span><span class="Comment"> (</span><span class="Constant">10</span><span class="Comment"> + </span><span class="Constant">1</span><span class="Comment">)</span>
+  std::cout &lt;&lt; binary_left_fold(<span class="Constant">1</span>, <span class="Constant">2</span>, <span class="Constant">3</span>) &lt;&lt; <span class="Constant">&quot;</span><span class="Special">\n</span><span class="Constant">&quot;</span>; <span class="Comment">// </span><span class="Constant">16</span><span class="Comment"> (</span><span class="Constant">10</span><span class="Comment"> + </span><span class="Constant">1</span><span class="Comment"> + </span><span class="Constant">2</span><span class="Comment"> +</span><span class="Constant">3</span><span class="Comment">)</span>
+
+  <span class="Comment">// </span><span class="Constant">115.499L</span><span class="Comment"> (internal cast to double) (</span><span class="Constant">10</span><span class="Comment"> + </span><span class="Constant">1</span><span class="Comment">+ </span><span class="Constant">4.5f</span><span class="Comment"> + </span><span class="Constant">99.9999L</span><span class="Comment">)</span>
+  std::cout &lt;&lt; binary_left_fold(<span class="Constant">1</span>, <span class="Constant">4</span><span class="Constant">.5f</span>, <span class="Constant">99</span><span class="Constant">.999L</span>) &lt;&lt; <span class="Constant">&quot;</span><span class="Special">\n</span><span class="Constant">&quot;</span>;
+
+  std::cout &lt;&lt; unary_left_fold(<span class="Constant">10</span>, <span class="Constant">3</span>, <span class="Constant">2</span>) &lt;&lt; <span class="Constant">&quot;</span><span class="Special">\n</span><span class="Constant">&quot;</span>;  <span class="Comment">// (</span><span class="Constant">10</span><span class="Comment"> - </span><span class="Constant">3</span><span class="Comment">) -</span><span class="Constant">2</span><span class="Comment"> = </span><span class="Constant">5</span>
+  std::cout &lt;&lt; unary_right_fold(<span class="Constant">10</span>, <span class="Constant">3</span>, <span class="Constant">2</span>) &lt;&lt; <span class="Constant">&quot;</span><span class="Special">\n</span><span class="Constant">&quot;</span>; <span class="Comment">// </span><span class="Constant">10</span><span class="Comment"> - (</span><span class="Constant">3</span><span class="Comment"> -</span><span class="Constant">2</span><span class="Comment">) = </span><span class="Constant">9</span>
+  unpack(<span class="Constant">&quot;ABC&quot;</span>, <span class="Constant">55</span>, <span class="Constant">1</span><span class="Constant">.345f</span>);
+}
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

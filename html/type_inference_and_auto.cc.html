@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>/c/Code/CPP_Booklet/source/type_inference_and_auto.cc.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="cpp">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #ffffff; background-color: #000000; }
+body { font-family: monospace; color: #ffffff; background-color: #000000; }
+* { font-size: 1em; }
+.Type { color: #00ff00; font-weight: bold; }
+.Comment { color: #00ffff; font-weight: bold; }
+.Constant { color: #ff40ff; font-weight: bold; }
+.Statement { color: #ffff00; font-weight: bold; }
+.PreProc { color: #8080ff; font-weight: bold; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="Comment">/*</span><span class="Comment">*</span>
+<span class="Comment">* Example for section @section @title</span>
+<span class="Comment">* of the C++ Booklet (<a href="https://goo.gl/VJ4T3A)">https://goo.gl/VJ4T3A)</a></span>
+<span class="Comment">* published by bbv software services AG (c) </span><span class="Constant">2017</span>
+<span class="Comment">*</span>
+<span class="Comment">* This example illustrates the use of the 'auto' keyword and type infrence</span>
+<span class="Comment">*</span>
+<span class="Comment">* SPDX-License-Identifier: GPL-</span><span class="Constant">3.0</span>
+<span class="Comment">*</span>
+<span class="Comment">*</span><span class="Comment">*/</span>
+
+<span class="PreProc">#include </span><span class="Constant">&lt;vector&gt;</span>
+
+<span class="Comment">// syntax for trailing return type</span>
+<span class="Type">auto</span> fac(<span class="Type">int</span> n) -&gt; <span class="Type">int</span> { <span class="Statement">return</span> n &lt;= <span class="Constant">1</span> ? <span class="Constant">1</span> : n * fac(n - <span class="Constant">1</span>); }
+
+<span class="Type">int</span> main(<span class="Type">int</span>, <span class="Type">char</span> **) {
+  <span class="Type">auto</span> x = <span class="Constant">42</span>; <span class="Comment">// x is an int</span>
+<span class="PreProc">#ifdef EXPECT_FAILED_COMPILATION</span>
+  x = <span class="Constant">&quot;fortytwo&quot;</span>; <span class="Comment">// Error, because x is already an int</span>
+<span class="PreProc">#endif</span>
+  std::vector&lt;<span class="Type">int</span>&gt; vec{<span class="Constant">1000</span>, <span class="Constant">1001</span>, <span class="Constant">1002</span>, <span class="Constant">1003</span>};
+  <span class="Type">auto</span> it0 = vec.begin();  <span class="Comment">// it0 is a vector&lt;T&gt;::iterator</span>
+  <span class="Type">auto</span> st0(vec[<span class="Constant">4</span>]);        <span class="Comment">// st0 is an int</span>
+  <span class="Type">auto</span> &amp;st1 = vec[<span class="Constant">4</span>];      <span class="Comment">// st1 is an int&amp;</span>
+  <span class="Type">const</span> <span class="Type">auto</span> &amp;s1 = vec[<span class="Constant">4</span>]; <span class="Comment">// s1 const int&amp;</span>
+  <span class="Type">auto</span> it1 = vec.cbegin(); <span class="Comment">// it1 is a vector&lt;int&gt;::const_iterator</span>
+  <span class="Type">auto</span> sil{vec[<span class="Constant">4</span>]};        <span class="Comment">// sil is a std:initializer_list&lt;int&gt;</span>
+}
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->
