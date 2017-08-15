@@ -54,4 +54,5 @@ use `$>clang++ -std=c++1z -S` to compile to assembler code
 All examples are formatted using clang-format
 `$>clang-format -i file.cc` for formatting
 
-
+# generating html output
+to generate syntax highlighed html files for each file in ./source you need ```vim``` with syntax highlighting and a colorscheme enabledd. if you have this simply run ```generate_html.sh``` and it will drop the generated files into the folder /html
