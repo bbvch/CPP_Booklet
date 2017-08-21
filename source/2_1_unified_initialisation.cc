@@ -1,5 +1,5 @@
 /**
-* Example for section @section @title
+* Example for section 2.1 Unified Initialisation 
 * of the C++ Booklet (https://goo.gl/VJ4T3A)
 * published by bbv software services AG (c) 2017
 *
