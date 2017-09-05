@@ -11,13 +11,13 @@
 
 #include <vector>
 
-@6
+//@6
 // syntax for trailing return type
 auto fac(int n) -> int { return n <= 1 ? 1 : n * fac(n - 1); }
-@6
+//@6
 
 int main(int, char **) {
-@7
+//@7
   auto x = 42; // x is an int
 #ifdef EXPECT_FAILED_COMPILATION
   x = "fortytwo"; // Error, because x is already an int
@@ -29,5 +29,5 @@ int main(int, char **) {
   const auto &s1 = vec[4]; // s1 const int&
   auto it1 = vec.cbegin(); // it1 is a vector<int>::const_iterator
   auto sil{vec[4]};        // sil is a std:initializer_list<int>
-@7
+//@7
 }

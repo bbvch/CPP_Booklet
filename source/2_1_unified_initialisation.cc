@@ -13,7 +13,7 @@
 #include <string>
 #include <vector>
 
-//@bsp 5
+//@5
 struct Klass {
 public:
   Klass(int x, const std::string &s) : _x(x), _s(s) {}
@@ -25,12 +25,12 @@ private:
   int _y = 1000; // value assignment
   std::string _s;
 };
-//@bsp 5
+//@5
 
 int main(int, char **) {
 
 
-//@bsp 1
+//@1
   // simple initializing using {}
   Klass k{123, "b"};
   int x{42};
@@ -42,10 +42,10 @@ int main(int, char **) {
   int fail{7.5f}; // fails because of narrowing down from float to int
 #endif
 
-//@bsp 1
+//@1
 
 
-//@bsp 2
+//@2
 // initializing of aggregates
   struct Data {
     int a{0};
@@ -58,9 +58,9 @@ int main(int, char **) {
   Data data2{7.0, 3.14, "Seven Pies!"};
 #endif
 
-//@bsp 2
+//@2
 
-//@bsp 3
+//@3
   struct MyType {
     // the constructor makes a non-aggregate out of this struct
     MyType(const std::string &msg, int x) : m_a(x), m_c(msg) {}
@@ -70,9 +70,9 @@ int main(int, char **) {
   };
   MyType myType{"Fortytwo!", 42};
 
-//@bsp 3
+//@3
 
-//@bsp 4
+//@4
   // Example for a container-type with explicit list initialisation
   struct Bar {
     explicit Bar(std::initializer_list<std::string> in) {
@@ -82,5 +82,5 @@ int main(int, char **) {
     std::vector<std::string> m_data;
   };
   Bar bar{"A", "B", "C", "D"};
-//@bsp 4
+//@4
 }
