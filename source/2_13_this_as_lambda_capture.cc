@@ -3,7 +3,8 @@
 * of the C++ Booklet (https://goo.gl/VJ4T3A)
 * published by bbv software services AG (c) 2017
 *
-* This example illustrates how 'this' can be passed to a lambda function
+* This example illustrates how 'this' can be passed to a lambda function. 
+* This example is no longer available in the print version of the booklet 
 *
 * SPDX-License-Identifier: GPL-3.0
 *

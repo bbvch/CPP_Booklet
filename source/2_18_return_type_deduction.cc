@@ -11,12 +11,14 @@
 
 #include <utility>
 #include <vector>
-
+//@37
 template <typename T, typename U> auto add(T t, U u) {
   // return type deducted from operator+(T, U)
   return t + u;
 }
+//@37
 
+//@38
 // C++11 Version
 template <typename Container, typename Index>
 auto assignValue11(Container &&cont, Index idx)
@@ -31,23 +33,24 @@ decltype(auto) assignValue14(Container &&cont, Index idx) {
 
   return std::forward<Container>(cont)[idx];
 }
+//@38
 
-// Vorsicht bei folgender Situation
 decltype(auto) func1() {
   int x = 777;
-  return x; // decltype(x) ist int
-  // func1 gibt "int” zurück
+  return x; // decltype(x) is int
+  // func1 returns 'int'
 }
 decltype(auto) func2() {
   int x = 777;
-  return (x); // decltype( (x) ) ist int&
-  // func2 gibt aber nun "int&” zurück
+  return (x); // decltype( (x) ) is int&
+  // func2 returns now "int&”
 }
 
 int main(int, char **) {
-
+//@38
   // this allowes the following initialisation,
   // note the missing template arguments
   std::vector<int> vec;
   assignValue14(std::vector<int>(), 1) = 10;
+//@38
 }

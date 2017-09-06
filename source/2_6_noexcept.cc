@@ -16,6 +16,7 @@ class myException : std::exception {
 };
 }
 
+//@16
 class A {
 public:
   void throwing_function() noexcept(false) { // marked as possibly throwing
@@ -52,6 +53,8 @@ int main(int argc, char **argv) {
   static_assert(!noexcept(a.unspecified_func()), "possibly throwing");
   static_assert(noexcept(a.bad_func()), "bad func pretends to be not throwing");
   static_assert(noexcept(a.old_syntax_func()), "not throwing");
-  // static_assert(!noexcept(a.old_syntax_throwing_func()), "possibly
-  // throwing");
+#ifdef EXPECT_FAILED_COMPILATION
+  static_assert(!noexcept(a.old_syntax_throwing_func()), "possibly throwing");
+#endif
 }
+//@16

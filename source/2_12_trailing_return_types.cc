@@ -9,6 +9,7 @@
 *
 **/
 
+//@22
 struct A {
   struct B {
     struct C {
@@ -29,5 +30,5 @@ auto A::B::C::bar(const C &) -> D { return D(); };
 template <typename A, typename B> auto add(A a, B b) -> decltype(a + b) {
   return a + b;
 }
-
+//@22
 int main(int, char **) {}
