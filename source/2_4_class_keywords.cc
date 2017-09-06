@@ -9,6 +9,7 @@
 *
 **/
 
+//@9
 struct Dummy {
   Dummy() = default;
   // specify destructor as virtual but use default implementation
@@ -28,7 +29,9 @@ protected:
   // also protect assignemt operator
   Dummy &operator=(const Dummy &rhs) = default;
 };
+//@9
 
+//@10
 struct DummyNonCopyable {
   DummyNonCopyable() = default;
 
@@ -47,19 +50,24 @@ struct NonContstructableByValue {
   void f(int){};
   void f(double) = delete; // prevents f.foo(3.14)
 };
+//@10
 
+//@15
 struct ExplicitConversion {
   // Conversion to bool overwritten
   explicit operator bool() { return true; }
 };
+//@15
 
 int main(int, char **) {
+//@15
 
   ExplicitConversion myBool;
   if (myBool) {
-  };                        // OK
+  }                         // OK
   int a = (myBool) ? 3 : 4; // OK
 #ifdef EXPECT_FAILED_COMPILATION
   int b = myBool + a; // Error, only conversion allowed
 #endif
+//@15
 }
