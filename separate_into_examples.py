@@ -18,8 +18,11 @@ for f in glob.glob("source/*.cc"):
 				print "Error: Previous example did not end"
 			elif current_example is None:
 				current_example = num
-				examples[current_example] = []
-				print "Starting example " + str(current_example)
+				if current_example not in examples:
+					examples[current_example] = []
+					print "Starting example " + str(current_example)
+				else:
+					print "Continuing example " + str(current_example)
 			elif current_example == num:  #end
 				current_example = None
 			else:
