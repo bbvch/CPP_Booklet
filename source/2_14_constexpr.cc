@@ -11,7 +11,7 @@
 
 #include <array>
 
-//@26
+//@27
 constexpr double pi{
     3.1416}; // const floating point instead of a #define PI 3.1416
 constexpr int square(int x) { return x * x; }
@@ -34,5 +34,5 @@ constexpr Dummy *construct(int x, int y) { return new Dummy(x, y); }
 constexpr Dummy d{3, 4};
 // d.m_a is transformed to a constant expression 3
 int iArray[d.m_a];
-//@26
+//@27
 int main(int, char **) {}

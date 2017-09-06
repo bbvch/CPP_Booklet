@@ -11,14 +11,14 @@
 
 #include <utility>
 #include <vector>
-//@37
+//@38
 template <typename T, typename U> auto add(T t, U u) {
   // return type deducted from operator+(T, U)
   return t + u;
 }
-//@37
-
 //@38
+
+//@39
 // C++11 Version
 template <typename Container, typename Index>
 auto assignValue11(Container &&cont, Index idx)
@@ -33,7 +33,7 @@ decltype(auto) assignValue14(Container &&cont, Index idx) {
 
   return std::forward<Container>(cont)[idx];
 }
-//@38
+//@39
 
 decltype(auto) func1() {
   int x = 777;
@@ -47,10 +47,10 @@ decltype(auto) func2() {
 }
 
 int main(int, char **) {
-//@38
+//@39
   // this allowes the following initialisation,
   // note the missing template arguments
   std::vector<int> vec;
   assignValue14(std::vector<int>(), 1) = 10;
-//@38
+//@39
 }

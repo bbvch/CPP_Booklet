@@ -13,7 +13,7 @@
 #include <vector>
 
 int main(int, char **) {
-//@23
+//@24
   // declaration of a lambda function
   const auto square = [](int x) { return x * x; };
   // execution of the lambda above
@@ -26,9 +26,9 @@ int main(int, char **) {
   const auto auto_param_function = [](const auto &a, const auto &b) {
     return a * b;
   };
-//@23
-
 //@24
+
+//@25
   int x, y, z;
 
   const auto no_capture = []() {};           // No variables are acptured
@@ -53,9 +53,9 @@ int main(int, char **) {
     r += 2;
     return x + 2;
   };
-//@24
-
 //@25
+
+//@26
   // using lambda with std::-functions
   std::vector<int> a1{1, 2, 3, 4, 5};
   std::vector<int> a2(a1.size());
@@ -70,5 +70,5 @@ int main(int, char **) {
   int sum{0};
   // sums up the values of vector v using pass by reference for sum
   std::for_each(v.begin(), v.end(), [&sum](int i) { sum += i; });
-//@25
+//@26
 }

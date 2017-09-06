@@ -8,7 +8,7 @@
 * SPDX-License-Identifier: GPL-3.0
 *
 **/
-//@21
+//@22
 namespace A::B::C {
 void doMagic() { 
 }
@@ -19,4 +19,4 @@ int main(int argc, char **argv) {
 
   return 0;
 }
-//@21
+//@22

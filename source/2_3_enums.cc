@@ -9,7 +9,7 @@
 *
 **/
 
-//@8
+//@9
 // non scoped enum
 enum Color { Cyan, Magenta, Yellow, Black };
 enum Sound { Beep, Bop, Boing };
@@ -20,10 +20,10 @@ enum class CMY { Cyan, Magenta, Yello, Black };
 
 // scoped enum with explicit type specifier
 enum class Fruits : unsigned int { Apples, Pears };
-//@8
+//@9
 
 int main(int, char **) {
-//@8
+//@9
 
   CMY cmy = CMY::Black; // CMY scope
   RGB rgb = RGB::Black; // RGB scope
@@ -42,5 +42,5 @@ int main(int, char **) {
   // Compiles with only a warning but is semantically incorrect
   if (Sound::Boing == Color::Yellow) {
   }
-//@8
+//@9
 }

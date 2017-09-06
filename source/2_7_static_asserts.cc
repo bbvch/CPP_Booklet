@@ -9,20 +9,20 @@
 *
 **/
 
-//@17
+//@18
 static_assert((sizeof(long) == 8), "64 bit code not supported!");
 
 template <typename T> struct Dummy {
   static_assert(sizeof(int) >= sizeof(T), "Dummy<T>: T is too small!");
 };
-//@17
+//@18
 
 int main(int, char **) {
-//@17
+//@18
   Dummy<int> di; // OK
 
 #ifdef EXPECT_FAILED_COMPILATION
   Dummy<short> ds; // Assert on compile tile
 #endif
-//@17
+//@18
 }

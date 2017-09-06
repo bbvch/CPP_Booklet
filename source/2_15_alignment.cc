@@ -12,7 +12,7 @@
 #include <cstddef>
 #include <iostream>
 
-//@29
+//@30
 struct C {
   char a; // size: 1, alignment: 1, offest 0
   char b; // size: 1, alignment: 1, offset 1
@@ -29,19 +29,19 @@ struct S {
   int b; // size: 4, alignment: 4, offset 4
   int c; // size: 4, alignment: 4, offset 8
 };       // sizeof(S): 12, alignof(S): 4
-//@29
-
 //@30
+
+//@31
 struct X {
   int a;             // size: 4, alignment: 4, offset 0
   alignas(16) int b; // size: 4, alignment: 16, offset 4
   int c;             // size: 4, alignment: 4, offset 20
   // + 8 bytes padding because the forced alignment of b
 }; // sizeof(X): 32, alignof(X): 16 (forced by alignas of b)
-//@30
+//@31
 
 int main(int, char **) {
-//@29
+//@30
   std::cout << "sizeof(C) = " << sizeof(C) << " alignof(C) = " << alignof(C)
             << std::endl;
   std::cout << "sizeof(I) = " << sizeof(I) << " alignof(I) = " << alignof(I)
@@ -53,11 +53,11 @@ int main(int, char **) {
             << std::endl;
   std::cout << "offsetof(S,b) = " << offsetof(S, b)
             << " offsetof(S,c) = " << offsetof(S, c) << std::endl;
-//@29
 //@30
+//@31
   std::cout << "sizeof(X) = " << sizeof(X) << " alignof(X) = " << alignof(X)
             << std::endl;
   std::cout << "offsetof(X,b) = " << offsetof(X, b)
             << " offsetof(X,c) = " << offsetof(X, c) << std::endl;
-//@30
+//@31
 }

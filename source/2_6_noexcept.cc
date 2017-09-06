@@ -16,7 +16,7 @@ class myException : std::exception {
 };
 }
 
-//@16
+//@17
 class A {
 public:
   void throwing_function() noexcept(false) { // marked as possibly throwing
@@ -57,4 +57,4 @@ int main(int argc, char **argv) {
   static_assert(!noexcept(a.old_syntax_throwing_func()), "possibly throwing");
 #endif
 }
-//@16
+//@17
