@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>/c/Code/CPP_Booklet/source/2_14_constexpr_if.cc.html</title>
+<meta name="Generator" content="Vim/8.0">
+<meta name="plugin-version" content="vim7.4_v2">
+<meta name="syntax" content="cpp">
+<meta name="settings" content="use_css,pre_wrap,no_foldcolumn,prevent_copy=">
+<meta name="colorscheme" content="none">
+<style type="text/css">
+<!--
+pre { white-space: pre-wrap; font-family: monospace; color: #000000; background-color: #c0c0c0; }
+body { font-family: monospace; color: #000000; background-color: #c0c0c0; }
+* { font-size: 1em; }
+.Type { color: #0000c0; background-color: #c0c0c0; padding-bottom: 1px; }
+.Comment { color: #008000; background-color: #c0c0c0; padding-bottom: 1px; }
+.Constant { color: #c00000; background-color: #c0c0c0; padding-bottom: 1px; }
+.Statement { color: #0000c0; background-color: #c0c0c0; padding-bottom: 1px; }
+.PreProc { color: #c000c0; background-color: #c0c0c0; padding-bottom: 1px; }
+-->
+</style>
+
+<script type='text/javascript'>
+<!--
+
+-->
+</script>
+</head>
+<body>
+<pre id='vimCodeElement'>
+<span class="Comment">/*</span><span class="Comment">*</span>
+<span class="Comment">* Example for section </span><span class="Constant">2.11.2</span>
+<span class="Comment">* of the C++ Booklet (<a href="https://goo.gl/VJ4T3A)">https://goo.gl/VJ4T3A)</a></span>
+<span class="Comment">* published by bbv software services AG (c) </span><span class="Constant">2017</span>
+<span class="Comment">*</span>
+<span class="Comment">* This example illustrates the use of constexpr if</span>
+<span class="Comment">*</span>
+<span class="Comment">* SPDX-License-Identifier: GPL-</span><span class="Constant">3.0</span>
+<span class="Comment">*</span>
+<span class="Comment">*</span><span class="Comment">*/</span>
+
+<span class="PreProc">#include </span><span class="Constant">&lt;algorithm&gt;</span>
+<span class="PreProc">#include </span><span class="Constant">&lt;array&gt;</span>
+<span class="PreProc">#include </span><span class="Constant">&lt;iostream&gt;</span>
+<span class="PreProc">#include </span><span class="Constant">&lt;vector&gt;</span>
+
+<span class="Comment">// Here Constexpr is used to facilitate template specialisation 'in-place'</span>
+<span class="Type">template</span> &lt;<span class="Type">typename</span> T&gt; <span class="Type">class</span> NameByType {
+<span class="Statement">public</span>:
+  std::string to_string() {
+    <span class="Statement">if</span>
+      <span class="Type">constexpr</span>(std::is_pointer&lt;T&gt;::value) { <span class="Statement">return</span> <span class="Constant">&quot;Pointer&quot;</span>; }
+    <span class="Statement">else</span> <span class="Statement">if</span>
+      <span class="Type">constexpr</span>(std::is_integral&lt;T&gt;::value) { <span class="Statement">return</span> <span class="Constant">&quot;Integral&quot;</span>; }
+    <span class="Statement">else</span> <span class="Statement">if</span>
+      <span class="Type">constexpr</span>(std::is_same&lt;T, <span class="Type">float</span>&gt;::value) { <span class="Statement">return</span> <span class="Constant">&quot;Float&quot;</span>; }
+    <span class="Statement">else</span> {
+      <span class="Statement">return</span> <span class="Constant">&quot;Unknown&quot;</span>;
+    }
+  }
+};
+
+<span class="Comment">// A fixed size storage class that can return differnt types by using auto and</span>
+<span class="Comment">// constexpr if</span>
+<span class="Type">class</span> MixedStorage {
+<span class="Statement">public</span>:
+  <span class="Type">template</span> &lt;std::<span class="Type">size_t</span> N&gt; <span class="Type">auto</span> access() {
+    <span class="Statement">if</span>
+      <span class="Type">constexpr</span>(N == <span class="Constant">0</span>) { <span class="Statement">return</span> a; } <span class="Comment">// int</span>
+    <span class="Statement">if</span>
+      <span class="Type">constexpr</span>(N == <span class="Constant">1</span>) { <span class="Statement">return</span> b; } <span class="Comment">// char</span>
+    <span class="Statement">if</span>
+      <span class="Type">constexpr</span>(N == <span class="Constant">2</span>) { <span class="Statement">return</span> c; } <span class="Comment">// string</span>
+    <span class="Statement">if</span>
+      <span class="Type">constexpr</span>(N == <span class="Constant">3</span>) { <span class="Statement">return</span> d; } <span class="Comment">// vector</span>
+    <span class="Statement">else</span> <span class="Statement">if</span>                           <span class="Comment">// return a fixed size array of size N</span>
+      <span class="Type">constexpr</span>(N &gt; <span class="Constant">3</span>) { <span class="Comment">// Condition needs explicit specification or else</span>
+                         <span class="Comment">// return type cannot be deducted correctly</span>
+        std::array&lt;<span class="Type">int</span>, N&gt; r;
+        <span class="Statement">return</span> std::move(r);
+      }
+
+<span class="PreProc">#ifdef EXPECT_FAILED_COMPILATION</span>
+    <span class="Statement">else</span> {
+      <span class="Statement">return</span> <span class="Constant">123</span>;
+    }
+<span class="PreProc">#endif</span>
+  }
+
+<span class="Statement">private</span>:
+  <span class="Type">int</span> a = <span class="Constant">1000</span>;
+  <span class="Type">char</span> b = <span class="Constant">64</span>;
+  std::string c{<span class="Constant">&quot;Hello world&quot;</span>};
+  std::vector&lt;<span class="Type">char</span>&gt; d{<span class="Constant">'a'</span>, <span class="Constant">'b'</span>, <span class="Constant">'c'</span>, <span class="Constant">'d'</span>};
+};
+
+<span class="Type">int</span> main(<span class="Type">int</span> argc, <span class="Type">char</span> **argv) {
+
+  std::cout &lt;&lt; NameByType&lt;<span class="Type">int</span>&gt;().to_string() &lt;&lt; std::endl;         <span class="Comment">// Integral</span>
+  std::cout &lt;&lt; NameByType&lt;<span class="Type">char</span> *&gt;().to_string() &lt;&lt; std::endl;      <span class="Comment">// Pointer</span>
+  std::cout &lt;&lt; NameByType&lt;<span class="Type">float</span>&gt;().to_string() &lt;&lt; std::endl;       <span class="Comment">// Float</span>
+  std::cout &lt;&lt; NameByType&lt;std::string&gt;().to_string() &lt;&lt; std::endl; <span class="Comment">// Unknown</span>
+
+  std::cout &lt;&lt; std::endl;
+  MixedStorage store;
+  std::cout &lt;&lt; store.access&lt;<span class="Constant">0</span>&gt;() &lt;&lt; std::endl; <span class="Comment">// </span><span class="Constant">1000</span>
+  std::cout &lt;&lt; store.access&lt;<span class="Constant">1</span>&gt;() &lt;&lt; std::endl; <span class="Comment">// </span><span class="Constant">64</span>
+  std::cout &lt;&lt; store.access&lt;<span class="Constant">2</span>&gt;() &lt;&lt; std::endl; <span class="Comment">// </span><span class="Constant">&quot;Hello World&quot;</span>
+  <span class="Statement">for</span> (<span class="Type">const</span> <span class="Type">auto</span> &amp;v : store.access&lt;<span class="Constant">3</span>&gt;()) {    <span class="Comment">// vector returned</span>
+    std::cout &lt;&lt; v &lt;&lt; <span class="Constant">&quot;, &quot;</span>;
+  }
+  std::cout &lt;&lt; std::endl;
+
+  <span class="Statement">for</span> (<span class="Type">const</span> <span class="Type">auto</span> &amp;v : store.access&lt;<span class="Constant">16</span>&gt;()) { <span class="Comment">// fixed size array returned</span>
+    std::cout &lt;&lt; v &lt;&lt; <span class="Constant">&quot;, &quot;</span>;
+  }
+  std::cout &lt;&lt; std::endl;
+
+  <span class="Statement">return</span> <span class="Constant">0</span>;
+}
+</pre>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->
