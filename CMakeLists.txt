@@ -16,7 +16,7 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "clang")
   add_compile_options(-std=c++1z)
   if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "4.0.0")
-	message(WARNING "Insufficient clang version - use 4.0.0 or above to compile all examples")
+    message(WARNING "Insufficient clang version - use 4.0.0 or above to compile all examples")
   endif()
 else()
   message(WARNING "your compiler is not yet able to compile all examples under the C++17 standard, some compilations may fail")
@@ -25,9 +25,18 @@ endif()
 file(GLOB SOURCE_FILES source/*.cc)
 
 foreach(CC_FILE ${SOURCE_FILES} )
-	get_filename_component(SOURCE_BASENAME ${CC_FILE} NAME)
-	string (REPLACE ".cc" "" EXE_NAME ${SOURCE_BASENAME})
-	add_executable(${EXE_NAME} ${CC_FILE})
+  get_filename_component(SOURCE_BASENAME ${CC_FILE} NAME)
+  string (REPLACE ".cc" "" EXE_NAME ${SOURCE_BASENAME})
+  add_executable(${EXE_NAME} ${CC_FILE})
 endforeach(CC_FILE ${SOURCE_FILES} )
 
-
+#if vi improved is detected add a target for generating html output
+find_program(VIM_PATH vim)
+if(VIM_PATH)
+  message("Vim found in ${VIM_PATH}")
+  
+  add_custom_target(build_html 
+  COMMAND ${CMAKE_CURRENT_LIST_DIR}/generate_html.sh)
+else()
+  message(WARNING "Vim not found, will not add target to build html output")
+endif()
