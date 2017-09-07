@@ -20,15 +20,20 @@ void foo() {}
 void bar() {}
 }
 
+//@42
 // indicates that this function never returns
 [[noreturn]] void always_throw() { throw 123; };
+//@42
 
+//@43
 // generates a compiler warning if called
 [[deprecated("black magic is no longer used")]] void black_magic(){};
 
 // generates a compiler warning if called
 [[deprecated]] void ancient_magic() {}
+//@43
 
+//@44
 void fall_through(int i) {
   switch (i) {
   case 0:
@@ -42,7 +47,9 @@ void fall_through(int i) {
     break;
   }
 }
+//@44
 
+//@45
 struct[[nodiscard]] demon{}; // Demons need to be kept and named
 struct ghost {};             // Ghosts can be free
 
@@ -61,8 +68,10 @@ void summon() {
   // Compiler Warning, because the function of summoning is nodiscard
   summon_ghost();
 }
+//@45
 
-// ommit compiler warning if thing1 on thing2 is not used
+//@46
+// omit compiler warning if thing1 on thing2 is not used
 [[maybe_unused]] void f([[maybe_unused]] bool thing1,
                         [[maybe_unused]] bool thing2) {
   [[maybe_unused]] bool b = thing1 && thing2;
@@ -72,10 +81,12 @@ void summon() {
   assert(thing1 &&
          thing2); // parameters thing1 and thing2 are not used, no warning
 }
+//@46
 
 //
 // Example for carrying memory dependence
 //
+//@47
 void opaque_func(int *p){/* do something with p */};
 
 [[carries_dependency]] void transparent_func(int *p) {
@@ -97,5 +108,5 @@ void illustrate_carries_dependency() {
     transparent_func(atomic); // marked as to work in the same memory-dependency
                               // tree, compiler can omit the memory fence
 }
-
+//@47
 int main(int argc, char **argv) {}
