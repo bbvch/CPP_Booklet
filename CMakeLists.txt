@@ -45,10 +45,9 @@ if(VIM_PATH)
   message("Vim found in ${VIM_PATH}")
   
   set(SOURCES_TO_CONVERT source/)
-  configure_file(generate_html.cmake.in generate_html.cmake @ONLY)
- 
-#  add_custom_target(build_html 
-#  COMMAND ${CMAKE_CURRENT_LIST_DIR}/generate_html.sh)
+  configure_file(generate_html.cmake.in ${CMAKE_BINARY_DIR}/generate_html.cmake @ONLY)
+  include(${CMAKE_BINARY_DIR}/generate_html.cmake)
+
 else()
   message(WARNING "Vim not found, will not add target to build html output")
 endif()

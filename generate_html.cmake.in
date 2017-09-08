@@ -1,6 +1,6 @@
 set(BBV_BACKGROUND LightGray)
 set(NORMAL Black)
-set(COMMENT DarkGreen)
+set(COMMENT_COL DarkGreen)
 set(CONSTANT DarkRed)
 set(PREPROC DarkMagenta)
 set(TYPE DarkBlue)
@@ -8,15 +8,25 @@ set(STATEMENT DarkBlue)
 
 set(SOURCEDIR @SOURCES_TO_CONVERT@)
 
-#this will open vim for each file and save it as html in the source/<filenamw>.cc.html 
 add_custom_target(build_html 
-  COMMAND for i in ${SOURCEDIR}/*.cc; do vim -c "set t_Co=256"\
-    -c "highlight Normal ctermbg=${BBV_BACKGROUND} ctermfg=${NORMAL}" \
-	-c "highlight Comment ctermbg=${BBV_BACKGROUND} ctermfg=${COMMENT}"\
-	-c "highlight Constant ctermbg=${BBV_BACKGROUND} ctermfg=${CONSTANT}"\
-	-c "highlight Statement ctermbg=${BBV_BACKGROUND} ctermfg=${STATEMENT}"\
-	-c "highlight Type ctermbg=${BBV_BACKGROUND} ctermfg=${TYPE}"\
-	-c "highlight PreProc ctermbg=${BBV_BACKGROUND} ctermfg=${PREPROC}"\
-	-c TOhtml -c wqa $i; done \
-	mv ${SOURCEDIR}/*.html html/
+	COMMAND mv ${SOURCEDIR}/*.html html/
 )
+
+#this will open vim for each file and save it as html in the source/<filenamw>.cc.html 
+foreach(CC_FILE ${SOURCE_FILES} )
+  get_filename_component(SOURCE_BASENAME ${CC_FILE} NAME)
+
+  add_custom_target(${SOURCE_BASENAME}_html)
+  
+  add_custom_command(TARGET ${SOURCE_BASENAME}_html
+  PRE_BUILD
+  COMMAND @VIM_PATH@ ARGS -c "set t_Co=256" -c "highlight Normal ctermbg=${BBV_BACKGROUND} ctermfg=${NORMAL}" -c "highlight Comment ctermbg=${BBV_BACKGROUND} ctermfg=${COMMENT_COL}" -c "highlight Constant ctermbg=${BBV_BACKGROUND} ctermfg=${CONSTANT}" -c "highlight Statement ctermbg=${BBV_BACKGROUND} ctermfg=${STATEMENT}" -c "highlight Type ctermbg=${BBV_BACKGROUND} ctermfg=${TYPE}" -c "highlight PreProc ctermbg=${BBV_BACKGROUND} ctermfg=${PREPROC}" -c TOhtml -c wqa ${CC_FILE}
+  VERBATIM
+	)
+	
+	add_dependencies(build_html ${SOURCE_BASENAME}_html)
+ 
+endforeach(CC_FILE ${SOURCE_FILES} )
+
+
+
