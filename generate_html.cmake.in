@@ -20,7 +20,14 @@ foreach(CC_FILE ${SOURCE_FILES} )
   
   add_custom_command(TARGET ${SOURCE_BASENAME}_html
   PRE_BUILD
-  COMMAND @VIM_PATH@ ARGS -c "set t_Co=256" -c "highlight Normal ctermbg=${BBV_BACKGROUND} ctermfg=${NORMAL}" -c "highlight Comment ctermbg=${BBV_BACKGROUND} ctermfg=${COMMENT_COL}" -c "highlight Constant ctermbg=${BBV_BACKGROUND} ctermfg=${CONSTANT}" -c "highlight Statement ctermbg=${BBV_BACKGROUND} ctermfg=${STATEMENT}" -c "highlight Type ctermbg=${BBV_BACKGROUND} ctermfg=${TYPE}" -c "highlight PreProc ctermbg=${BBV_BACKGROUND} ctermfg=${PREPROC}" -c TOhtml -c wqa ${CC_FILE}
+  COMMAND @VIM_PATH@ -c "set t_Co=256" 
+  -c "highlight Normal ctermbg=${BBV_BACKGROUND} ctermfg=${NORMAL}" 
+  -c "highlight Comment ctermbg=${BBV_BACKGROUND} ctermfg=${COMMENT_COL}" 
+  -c "highlight Constant ctermbg=${BBV_BACKGROUND} ctermfg=${CONSTANT}" 
+  -c "highlight Statement ctermbg=${BBV_BACKGROUND} ctermfg=${STATEMENT}" 
+  -c "highlight Type ctermbg=${BBV_BACKGROUND} ctermfg=${TYPE}" 
+  -c "highlight PreProc ctermbg=${BBV_BACKGROUND} ctermfg=${PREPROC}" 
+  -c TOhtml -c wqa ${CC_FILE}
   VERBATIM
 	)
 	
