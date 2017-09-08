@@ -26,17 +26,11 @@ set(SOURCE_DIR source)
 file(GLOB SOURCE_FILES ${SOURCE_DIR}/*.cc)
 
 foreach(CC_FILE ${SOURCE_FILES} )
+
   get_filename_component(SOURCE_BASENAME ${CC_FILE} NAME)
   string (REPLACE ".cc" "" EXE_NAME ${SOURCE_BASENAME})
   add_executable(${EXE_NAME} ${CC_FILE})
 endforeach(CC_FILE ${SOURCE_FILES} )
-
-find_program(PYTHON_PATH python)
-if(PYTHON_PATH)
-  add_custom_target(split_examples COMMAND python ${CMAKE_CURRENT_LIST_DIR}/separate_into_examples.py)
-else()
-  message(WARNING "Python not found, will not build target to separate examples")
-endif()
 
 #if vi improved is detected add a target for generating html output
 find_program(VIM_PATH vim)
@@ -45,17 +39,24 @@ find_program(VIM_PATH vim)
 if(VIM_PATH)
   message("Vim found in ${VIM_PATH}")
   
-  set(TARGET_POSTFIX html)
-  configure_file(generate_html.cmake.in ${CMAKE_BINARY_DIR}/generate_html.cmake @ONLY)
-  include(${CMAKE_BINARY_DIR}/generate_html.cmake)
+  find_program(PYTHON_PATH python)
   
   if(PYTHON_PATH)
-    set(SOURCE_DIR examples)
-    set(TARGET_POSTFIX html_example)
-    file(GLOB SOURCE_FILES ${SOURCE_DIR}/*.cc)
-    configure_file(generate_html.cmake.in ${CMAKE_BINARY_DIR}/generate_html_examples.cmake @ONLY)
-    include(${CMAKE_BINARY_DIR}/generate_html_examples.cmake)
+    message("found Python; Splitting cc files into individual examples")
+    add_custom_target(split_examples COMMAND python ${CMAKE_CURRENT_LIST_DIR}/separate_into_examples.py)
+    file(GLOB SOURCE_FILES_EXAMPLES examples/*.cc)
+    set(SOURCE_FILES ${SOURCE_FILES} ${SOURCE_FILES_EXAMPLES})
+
+  else()
+    message(WARNING "Python not found, will not build target to separate examples")
   endif()
+  
+  configure_file(generate_html.cmake.in ${CMAKE_BINARY_DIR}/generate_html.cmake @ONLY)
+  include(${CMAKE_BINARY_DIR}/generate_html.cmake)
+  if(PYTHON_PATH)
+    add_dependencies(build_html split_examples)
+  endif()
+  
 
 else()
   message(WARNING "Vim not found, will not add target to build html output")

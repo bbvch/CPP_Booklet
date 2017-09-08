@@ -6,17 +6,18 @@ set(PREPROC DarkMagenta)
 set(TYPE DarkBlue)
 set(STATEMENT DarkBlue)
 
-add_custom_target(build_@TARGET_POSTFIX@
+add_custom_target(build_html
 	COMMENT "Building HTML output for ${SOURCE_DIR}"
 )
 
 #this will open vim for each file and save it as html in the source/<filenamw>.cc.html 
 foreach(CC_FILE ${SOURCE_FILES} )
+
   get_filename_component(SOURCE_BASENAME ${CC_FILE} NAME)
 
-  add_custom_target(${SOURCE_BASENAME}_@TARGET_POSTFIX@)
+  add_custom_target(${SOURCE_BASENAME}_html)
   
-  add_custom_command(TARGET ${SOURCE_BASENAME}_@TARGET_POSTFIX@
+  add_custom_command(TARGET ${SOURCE_BASENAME}_html
   PRE_BUILD
   COMMAND @VIM_PATH@ -c "set t_Co=256" 
   -c "highlight Normal ctermbg=${BBV_BACKGROUND} ctermfg=${NORMAL}" 
@@ -30,7 +31,7 @@ foreach(CC_FILE ${SOURCE_FILES} )
   VERBATIM
 	)
 	
-add_dependencies(build_@TARGET_POSTFIX@ ${SOURCE_BASENAME}_@TARGET_POSTFIX@)
+add_dependencies(build_html ${SOURCE_BASENAME}_html)
  
 endforeach(CC_FILE ${SOURCE_FILES} )
 
