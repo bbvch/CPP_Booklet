@@ -30,13 +30,25 @@ foreach(CC_FILE ${SOURCE_FILES} )
   add_executable(${EXE_NAME} ${CC_FILE})
 endforeach(CC_FILE ${SOURCE_FILES} )
 
+find_program(PYTHON_PATH python)
+if(PYTHON_PATH)
+  add_custom_target(split_examples COMMAND python ${CMAKE_CURRENT_LIST_DIR}/separate_into_examples.py)
+else()
+  message(WARNING "Python not found, will not build target to separate examples")
+endif()
+
 #if vi improved is detected add a target for generating html output
 find_program(VIM_PATH vim)
+
+
 if(VIM_PATH)
   message("Vim found in ${VIM_PATH}")
   
-  add_custom_target(build_html 
-  COMMAND ${CMAKE_CURRENT_LIST_DIR}/generate_html.sh)
+  set(SOURCES_TO_CONVERT source/)
+  configure_file(generate_html.cmake.in generate_html.cmake @ONLY)
+ 
+#  add_custom_target(build_html 
+#  COMMAND ${CMAKE_CURRENT_LIST_DIR}/generate_html.sh)
 else()
   message(WARNING "Vim not found, will not add target to build html output")
 endif()
