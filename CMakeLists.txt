@@ -22,7 +22,8 @@ else()
   message(WARNING "your compiler is not yet able to compile all examples under the C++17 standard, some compilations may fail")
 endif()
 
-file(GLOB SOURCE_FILES source/*.cc)
+set(SOURCE_DIR source)
+file(GLOB SOURCE_FILES ${SOURCE_DIR}/*.cc)
 
 foreach(CC_FILE ${SOURCE_FILES} )
   get_filename_component(SOURCE_BASENAME ${CC_FILE} NAME)
@@ -44,9 +45,17 @@ find_program(VIM_PATH vim)
 if(VIM_PATH)
   message("Vim found in ${VIM_PATH}")
   
-  set(SOURCES_TO_CONVERT source/)
+  set(TARGET_POSTFIX html)
   configure_file(generate_html.cmake.in ${CMAKE_BINARY_DIR}/generate_html.cmake @ONLY)
   include(${CMAKE_BINARY_DIR}/generate_html.cmake)
+  
+  if(PYTHON_PATH)
+    set(SOURCE_DIR examples)
+    set(TARGET_POSTFIX html_example)
+    file(GLOB SOURCE_FILES ${SOURCE_DIR}/*.cc)
+    configure_file(generate_html.cmake.in ${CMAKE_BINARY_DIR}/generate_html_examples.cmake @ONLY)
+    include(${CMAKE_BINARY_DIR}/generate_html_examples.cmake)
+  endif()
 
 else()
   message(WARNING "Vim not found, will not add target to build html output")
