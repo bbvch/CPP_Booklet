@@ -6,6 +6,8 @@ set(PREPROC DarkMagenta)
 set(TYPE DarkBlue)
 set(STATEMENT DarkBlue)
 
+file(MAKE_DIRECTORY html)
+
 add_custom_target(build_html
 	COMMENT "Building HTML output for ${SOURCE_DIR}"
 )

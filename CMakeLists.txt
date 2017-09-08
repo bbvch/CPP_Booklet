@@ -25,6 +25,8 @@ endif()
 set(SOURCE_DIR source)
 file(GLOB SOURCE_FILES ${SOURCE_DIR}/*.cc)
 
+set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES html examples)
+
 foreach(CC_FILE ${SOURCE_FILES} )
 
   get_filename_component(SOURCE_BASENAME ${CC_FILE} NAME)
@@ -41,6 +43,9 @@ if(VIM_PATH)
   
   find_program(PYTHON_PATH python)
   
+  #if Python is available the .cc files will be split into chunks for each example
+  #in the print version of the booklet. The newly generated files will be appended to the source list
+  #to generate the build_html targets
   if(PYTHON_PATH)
     message("found Python; Splitting cc files into individual examples")
     add_custom_target(split_examples COMMAND python ${CMAKE_CURRENT_LIST_DIR}/separate_into_examples.py)
