@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<title>~/workspace/CPP_Booklet/source/2_10_range_based_for_loops.cc.html</title>
+<title>~/workspace/CPP_Booklet/source/2_26_variable_templates.cc.html</title>
 <meta name="Generator" content="Vim/7.4">
 <meta name="plugin-version" content="vim7.4_v2">
 <meta name="syntax" content="cpp">
@@ -16,7 +16,6 @@ body { font-family: monospace; color: #000000; background-color: #c0c0c0; }
 .Comment { color: #008000; background-color: #c0c0c0; padding-bottom: 1px; }
 .Constant { color: #c00000; background-color: #c0c0c0; padding-bottom: 1px; }
 .Statement { color: #0000c0; background-color: #c0c0c0; padding-bottom: 1px; }
-.PreProc { color: #c000c0; background-color: #c0c0c0; padding-bottom: 1px; }
 .Type { color: #0000c0; background-color: #c0c0c0; padding-bottom: 1px; }
 -->
 </style>
@@ -30,35 +29,29 @@ body { font-family: monospace; color: #000000; background-color: #c0c0c0; }
 <body>
 <pre id='vimCodeElement'>
 <span class="Comment">/*</span><span class="Comment">*</span>
-<span class="Comment">* Example for section 2.10</span>
+<span class="Comment">* Example for section 2.26</span>
 <span class="Comment">* of the C++ Booklet (<a href="https://goo.gl/VJ4T3A)">https://goo.gl/VJ4T3A)</a></span>
 <span class="Comment">* published by bbv software services AG (c) 2017</span>
 <span class="Comment">*</span>
-<span class="Comment">* This exampple illustrates the use of a range based for loop</span>
+<span class="Comment">*  This example illustrates the definition of variable templates</span>
 <span class="Comment">*</span>
 <span class="Comment">* SPDX-License-Identifier: GPL-3.0</span>
 <span class="Comment">*</span>
 <span class="Comment">*</span><span class="Comment">*/</span>
 
-<span class="PreProc">#include </span><span class="Constant">&lt;vector&gt;</span>
 
-<span class="Type">int</span> main(<span class="Type">int</span>, <span class="Type">char</span> **) {
-<span class="Comment">//@21</span>
-  <span class="Type">int</span> iArray[]{<span class="Constant">1</span>, <span class="Constant">2</span>, <span class="Constant">3</span>, <span class="Constant">4</span>, <span class="Constant">5</span>, <span class="Constant">6</span>, <span class="Constant">7</span>, <span class="Constant">8</span>, <span class="Constant">9</span>, <span class="Constant">0</span>};
+<span class="Comment">//@53</span>
+<span class="Type">template</span>&lt;<span class="Type">typename</span> T&gt;
+<span class="Type">constexpr</span> T pi = T(<span class="Constant">3.1415926535897932385</span>);
 
-  <span class="Comment">// access the elements by value</span>
-  <span class="Statement">for</span> (<span class="Type">int</span> i : iArray) {
-    <span class="Comment">// do something</span>
-  };
+<span class="Type">auto</span> two_pi = pi&lt;<span class="Type">float</span>&gt; * <span class="Constant">2</span>;
+<span class="Comment">//@53</span>
 
-  std::vector&lt;<span class="Type">int</span>&gt; v{<span class="Constant">1</span>, <span class="Constant">2</span>, <span class="Constant">3</span>, <span class="Constant">4</span>};
-
-  <span class="Comment">// access the elements as references</span>
-  <span class="Statement">for</span> (<span class="Type">const</span> <span class="Type">auto</span> &amp;i : v) {
-    <span class="Comment">// do something</span>
-  }
-<span class="Comment">//@21</span>
+<span class="Type">int</span> main(<span class="Type">int</span>, <span class="Type">char</span>**)
+{
+<span class="Statement">return</span> <span class="Constant">0</span>;
 }
+
 </pre>
 </body>
 </html>
