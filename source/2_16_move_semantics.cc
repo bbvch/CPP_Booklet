@@ -11,16 +11,16 @@
 
 #include <vector>
 
-//@33
+//@32
 // swaps two variables using move semantics
 template <typename T> void swap(T &a, T &b) {
   T tmp(std::move(a));
   a = std::move(b);
   b = std::move(tmp);
 }
-//@33
-
 //@32
+
+//@31
 struct Dummy {
 
   Dummy() : data(nullptr) {}
@@ -70,4 +70,4 @@ int main(int, char **) {
   // retrieve an element. the vector does not change its size
   std::vector<Dummy> result = std::move(vd2[2]);
 }
-//@32
+//@31

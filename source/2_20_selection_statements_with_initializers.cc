@@ -16,7 +16,7 @@
 
 int main(int argc, char **argv) {
   std::srand(std::time(0));
-//@41
+//@40
   // initialize i with radn(); then perform the check the the if
   if (int i = std::rand(); i % 2 == 0) {
     std::cout << "i is even" << std::endl;
@@ -36,6 +36,6 @@ int main(int argc, char **argv) {
     std::cout << "i is almost a multipe of 3" << std::endl;
     break;
   }
-//@41
+//@40
   return 0;
 }

@@ -11,17 +11,17 @@
 
 #include <vector>
 
-//@20
+//@19
 template<bool T>
 class SomeType 
 {
 
 };
-//@20
+//@19
 
 int main(int, char**)
 {
-//@20
+//@19
 	//OK before and after C++11. Note the space between the  >>
 	std::vector<std::pair<int, int> > vec0;
 	
@@ -30,5 +30,5 @@ int main(int, char**)
 	
 	//OK after C++11: interpreted as std::vector<SomeType<false>>
 	std::vector<SomeType<(1>2)>> vec3;
-//@20
+//@19
 }

@@ -12,7 +12,7 @@
 #include <array>
 #include <map>
 #include <tuple>
-//@40
+//@39
 struct Packed {
   int x;
   char y;
@@ -24,9 +24,9 @@ public:
   int m;
   float n;
 };
-//@40
+//@39
 int main() {
-//@40
+//@39
   auto tuple = std::make_tuple(1, 'a', 2.3);
   std::array<int, 3> a{1, 2, 3};
   Packed p;
@@ -49,6 +49,6 @@ int main() {
   for (auto && [ k, v ] : map) {
     // do something
   }
-//@40
+//@39
   return 0;
 }

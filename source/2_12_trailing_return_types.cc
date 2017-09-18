@@ -9,7 +9,7 @@
 *
 **/
 
-//@23
+//@22
 struct A {
   struct B {
     struct C {
@@ -20,8 +20,8 @@ struct A {
     };
   };
 };
-//@23
-//@22
+
+
 // Standard, the scope of D has to be specified
 A::B::C::D A::B::C::foo(const C &) { return D(); };
 

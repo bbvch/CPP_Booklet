@@ -12,12 +12,12 @@
 #include <iostream>
 
 int main() {
-//@48
+//@47
   //binary literal
   int i = 0b1000;
-//@48
+//@47
 
-//@49
+//@48
   // implicitely cast to float
   float f = 0x1.2p3; // = decimal 1.125  or 1. + 1/16 * 2 * 2^3;
 
@@ -32,10 +32,10 @@ int main() {
 
   double d = 0xDEAD.D0D0p2;
   double d2 = 0xDEAD.D0D0p2l; // explicitely stating double
-//@49
+//@48
 
-//@50
+//@49
   // single quotation mark as digit separator. Has no effect on the interpretation
   int x = 1'222'333;
-//@50
+//@49
 }

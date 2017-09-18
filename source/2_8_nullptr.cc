@@ -8,7 +8,7 @@
 *
 **/
 
-//@19
+//@18
 // this is how NULL used to be defined. NULL was never a language keyword, but
 // always a predefined macro
 #define NULL 0
@@ -44,4 +44,4 @@ int main(int, char **) {
 #endif
   bar(static_cast<const float *>(nullptr)); // force pointer type
 }
-//@19
+//@18

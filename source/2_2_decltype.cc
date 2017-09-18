@@ -12,7 +12,7 @@
 #include <string>
 
 int main(int, char **) {
-//@8
+//@7
   const std::string &other{"Abracadabra"};
   const std::string &name();
 
@@ -28,5 +28,5 @@ int main(int, char **) {
   decltype(foo.i) j;      // j contains type int
   decltype((foo.i)) k(j); // k contains type int&, because
                           // (foo.i) is an expression which has an adress
-//@8
+//@7
 }
