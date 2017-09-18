@@ -11,11 +11,6 @@
 
 #include <vector>
 
-//@6
-// syntax for trailing return type
-auto fac(int n) -> int { return n <= 1 ? 1 : n * fac(n - 1); }
-//@6
-
 int main(int, char **) {
 //@7
   auto x = 42; // x is an int
