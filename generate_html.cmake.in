@@ -8,7 +8,7 @@ set(STATEMENT DarkBlue)
 
 file(MAKE_DIRECTORY html)
 
-add_custom_target(build_html
+add_custom_target(html
 	COMMENT "Building HTML output for ${SOURCE_DIR}"
 )
 
@@ -33,7 +33,7 @@ foreach(CC_FILE ${SOURCE_FILES} )
   VERBATIM
 	)
 	
-add_dependencies(build_html ${SOURCE_BASENAME}_html)
+add_dependencies(html ${SOURCE_BASENAME}_html)
  
 endforeach(CC_FILE ${SOURCE_FILES} )
 

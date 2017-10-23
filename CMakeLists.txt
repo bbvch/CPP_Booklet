@@ -59,7 +59,7 @@ if(VIM_PATH)
   configure_file(generate_html.cmake.in ${CMAKE_BINARY_DIR}/generate_html.cmake @ONLY)
   include(${CMAKE_BINARY_DIR}/generate_html.cmake)
   if(PYTHON_PATH)
-    add_dependencies(build_html split_examples)
+    add_dependencies(html split_examples)
   endif()
   
 
