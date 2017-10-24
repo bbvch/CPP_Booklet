@@ -28,6 +28,13 @@ Or
 
 `$>cmake --build . --target all`
 
+## Generating HTML output for examples
+In order to link the examples in the .cc files to the printed version of the booklet the examples are annotated in code with ```\\@<number```
+CMake will parse the .cc files in the source folder for annotations for the example numbers in the print version of the booklet and split these files into files to create a syntax highlighted html file for each example. To build the html files from the splitted files run ```$>make html```
+
+*Note* whenever a new example is annotated in a .cc file cmake needs to be run again to separate the files again. 
+Alternatively the run ```separate_into_examples.py``` to split the files manually. 
+
 ### building and compiling with non-feature complete compilers
 As most make tools (GNU make, nmake) exit if a target fails to build additional options have to be passed to make to continue even on a failed target
 for GNU make use `$>make -i` for nmake use `$>nmake -I` if using cmake to build use `$>cmake --build . --target all` 
@@ -51,8 +58,5 @@ use `$>clang++ -std=c++1z -S` to compile to assembler code
 All examples are formatted using clang-format
 `$>clang-format -i file.cc` for formatting
 
-# generating html output
+# generating html output manually
 to generate syntax highlighed html files for each file in ./source you need ```vim``` with syntax highlighting and a colorscheme enabledd. if you have this simply run ```generate_html.sh``` and it will drop the generated files into the folder /html
-
-## Example annotation
-in order to link the examples in the .cc files to the printed version of the booklet the examples are annotated in code with ```\\@<number``` to separate the the examples into files run ```separate_into_examples.py```
