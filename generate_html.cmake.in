@@ -20,7 +20,7 @@ foreach(CC_FILE ${SOURCE_FILES} )
   add_custom_target(${SOURCE_BASENAME}_html)
   
   add_custom_command(TARGET ${SOURCE_BASENAME}_html
-  PRE_BUILD
+  POST_BUILD
   COMMAND @VIM_PATH@ -c "set t_Co=256" 
   -c "highlight Normal ctermbg=${BBV_BACKGROUND} ctermfg=${NORMAL}" 
   -c "highlight Comment ctermbg=${BBV_BACKGROUND} ctermfg=${COMMENT_COL}" 
@@ -30,6 +30,7 @@ foreach(CC_FILE ${SOURCE_FILES} )
   -c "highlight PreProc ctermbg=${BBV_BACKGROUND} ctermfg=${PREPROC}" 
   -c TOhtml -c wqa ${CC_FILE}
   COMMAND mv ${CC_FILE}.html html/
+  DEPENDS split_html
   VERBATIM
 	)
 	

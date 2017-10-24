@@ -41,14 +41,14 @@ find_program(VIM_PATH vim)
 if(VIM_PATH)
   message("Vim found in ${VIM_PATH}")
   
-  find_program(PYTHON_PATH python)
+  find_program(PYTHON_EXECUTABLE python)
   
   #if Python is available the .cc files will be split into chunks for each example
   #in the print version of the booklet. The newly generated files will be appended to the source list
   #to generate the build_html targets
-  if(PYTHON_PATH)
+  if(PYTHON_EXECUTABLE)
     message("found Python; Splitting cc files into individual examples")
-    add_custom_target(split_examples COMMAND python ${CMAKE_CURRENT_LIST_DIR}/separate_into_examples.py)
+    add_custom_target(split_examples COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/separate_into_examples.py)
     file(GLOB SOURCE_FILES_EXAMPLES examples/*.cc)
     set(SOURCE_FILES ${SOURCE_FILES} ${SOURCE_FILES_EXAMPLES})
 
@@ -58,7 +58,7 @@ if(VIM_PATH)
   
   configure_file(generate_html.cmake.in ${CMAKE_BINARY_DIR}/generate_html.cmake @ONLY)
   include(${CMAKE_BINARY_DIR}/generate_html.cmake)
-  if(PYTHON_PATH)
+  if(PYTHON_EXECUTABLE)
     add_dependencies(html split_examples)
   endif()
   
