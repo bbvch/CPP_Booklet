@@ -29,7 +29,8 @@ foreach(CC_FILE ${SOURCE_FILES} )
   -c "highlight Type ctermbg=${BBV_BACKGROUND} ctermfg=${TYPE}" 
   -c "highlight PreProc ctermbg=${BBV_BACKGROUND} ctermfg=${PREPROC}" 
   -c TOhtml -c wqa ${CC_FILE}
-  COMMAND mv ${CC_FILE}.html html/
+  COMMAND ${CMAKE_COMMAND} -E copy ${CC_FILE}.html html/
+  COMMAND ${CMAKE_COMMAND} -E remove ${CC_FILE}.html
   DEPENDS split_html
   VERBATIM
 	)
