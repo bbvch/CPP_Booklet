@@ -37,8 +37,6 @@ endforeach(CC_FILE ${SOURCE_FILES} )
 #if vi improved is detected add a target for generating html output
 find_program(VIM_PATH vim)
 
-execute_process(COMMAND python ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/separate_into_examples.py)
-
 if(VIM_PATH)
   message("Vim found in ${VIM_PATH}")
   
