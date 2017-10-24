@@ -53,3 +53,6 @@ All examples are formatted using clang-format
 
 # generating html output
 to generate syntax highlighed html files for each file in ./source you need ```vim``` with syntax highlighting and a colorscheme enabledd. if you have this simply run ```generate_html.sh``` and it will drop the generated files into the folder /html
+
+## Example annotation
+in order to link the examples in the .cc files to the printed version of the booklet the examples are annotated in code with ```\\@<number``` to separate the the examples into files run ```separate_into_examples.py```

@@ -9,6 +9,7 @@
 *
 **/
 
+//@51
 class A {
 public:
   A() = default;
@@ -16,15 +17,17 @@ public:
   A(const A &&rhs) = delete;
   ~A() = default;
 
-private:
 };
 
 // Without elision this is illegal, as it performs a copy/move of A which has
 // deleted copy/move ctors
 A f() { return A{}; }
-
+//@51
 int main() {
+
+//@51
   // OK, because of copy elision. Copy/Move constructing an anonymous A is not
   // neccessary
   A a = f();
+//@51
 }

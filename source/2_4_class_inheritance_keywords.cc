@@ -9,7 +9,7 @@
 * SPDX-License-Identifier: GPL-3.0
 *
 **/
-
+//@11
 struct NonDeriveable final {};
 
 #ifdef EXPECT_FAILED_COMPILATION
@@ -26,6 +26,12 @@ struct Derived2 : public BaseWithFinalMembers {
 
 #ifdef EXPECT_FAILED_COMPILATION
   void foo(int) override; // error because of foo() being 'final' in base class
+#endif
+}
+
+//@11
+//@12
+struct Derived3 : public BaseWithFinalMembers {}
 
   // error does not override any function of base class
   void nonexistant() override;
@@ -34,8 +40,10 @@ struct Derived2 : public BaseWithFinalMembers {
   void nonVirtual() override;
 #endif
   void bar() override; // explicitely override bar
+  
 };
-
+//@12
+//@13
 class DelegatingCtor {
   int m_number;
 
@@ -44,7 +52,9 @@ public:
   DelegatingCtor()
       : DelegatingCtor(42) {} // constructor delegates to DelegatingCtor(int)
 };
+//@13
 
+//@14
 struct Base {
 
   Base() = default;
@@ -55,8 +65,11 @@ struct InheritingCtor : public Base {
   using Base::Base;               // Inherit all ctors from Base
   InheritingCtor(int x, int y){}; // Additional Ctor
 };
+//@14
 
 int main(int, char **) {
+//@14
   InheritingCtor d1(5, 10); // uses additional ctor
   InheritingCtor d2(42);    // Uses inherited ctor
+//@14
 }

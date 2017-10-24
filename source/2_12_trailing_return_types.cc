@@ -9,6 +9,7 @@
 *
 **/
 
+//@22
 struct A {
   struct B {
     struct C {
@@ -19,6 +20,8 @@ struct A {
     };
   };
 };
+
+
 // Standard, the scope of D has to be specified
 A::B::C::D A::B::C::foo(const C &) { return D(); };
 
@@ -29,5 +32,5 @@ auto A::B::C::bar(const C &) -> D { return D(); };
 template <typename A, typename B> auto add(A a, B b) -> decltype(a + b) {
   return a + b;
 }
-
+//@22
 int main(int, char **) {}

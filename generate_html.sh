@@ -8,8 +8,10 @@ PREPROC=DarkMagenta
 TYPE=DarkBlue
 STATEMENT=DarkBlue
 
+SOURCEDIR=examples
+
 #this will open vim for each file and save it as html in the source/<filenamw>.cc.html 
-for i in source/*.cc; do vim -c "set t_Co=256"\
+for i in ${SOURCEDIR}/*.cc; do vim -c "set t_Co=256"\
     -c "highlight Normal ctermbg=${BBV_BACKGROUND} ctermfg=${NORMAL}" \
 	-c "highlight Comment ctermbg=${BBV_BACKGROUND} ctermfg=${COMMENT}"\
 	-c "highlight Constant ctermbg=${BBV_BACKGROUND} ctermfg=${CONSTANT}"\
@@ -19,4 +21,4 @@ for i in source/*.cc; do vim -c "set t_Co=256"\
 	-c TOhtml -c wqa $i; done
 
 #move all the generated files to the /html folder
-mv source/*.html html/
+mv ${SOURCEDIR}/*.html html/
