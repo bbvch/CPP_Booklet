@@ -16,18 +16,49 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "clang")
   add_compile_options(-std=c++1z)
   if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "4.0.0")
-	message(WARNING "Insufficient clang version - use 4.0.0 or above to compile all examples")
+    message(WARNING "Insufficient clang version - use 4.0.0 or above to compile all examples")
   endif()
 else()
   message(WARNING "your compiler is not yet able to compile all examples under the C++17 standard, some compilations may fail")
 endif()
 
-file(GLOB SOURCE_FILES source/*.cc)
+set(SOURCE_DIR source)
+file(GLOB SOURCE_FILES ${SOURCE_DIR}/*.cc)
+
+set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES html)
 
 foreach(CC_FILE ${SOURCE_FILES} )
-	get_filename_component(SOURCE_BASENAME ${CC_FILE} NAME)
-	string (REPLACE ".cc" "" EXE_NAME ${SOURCE_BASENAME})
-	add_executable(${EXE_NAME} ${CC_FILE})
+
+  get_filename_component(SOURCE_BASENAME ${CC_FILE} NAME)
+  string (REPLACE ".cc" "" EXE_NAME ${SOURCE_BASENAME})
+  add_executable(${EXE_NAME} ${CC_FILE})
 endforeach(CC_FILE ${SOURCE_FILES} )
 
+#if vi improved is detected add a target for generating html output
+find_program(VIM_PATH vim)
 
+if(VIM_PATH)
+  message("Vim found in ${VIM_PATH}")
+  
+  find_program(PYTHON_EXECUTABLE python)
+  
+  #if Python is available the .cc files will be split into chunks for each example
+  #in the print version of the booklet. The newly generated files will be appended to the source list
+  #to generate the build_html targets
+  #once caveat is that if new examples are added/configured in existing files cmake needs to be run again
+  if(PYTHON_EXECUTABLE)
+    message("found Python; Splitting cc files into individual examples")
+    execute_process(COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_LIST_DIR}/separate_into_examples.py)
+    file(GLOB SOURCE_FILES_EXAMPLES examples/*.cc)
+    set(SOURCE_FILES ${SOURCE_FILES} ${SOURCE_FILES_EXAMPLES})
+
+  else()
+    message(WARNING "Python not found, will not build target to separate examples")
+  endif()
+  
+  configure_file(generate_html.cmake.in ${CMAKE_BINARY_DIR}/generate_html.cmake @ONLY)
+  include(${CMAKE_BINARY_DIR}/generate_html.cmake)
+  
+else()
+  message(WARNING "Vim not found, will not add target to build html output")
+endif()
