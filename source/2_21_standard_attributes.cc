@@ -84,7 +84,7 @@ void summon() {
 //@45
 
 //
-// Example for carrying memory dependence
+// Example for carrying memory dependency
 //
 //@46
 void opaque_func(int *p){/* do something with p */};
@@ -101,7 +101,7 @@ void illustrate_carries_dependency() {
     std::cout << *atomic << std::endl; // transparent for the the compiler
 
   if (atomic)
-    opaque_func(atomic); // if from another compile unit and not inline the
+    opaque_func(atomic); // if from another compile unit and not inline, the
                          // compiler might construct a memory fence here
 
   if (atomic)
