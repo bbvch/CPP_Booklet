@@ -1,4 +1,4 @@
-These are examples illustrating the use of some of the C++11/14/17 features used in the [booklet about C++11/14/17 language](https://www.bbv.ch/de/booklet.html#die-neuen-c-standards-%E2%80%93-c-11-bis-c-17) (*german*) produced by bbv software services
+These are examples illustrating the use of some of the C++11/14/17 features used in the [booklet about C++11/14/17 language](https://www.bbv.ch/de/booklet.html#die-neuen-c-standards-%E2%80%93-c-11-bis-c-17) (*german*) produced by [bbv software services](https://www.bbv.ch). [view online](https://issuu.com/bbvsoftwareservices/docs/c__17_es?e=12228561/55697143) or [download as pdf](https://www.bbv.ch/images/bbv/pdf/downloads/booklets/C++17_DS.pdf)
 
 # Supported Compilers
 
