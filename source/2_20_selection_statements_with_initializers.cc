@@ -17,7 +17,7 @@
 int main(int argc, char **argv) {
   std::srand(std::time(0));
 //@40
-  // initialize i with radn(); then perform the check the the if
+  // initialize i with rand(); then perform the if
   if (int i = std::rand(); i % 2 == 0) {
     std::cout << "i is even" << std::endl;
   } else {

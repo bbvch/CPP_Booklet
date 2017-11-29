@@ -19,7 +19,7 @@ int main(int, char **) {
   // execution of the lambda above
   const auto r = square(4);
 
-  // the parameter brackes () can be omitted if  empty set
+  // the parameter brackes () can be omitted if empty
   const auto abbreviated = [] { return 55; };
 
   // using auto a parameter types for even more generic programming
@@ -31,7 +31,7 @@ int main(int, char **) {
 //@24
   int x, y, z;
 
-  const auto no_capture = []() {};           // No variables are acptured
+  const auto no_capture = []() {};           // No variables are captured
   const auto capture_by_value = [x, y]() {}; // x and y are captured by value
   const auto capture_by_ref = [&x, &y]() {
   }; // x and y are captured by reference
@@ -56,7 +56,7 @@ int main(int, char **) {
 //@24
 
 //@25
-  // using lambda with std::-functions
+  // using lambda with std::functions
   std::vector<int> a1{1, 2, 3, 4, 5};
   std::vector<int> a2(a1.size());
   // fills a vector with the squares of the valus of another vectoir

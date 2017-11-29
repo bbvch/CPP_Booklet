@@ -49,9 +49,9 @@ std::string reorder_and_concat(T t, Args... args) {
  * - assignement = and combinations such as /=, &=...
  * - unpacking (,) [can be used to forward to normals functions]
  *
- * folds can be written left or right associative as well as as
- * unary or as binary operators. Note that in a binary fold the operators cannot
- * be mixed
+ * folds can be written left or right associative as well as
+ * unary or as binary operators. Note that in a binary fold
+ * the operators cannot be mixed
  */
 
 //@36

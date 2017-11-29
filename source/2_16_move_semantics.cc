@@ -67,7 +67,7 @@ int main(int, char **) {
   vd2[1] = std::move(vd2[0]); // move the whole vector
   std::swap(vd2[1], vd2[2]);  // swap two vectors
 
-  // retrieve an element. the vector does not change its size
+  // retrieve an element. The vector does not change its size
   std::vector<Dummy> result = std::move(vd2[2]);
 }
 //@31
