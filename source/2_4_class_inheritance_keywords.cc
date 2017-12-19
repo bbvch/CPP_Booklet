@@ -22,17 +22,19 @@ struct BaseWithFinalMembers {
   virtual void bar();
   void nonVirtual();
 };
+
 struct Derived2 : public BaseWithFinalMembers {
 
 #ifdef EXPECT_FAILED_COMPILATION
   void foo(int) override; // error because of foo() being 'final' in base class
 #endif
-}
+};
 
 //@11
 //@12
-struct Derived3 : public BaseWithFinalMembers {}
+struct Derived3 : public BaseWithFinalMembers {
 
+#ifdef EXPECT_FAILED_COMPILATION
   // error does not override any function of base class
   void nonexistant() override;
 
