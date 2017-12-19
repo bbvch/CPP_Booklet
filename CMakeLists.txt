@@ -5,15 +5,16 @@ project (CPP_Booklet)
 #when doing STREQUAL on it
 set(MSVC_COMPILER_NAME "MSVC")
 
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 message("Compiler is: ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION}")
 
-if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
   if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "7.0.1")
     message(WARNING "Insufficient g++ version - use 7.0.1 to compile all examples")
   endif()	
   add_compile_options(-std=c++17)
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "clang")
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "^clang.*" OR CMAKE_CXX_COMPILER_ID MATCHES "^Clang.*")
   add_compile_options(-std=c++1z)
   if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "4.0.0")
     message(WARNING "Insufficient clang version - use 4.0.0 or above to compile all examples")
