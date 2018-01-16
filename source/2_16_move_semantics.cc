@@ -11,6 +11,7 @@
 
 #include <vector>
 
+namespace {
 //@32
 // swaps two variables using move semantics
 template <typename T> void swap(T &a, T &b) {
@@ -19,6 +20,7 @@ template <typename T> void swap(T &a, T &b) {
   b = std::move(tmp);
 }
 //@32
+}
 
 //@31
 struct Dummy {
