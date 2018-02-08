@@ -14,6 +14,11 @@ void doMagic() {
 }
 }
 
+void x() {
+  using namespace A::B::C;
+  doMagic();
+}
+
 int main(int argc, char **argv) {
   A::B::C::doMagic();
 
