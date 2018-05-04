@@ -1,0 +1,90 @@
+Die neuen C++ Standards C++11 bis C++17
+========================================
+
+:Copyright: Copyright © 2017 bbv Software Services AG
+
+Profitieren Sie von unserer erfahrung!
+Der inhalt dieses Booklets wurde mit Sorgfalt und nach bestem gewissen erstellt. eine gewähr für die aktualität, vollständigkeit und richtigkeit des Inhalts kann jedoch nicht übernommen werden. eine Haftung (einschliesslich Fahrlässigkeit) für Schäden oderFfolgeschäden, die sich aus der Anwendung des Inhalts dieses Booklets ergeben, wird nicht übernommen.
+
+
+.. contents::
+
+Einleitung
+----------
+
+C++ wurde von 1979 an von Bjarne Stroustrup als erweiterung der programmiersprache C mit dem namen «C with Classes» entwickelt. wie der name schon sagt, war die erste und wichtigste erweiterung das klassenkonzept mit Datenkapselung. im Jahre 1983 wurde dann der name C++ eingeführt. Die erste referenzversion von C++ erschien 1985, die aber noch nicht standardisiert war. kurz darauf erschien 1989 die version 2.0 von C++ mit den neuerungen: Mehrfachvererbung, abstrakte klassen, statische elementfunktionen usw. Die endgültige fassung der Sprache C++ nach iSo/ieC 14882:1998 wurde 1998 genormt. 2003 verabschiedete man eine nachbesserung der norm von 1998 als «C++03» nach iSo/ieC 14882:2003. Seit 2011 werden wird die C++ als Sprache sowie der iSo/ieC 14882 Standard alle vier Jahre erweitert. aktuell ist C++17 der gültige der Standard, während die features für C++20 nach und nach erarbeitet und als proposal aufgestellt werden.
+
+.. image:: images/bbv_Booklet_CPP_Timeline_1200px.jpg
+
+Die wichtigsten Elemente dieser Fassung werden im Kapitel «Spracherweiterungen
+» anhand einer kurzen Beschreibung und der Syntax
+mit entsprechenden Beispielen erläutert. Im folgenden Kapitel wird
+die Standard Library nur kurz erwähnt, da es den Rahmen des Booklets
+übersteigen würde und dafür auf Online-Informationen verwiesen.
+Dieses Booklet ist für Softwareentwickler gedacht, die sich mit
+den neuen C++ Standards auseinandersetzen wollen. Es gibt einen
+Überblick über die neuen, modernen Funktionen und Spracherweiterungen,
+die dem Softwareentwickler das Leben erleichtern können
+bzw. sollen.
+
+Spracherweiterungen
+-------------------
+
+Vereinheitlichte Initialisierung
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Der neue Standard vereinheitlicht die Benutzung der geschweiften
+Klammern bei der Initialisierung, das heisst, sie ist frei von
+Mehrdeutigkeiten, und bei gleichem Aussehen bedeutet es auch
+das Gleiche. Alle bisherigen Initialisierungskonstrukte bleiben
+gültig.
+
+**Syntax:** ``expression { expression };`` oder ``expression = { expression };``
+
+:: 
+
+	// simple initializing using {}
+	Klass k{123, "b"};
+	int x{42};
+	std::vector<int> v{1, 2, 3, 4}; // list initialisation
+	std::vector<int> y = {0, 1, 2, 3, 4};
+	int fail{7.5f}; // fails because of narrowing down from float to int
+
+**Vereinheitlichte Initialisierung von Aggregates:**
+ - Members werden in der Reihenfolge der Deklaration copy initialized
+ - Implizite Konvertierungen sind erlaubt
+ - Leere Initialisierungslisten bedeuten value initialized
+ - Initialisierungslisten können weniger Elemente haben als benötigt werden
+
+::
+
+	// initializing of aggregates
+	struct Data {
+	int a{0};
+	double b{0};
+	std::string c;
+	};
+	Data data{7, 3.14, "Seven Pies!"};
+	// Error narrowing from double to int
+	Data data2{7.0, 3.14, "Seven Pies!"};
+
+**Initialisierung von Non-aggregates:**
+ * Argumente von Initialisierungslisten werden dem Konstruktor übergeben
+ * Implizite Konvertierungen sind erlaubt, aber narrowing-Konvertierungen nicht
+
+::
+
+	struct MyType {
+	// the constructor makes a non-aggregate out of this struct
+	MyType(const std::string &msg, int x) : m_a(x), m_c(msg) {}
+	int m_a;
+	double m_b;
+	std::string m_c;
+	};
+	MyType myType{"Fortytwo!", 42};
+
+**Initialisieren von Container-Typen:**
+ - Argumente von Initialisierungslisten müssen alle vom selben Typ sein, implizite Konvertierungen sind erlaubt, aber keine narrowing-Konvertierungen
+ - Funktioniert für Container mit statischer oder dynamischer Grösse
+
+*Container-Typen* definieren einen Konstruktor mit ``std::initializer_list<T>``
