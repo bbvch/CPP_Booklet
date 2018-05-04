@@ -41,7 +41,7 @@ gültig.
 
 **Syntax:** ``expression { expression };`` oder ``expression = { expression };``
 
-:: 
+.. code-block:: cpp
 
 	// simple initializing using {}
 	Klass k{123, "b"};
@@ -56,7 +56,7 @@ gültig.
  - Leere Initialisierungslisten bedeuten value initialized
  - Initialisierungslisten können weniger Elemente haben als benötigt werden
 
-::
+.. code-block:: cpp
 
 	// initializing of aggregates
 	struct Data {
@@ -72,7 +72,7 @@ gültig.
  * Argumente von Initialisierungslisten werden dem Konstruktor übergeben
  * Implizite Konvertierungen sind erlaubt, aber narrowing-Konvertierungen nicht
 
-::
+.. code-block:: cpp
 
 	struct MyType {
 	// the constructor makes a non-aggregate out of this struct

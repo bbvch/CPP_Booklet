@@ -1,0 +1,8 @@
+/* This defines styles and classes used in the book */
+body { text-align: justify; font-size: medium; font-family: sans-serif }
+h1.title { color: red; text-transform: uppercase }
+h1 { color: red; font-variant: small-caps }
+h2 { color: red; font-variant: small-caps }
+h2 { color: red }
+em, em em em, em em em em em { font-style: italic; color: red;}
+em em, em em em em { font-style: normal; }

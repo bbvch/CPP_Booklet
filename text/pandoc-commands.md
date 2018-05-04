@@ -1,0 +1,1 @@
+```pandoc booklet.rst -f rst -t html --indented-code-classes=numberLines -o out.html -s --highlight-style=tango --toc -N -c style.css```
