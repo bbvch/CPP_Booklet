@@ -47,14 +47,14 @@ gültig.
 
 **Syntax:** ``expression { expression };`` oder ``expression = { expression };``
 
-.. code-block:: cpp
-
-	// simple initializing using {}
-	Klass k{123, "b"};
-	int x{42};
-	std::vector<int> v{1, 2, 3, 4}; // list initialisation
-	std::vector<int> y = {0, 1, 2, 3, 4};
-	int fail{7.5f}; // fails because of narrowing down from float to int
+```cpp
+// simple initializing using {}
+Klass k{123, "b"};
+int x{42};
+std::vector<int> v{1, 2, 3, 4}; // list initialisation
+std::vector<int> y = {0, 1, 2, 3, 4};
+int fail{7.5f}; // fails because of narrowing down from float to int
+```
 
 **Vereinheitlichte Initialisierung von Aggregates:**
  - Members werden in der Reihenfolge der Deklaration copy initialized
@@ -62,32 +62,33 @@ gültig.
  - Leere Initialisierungslisten bedeuten value initialized
  - Initialisierungslisten können weniger Elemente haben als benötigt werden
 
-.. code-block:: cpp
+```cpp
 
-	// initializing of aggregates
-	struct Data {
-	int a{0};
-	double b{0};
-	std::string c;
-	};
-	Data data{7, 3.14, "Seven Pies!"};
-	// Error narrowing from double to int
-	Data data2{7.0, 3.14, "Seven Pies!"};
+// initializing of aggregates
+struct Data {
+int a{0};
+double b{0};
+std::string c;
+};
+Data data{7, 3.14, "Seven Pies!"};
+// Error narrowing from double to int
+Data data2{7.0, 3.14, "Seven Pies!"};
+```
 
 **Initialisierung von Non-aggregates:**
  * Argumente von Initialisierungslisten werden dem Konstruktor übergeben
  * Implizite Konvertierungen sind erlaubt, aber narrowing-Konvertierungen nicht
 
-.. code-block:: cpp
-
-	struct MyType {
-	// the constructor makes a non-aggregate out of this struct
-	MyType(const std::string &msg, int x) : m_a(x), m_c(msg) {}
-	int m_a;
-	double m_b;
-	std::string m_c;
-	};
-	MyType myType{"Fortytwo!", 42};
+```cpp
+struct MyType {
+// the constructor makes a non-aggregate out of this struct
+MyType(const std::string &msg, int x) : m_a(x), m_c(msg) {}
+int m_a;
+double m_b;
+std::string m_c;
+};
+MyType myType{"Fortytwo!", 42};
+```
 
 **Initialisieren von Container-Typen:**
  - Argumente von Initialisierungslisten müssen alle vom selben Typ sein, implizite Konvertierungen sind erlaubt, aber keine narrowing-Konvertierungen
