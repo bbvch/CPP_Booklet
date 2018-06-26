@@ -5,6 +5,7 @@ if not os.path.exists("./examples"):
     os.makedirs("./examples")
 
 num_examples = 0
+example_files = []
 
 for f in glob.glob("source/*.cc"):
     f_in = open(f)
@@ -36,9 +37,11 @@ for f in glob.glob("source/*.cc"):
     if len(examples) > 0:
         for k in examples:
             bname = os.path.basename(f)
-            f_out = open("examples/example_" + str(k) +
-                         "_chapter_" + bname, 'w+')
+            filename  = "examples/example_" + str(k) + "_chapter_" + bname
+            example_files.append(filename)
+            f_out = open(filename, 'w+')
             f_out.writelines(examples[k])
             f_out.close()
 
 print "split examples into " + str(num_examples) + " files"
+#print example_files
