@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 2.6)
+cmake_minimum_required (VERSION 3.0)
 project (CPP_Booklet)
 
 #this is a workaround because MSVC is a CMake internal variable which leads to confusion
