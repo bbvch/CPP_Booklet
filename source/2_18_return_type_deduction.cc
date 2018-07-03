@@ -41,7 +41,7 @@ decltype(auto) func1() {
   // func1 returns 'int'
 }
 decltype(auto) func2() {
-  int x = 777;
+  static int x = 777;
   return (x); // decltype( (x) ) is int&
   // func2 returns now "int&”
 }
