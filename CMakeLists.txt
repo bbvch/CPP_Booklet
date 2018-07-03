@@ -13,9 +13,9 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
   if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "7.0.1")
     message(WARNING "Insufficient g++ version - use 7.0.1 to compile all examples")
   endif()	
-  add_compile_options(-std=c++17)
+  
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "^clang.*" OR CMAKE_CXX_COMPILER_ID MATCHES "^Clang.*")
-  add_compile_options(-std=c++1z)
+  
   if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "4.0.0")
     message(WARNING "Insufficient clang version - use 4.0.0 or above to compile all examples")
   endif()
@@ -33,6 +33,10 @@ foreach(CC_FILE ${SOURCE_FILES} )
   get_filename_component(SOURCE_BASENAME ${CC_FILE} NAME)
   string (REPLACE ".cc" "" EXE_NAME ${SOURCE_BASENAME})
   add_executable(${EXE_NAME} ${CC_FILE})
+  set_target_properties(${EXE_NAME} PROPERTIES
+    CXX_STANDARD 17
+    CXX_STANDARD_REQUIRED YES
+  )
 endforeach(CC_FILE ${SOURCE_FILES} )
 
 #if vi improved is detected add a target for generating html output
