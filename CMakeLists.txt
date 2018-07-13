@@ -28,6 +28,7 @@ file(GLOB SOURCE_FILES ${SOURCE_DIR}/*.cc)
 
 set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES html)
 
+#Todo instead of globbing use expilcit files and add target_compile_features  (cxx_variadic for example) for each example 
 foreach(CC_FILE ${SOURCE_FILES} )
 
   get_filename_component(SOURCE_BASENAME ${CC_FILE} NAME)
