@@ -1,5 +1,5 @@
 # Profitieren Sie von unserer Erfahrung!
-Der Inhalt dieses Booklets wurde mit Sorgfalt und nach bestem Gewissen erstellt. eine Gewähr für die Aktualität, Vollständigkeit und Richtigkeit des Inhalts kann jedoch nicht übernommen werden. eine Haftung (einschliesslich Fahrlässigkeit) für Schäden oder Folgeschäden, die sich aus der Anwendung des Inhalts dieses Booklets ergeben, wird nicht übernommen.
+Der Inhalt dieses Booklets wurde mit Sorgfalt und nach bestem Gewissen erstellt. Eine Gewähr für die Aktualität, Vollständigkeit und Richtigkeit des Inhalts kann jedoch nicht übernommen werden. eine Haftung (einschliesslich Fahrlässigkeit) für Schäden oder Folgeschäden, die sich aus der Anwendung des Inhalts dieses Booklets ergeben, wird nicht übernommen.
 
 * * *
 
@@ -64,8 +64,9 @@ Data data2{7.0, 3.14, "Seven Pies!"};
 ```
 
 **Initialisierung von Non-aggregates:**
- * Argumente von Initialisierungslisten werden dem Konstruktor übergeben
- * Implizite Konvertierungen sind erlaubt, aber narrowing-Konvertierungen nicht
+
+* Argumente von Initialisierungslisten werden dem Konstruktor übergeben
+* Implizite Konvertierungen sind erlaubt, aber narrowing-Konvertierungen nicht
 
 ```cpp
 struct MyType {
@@ -79,7 +80,7 @@ MyType myType{"Fortytwo!", 42};
 ```
 
 **Initialisieren von Container-Typen:**
- - Argumente von Initialisierungslisten müssen alle vom selben Typ sein, implizite Konvertierungen sind erlaubt, aber keine narrowing-Konvertierungen
- - Funktioniert für Container mit statischer oder dynamischer Grösse
+* Argumente von Initialisierungslisten müssen alle vom selben Typ sein, implizite Konvertierungen sind erlaubt, aber keine narrowing-Konvertierungen
+* Funktioniert für Container mit statischer oder dynamischer Grösse
 
 *Container-Typen* definieren einen Konstruktor mit ``std::initializer_list<T>``
