@@ -1,11 +1,11 @@
-{ 
+{section: frontmatter
 title: Die neuen C++ Standards C++11 bis C++17
 authors: Silvan Wegmann, Thomas Meister, Jürgen Messerer, Raphael Meyer, Michel Estermann, Lothar Rubusch, Dominik Berner 
 copyright: bbv Software Services AG
 }
 
-# Profitieren Sie von unserer erfahrung!
-Der inhalt dieses Booklets wurde mit Sorgfalt und nach bestem gewissen erstellt. eine gewähr für die aktualität, vollständigkeit und richtigkeit des Inhalts kann jedoch nicht übernommen werden. eine Haftung (einschliesslich Fahrlässigkeit) für Schäden oderFfolgeschäden, die sich aus der Anwendung des Inhalts dieses Booklets ergeben, wird nicht übernommen.
+# Profitieren Sie von unserer Erfahrung!
+Der Inhalt dieses Booklets wurde mit Sorgfalt und nach bestem Gewissen erstellt. eine Gewähr für die Aktualität, Vollständigkeit und Richtigkeit des Inhalts kann jedoch nicht übernommen werden. eine Haftung (einschliesslich Fahrlässigkeit) für Schäden oder Folgeschäden, die sich aus der Anwendung des Inhalts dieses Booklets ergeben, wird nicht übernommen.
 
 * * *
 
@@ -18,7 +18,7 @@ Der inhalt dieses Booklets wurde mit Sorgfalt und nach bestem gewissen erstellt.
 Einleitung
 ----------
 
-C++ wurde von 1979 an von Bjarne Stroustrup als erweiterung der programmiersprache C mit dem namen «C with Classes» entwickelt. wie der name schon sagt, war die erste und wichtigste erweiterung das klassenkonzept mit Datenkapselung. im Jahre 1983 wurde dann der name C++ eingeführt. Die erste referenzversion von C++ erschien 1985, die aber noch nicht standardisiert war. kurz darauf erschien 1989 die version 2.0 von C++ mit den neuerungen: Mehrfachvererbung, abstrakte klassen, statische elementfunktionen usw. Die endgültige fassung der Sprache C++ nach iSo/ieC 14882:1998 wurde 1998 genormt. 2003 verabschiedete man eine nachbesserung der norm von 1998 als «C++03» nach iSo/ieC 14882:2003. Seit 2011 werden wird die C++ als Sprache sowie der iSo/ieC 14882 Standard alle vier Jahre erweitert. aktuell ist C++17 der gültige der Standard, während die features für C++20 nach und nach erarbeitet und als proposal aufgestellt werden.
+C++ wurde von 1979 an von Bjarne Stroustrup als Erweiterung der Programmiersprache C mit dem namen «C with Classes» entwickelt. Wie der Name schon sagt, war die erste und wichtigste Erweiterung das Klassenkonzept mit Datenkapselung. Im Jahre 1983 wurde dann der Name C++ eingeführt. Die erste Referenzversion von C++ erschien 1985, die aber noch nicht standardisiert war. Kurz darauf erschien 1989 die Version 2.0 von C++ mit den Neuerungen: Mehrfachvererbung, abstrakte Klassen, statische Elementfunktionen usw. Die endgültige Fassung der Sprache C++ nach ISO/IEC 14882:1998 wurde 1998 genormt. 2003 verabschiedete man eine Nachbesserung der Norm von 1998 als «C++03» nach ISO/IEC 14882:2003. Seit 2011 werden wird die C++ als Sprache sowie der ISO/IEC 14882 Standard alle vier Jahre erweitert. Aktuell ist C++17 der gültige der Standard, während die Features für C++20 nach und nach erarbeitet und als Proposal aufgestellt werden.
 
 ![The C++ timeline](images/bbv_Booklet_CPP_Timeline_1200px.jpg)
 
