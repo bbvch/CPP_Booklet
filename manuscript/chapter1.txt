@@ -1,19 +1,9 @@
-{section: frontmatter
-title: Die neuen C++ Standards C++11 bis C++17
-authors: Silvan Wegmann, Thomas Meister, Jürgen Messerer, Raphael Meyer, Michel Estermann, Lothar Rubusch, Dominik Berner 
-copyright: bbv Software Services AG
-}
-
 # Profitieren Sie von unserer Erfahrung!
 Der Inhalt dieses Booklets wurde mit Sorgfalt und nach bestem Gewissen erstellt. eine Gewähr für die Aktualität, Vollständigkeit und Richtigkeit des Inhalts kann jedoch nicht übernommen werden. eine Haftung (einschliesslich Fahrlässigkeit) für Schäden oder Folgeschäden, die sich aus der Anwendung des Inhalts dieses Booklets ergeben, wird nicht übernommen.
 
 * * *
 
 {section: mainmatter }
-# Inhalt
-
-* * *
-
 
 Einleitung
 ----------
