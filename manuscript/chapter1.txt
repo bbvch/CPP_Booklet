@@ -5,8 +5,7 @@ Der Inhalt dieses Booklets wurde mit Sorgfalt und nach bestem Gewissen erstellt.
 
 {section: mainmatter }
 
-Einleitung
-----------
+# Einleitung
 
 C++ wurde von 1979 an von Bjarne Stroustrup als Erweiterung der Programmiersprache C mit dem namen «C with Classes» entwickelt. Wie der Name schon sagt, war die erste und wichtigste Erweiterung das Klassenkonzept mit Datenkapselung. Im Jahre 1983 wurde dann der Name C++ eingeführt. Die erste Referenzversion von C++ erschien 1985, die aber noch nicht standardisiert war. Kurz darauf erschien 1989 die Version 2.0 von C++ mit den Neuerungen: Mehrfachvererbung, abstrakte Klassen, statische Elementfunktionen usw. Die endgültige Fassung der Sprache C++ nach ISO/IEC 14882:1998 wurde 1998 genormt. 2003 verabschiedete man eine Nachbesserung der Norm von 1998 als «C++03» nach ISO/IEC 14882:2003. Seit 2011 werden wird die C++ als Sprache sowie der ISO/IEC 14882 Standard alle vier Jahre erweitert. Aktuell ist C++17 der gültige der Standard, während die Features für C++20 nach und nach erarbeitet und als Proposal aufgestellt werden.
 
@@ -23,11 +22,10 @@ den neuen C++ Standards auseinandersetzen wollen. Es gibt einen
 die dem Softwareentwickler das Leben erleichtern können
 bzw. sollen.
 
-Spracherweiterungen
--------------------
+# Spracherweiterungen
 
-Vereinheitlichte Initialisierung
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+## Vereinheitlichte Initialisierung
 
 Der neue Standard vereinheitlicht die Benutzung der geschweiften
 Klammern bei der Initialisierung, das heisst, sie ist frei von
