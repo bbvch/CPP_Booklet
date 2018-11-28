@@ -59,4 +59,60 @@ MyType myType{"Fortytwo!", 42};
 * Argumente von Initialisierungslisten müssen alle vom selben Typ sein, implizite Konvertierungen sind erlaubt, aber keine narrowing-Konvertierungen
 * Funktioniert für Container mit statischer oder dynamischer Grösse
 
-*Container-Typen* definieren einen Konstruktor mit ``std::initializer_list<T>``
+*Container-Typen* definieren einen Konstruktor mit `std::initializer_list<T>`
+Beispiel:
+```cpp
+
+// Example for a container-type with explicit list
+initialisation
+struct Bar {
+explicit Bar(std::initializer_list<std::string> in) {
+for (auto &s : in)
+m_data.push_back("Bar " + s);
+}
+std::vector<std::string> m_data;
+};
+Bar bar{"A", "B", "C", "D"};
+
+```
+
+**Initialisierung von nicht statischen Data-Membern:**
+• Nicht statische Data Members können jetzt zum Zeitpunkt der
+Deklaration initialisiert werden
+• PODs werden dadurch in C++14 zu non PODs
+Beispiel:
+```cpp
+truct Klass {
+public:
+Klass(int x, const std::string &s) : _x(x), _s(s) {}
+private:
+// initialisation can be specified at the time of declaration
+int _x{999}; // Value assignment through construction
+int _y = 1000; // value assignment
+std::string _s;
+};
+```
+
+## Typeninferenz
+### Keyword `auto`
+Mit dem Keyword auto bestimmt der Compiler automatisch den
+optimalen Typ für den Ausdruck. Verwendung zur expliziten
+Initialisierung und bei Templates für bessere Lesbarkeit. 
+
+Bemerkung: Das Keyword `auto` existierte bereits bei C++03, al-
+lerdings als storage-specifier wie extern, register oder
+static und ist somit nicht abwärtskompatibel.
+Syntax: `auto expression`;
+
+```cpp
+auto x = 42; // x is an int
+x = "fortytwo"; // Error, because x is already an int
+std::vector<int> vec{1000, 1001, 1002, 1003};
+auto it0 = vec.begin(); // it0 is a vector<T>::iterator
+auto st0(vec[4]); // st0 is an int
+auto &st1 = vec[4]; // st1 is an int&
+const auto &s1 = vec[4]; // s1 const int&
+auto it1 = vec.cbegin(); // it1 is a vector<int>::const_iterator
+auto sil{vec[4]}; // sil is a std:initializer_list<int>
+```
+
