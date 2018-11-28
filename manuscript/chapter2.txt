@@ -56,11 +56,13 @@ MyType myType{"Fortytwo!", 42};
 ```
 
 **Initialisieren von Container-Typen:**
+
 * Argumente von Initialisierungslisten müssen alle vom selben Typ sein, implizite Konvertierungen sind erlaubt, aber keine narrowing-Konvertierungen
 * Funktioniert für Container mit statischer oder dynamischer Grösse
 
 *Container-Typen* definieren einen Konstruktor mit `std::initializer_list<T>`
 Beispiel:
+
 ```cpp
 
 // Example for a container-type with explicit list
@@ -77,10 +79,12 @@ Bar bar{"A", "B", "C", "D"};
 ```
 
 **Initialisierung von nicht statischen Data-Membern:**
-• Nicht statische Data Members können jetzt zum Zeitpunkt der
+
+* Nicht statische Data Members können jetzt zum Zeitpunkt der
 Deklaration initialisiert werden
-• PODs werden dadurch in C++14 zu non PODs
+* PODs werden dadurch in C++14 zu non PODs
 Beispiel:
+
 ```cpp
 truct Klass {
 public:
