@@ -1,0 +1,11 @@
+# Standard-Library-Erweiterungen
+
+
+Da es den Rahmen des Booklets sprengen wür-
+de (siehe Einleitung), kann hier auf die Stan-
+dard-Library-Erweiterung nicht eingegangen
+werden. Zu diesem Thema gibt es Bücher und
+Online-Informationen. Weitergehende Infor-
+mationen finden Sie zum Beispiel im Buch «The
+C++ Standard Library Second Edition» [3] oder
+auf der Webseite http://en.cppreference.com.

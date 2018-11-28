@@ -1,0 +1,24 @@
+# Fazit
+
+Linguistische Sprachen entwickeln und verändern
+sich im Laufe der Zeit, diesem Prozess sind auch
+Programmiersprachen unterworfen. Nach einer
+langen Wartezeit entwickelt sich C++ erfreulicher-
+weise wieder stetig weiter.
+
+---
+
+Und was bringen die neuen Standards? Zum einen ist C++
+typensicherer geworden und Limitationen der früheren Stan-
+dards wurden behoben. Zum anderen wurde die Sprache mit
+neuen Funktionen erweitert, welche bei anderen Sprachen be-
+reits umgesetzt sind. Um ein paar zu nennen: vereinheitlichte
+Initialisierung, Multithreading-Unterstützung, allgemeine Pro-
+grammierunterstützung und Performanceverbesserungen. Wie
+die Kernsprache wurde auch die Standard Library überarbeitet,
+erweitert und verbessert. Alles in allem sind die neuen Standards
+weitere Schritte weiter weg von «C mit Klassen» hin zu einer
+modernen und starken Programmiersprache.
+Wir denken, der neue Standard ist eine gelungene Erweiterung,
+die dem Softwareentwickler bei seiner täglichen Arbeit hilft, bes-
+seren und effizienteren Code zu entwickeln.
