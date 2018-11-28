@@ -19,6 +19,7 @@ die Standard Library nur kurz erwähnt, da es den Rahmen des Booklets
 Dieses Booklet ist für Softwareentwickler gedacht, die sich mit
 den neuen C++ Standards auseinandersetzen wollen. Es gibt einen
 Überblick über die neuen, modernen Funktionen und Spracherweiterungen,
-die dem Softwareentwickler das Leben erleichtern können
+die dem Softwareentwickler[^SWDev] das Leben erleichtern können
 bzw. sollen.
 
+[^SWDev]: Beispiel Fussnote...
