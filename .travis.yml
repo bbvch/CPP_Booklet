@@ -1,0 +1,12 @@
+ 
+language: cpp
+dist: xenial
+compiler: 
+  - gcc-7
+  - clang
+
+script:
+  - cmake --version
+  - mkdir build && cd build && cmake .. 
+  - cmake --build . --config Debug
+  - ctest -C Debug
