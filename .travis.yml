@@ -5,18 +5,20 @@ dist: xenial
 matrix:
   include:
     - os: linux
-      compiler: gcc
+      compiler: 
+       - gcc
       addons:
-      apt:
-        sources: 
-          - ubuntu-toolchain-r-test
-        packages:
-          - g++-7
+        apt:
+          sources: 
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-7
       env:
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
 
     - os: linux
-      compiler: clang
+      compiler:
+       - clang
       addons:
         apt:
           sources: 
@@ -35,7 +37,7 @@ matrix:
             - ubuntu-toolchain-r-test
             - llvm-toolchain-xenial-6.0
           packages:
-            - 'clang-5.0']
+            - 'clang-5.0'
       env:
         - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
     
