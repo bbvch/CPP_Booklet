@@ -23,7 +23,7 @@ else()
   message(WARNING "your compiler is not yet able to compile all examples under the C++17 standard, some compilations may fail")
 endif()
 
-set(SOURCE_DIR source)
+set(SOURCE_DIR src)
 file(GLOB SOURCE_FILES ${SOURCE_DIR}/*.cc)
 
 set_property(DIRECTORY APPEND PROPERTY ADDITIONAL_MAKE_CLEAN_FILES html)

@@ -7,7 +7,7 @@ if not os.path.exists("./examples"):
 num_examples = 0
 example_files = []
 
-for f in glob.glob("source/*.cc"):
+for f in glob.glob("src/*.cc"):
     f_in = open(f)
 
     lines = f_in.readlines()
@@ -37,11 +37,11 @@ for f in glob.glob("source/*.cc"):
     if len(examples) > 0:
         for k in examples:
             bname = os.path.basename(f)
-            filename  = "examples/example_" + str(k) + "_chapter_" + bname
+            filename = "examples/example_" + str(k) + "_chapter_" + bname
             example_files.append(filename)
             f_out = open(filename, 'w+')
             f_out.writelines(examples[k])
             f_out.close()
 
 print "split examples into " + str(num_examples) + " files"
-#print example_files
+# print example_files

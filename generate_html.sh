@@ -10,7 +10,7 @@ STATEMENT=DarkBlue
 
 SOURCEDIR=examples
 
-#this will open vim for each file and save it as html in the source/<filenamw>.cc.html 
+#this will open vim for each file and save it as html in the src/<filenamw>.cc.html 
 for i in ${SOURCEDIR}/*.cc; do vim -c "set t_Co=256"\
     -c "highlight Normal ctermbg=${BBV_BACKGROUND} ctermfg=${NORMAL}" \
 	-c "highlight Comment ctermbg=${BBV_BACKGROUND} ctermfg=${COMMENT}"\

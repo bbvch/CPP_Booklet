@@ -12,7 +12,7 @@ add_custom_target(html
 	COMMENT "Building HTML output for ${SOURCE_DIR}"
 )
 
-#this will open vim for each file and save it as html in the source/<filenamw>.cc.html 
+#this will open vim for each file and save it as html in the src/<filenamw>.cc.html 
 foreach(CC_FILE ${SOURCE_FILES} )
 
   get_filename_component(SOURCE_BASENAME ${CC_FILE} NAME)
