@@ -19,6 +19,8 @@ To specify a non-default compiler (i.e. g++7) to use  `$CC` and `$CXX` environme
 As soon as more and more compilers are able to compile the full C++17 feature set they will be added.
 If you find one missing, raise an issue on github for it. https://github.com/bernedom/CPP_Booklet
 
+See https://cmake.org/cmake/help/v3.8/prop_gbl/CMAKE_CXX_KNOWN_FEATURES.html for known compilation features of cmake.
+
 ## building and compiling
 `$>cmake .`
 
