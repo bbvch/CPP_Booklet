@@ -46,11 +46,8 @@ foreach(CC_FILE ${SOURCE_FILES})
                  EXE_NAME
                  ${SOURCE_BASENAME})
   add_executable(${EXE_NAME} ${CC_FILE})
-  set_target_properties(${EXE_NAME}
-                        PROPERTIES CXX_STANDARD
-                                   17
-                                   CXX_STANDARD_REQUIRED
-                                   YES)
+  target_compile_features(${EXE_NAME} PRIVATE cxx_std_17)
+
 endforeach(CC_FILE ${SOURCE_FILES})
 
 # if vi improved is detected add a target for generating html output
