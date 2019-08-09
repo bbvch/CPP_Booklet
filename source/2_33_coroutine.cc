@@ -75,6 +75,7 @@
     };
 
 #if Example ==2
+// promise returns a reference to the promise object
     const char* resumable::return_val(){
       return handle_.promise().string_;
     }
