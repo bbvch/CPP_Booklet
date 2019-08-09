@@ -4,7 +4,7 @@
 #include <vector>
 #include <type_traits>
 
-#define Example 1
+#define Example 3
 
 // experimental ..?
 // #include <coroutine>
@@ -20,8 +20,10 @@
       resumable(resumable&) = delete;
       resumable(resumable&&) = delete;
 
-#if Example == 1
+#if Example != 3
       const char* return_val();
+#elif Example == 3
+      const char* recent_val();
 #endif
       // returns true if coroutine can be resumed
       bool resume() {
@@ -39,12 +41,6 @@
       coro_handle handle_;
     };
 
-#if Example == 2
-    const char* resumable::return_val(){
-      return handle_.promise().string_;
-    }
-#endif
-
     struct resumable::promise_type {
       using coro_handle = std::experimental::coroutine_handle<promise_type>;
 
@@ -57,15 +53,16 @@
       auto initial_suspend() { return std::experimental::suspend_always(); }
       auto final_suspend() { return std::experimental::suspend_always(); }
 
+      const char * string_;
 #if Example == 1
       // needed for co_await (otherwise undefined behaviour)
       // in case of co_return: define return_value
       void return_void() {}
 #elif Example == 2
-      const char * string_;
+    //void return_void() {}
       void return_value(const char * string) { string_ = string; }
-#elif Example == 3
-      const char * string_;
+#elif  Example == 3
+       void return_void() {};
       auto yield_value(const char* string){
         string_=string;
         return std::experimental::suspend_always();
@@ -77,25 +74,48 @@
       }
     };
 
+#if Example ==2
+    const char* resumable::return_val(){
+      return handle_.promise().string_;
+    }
+#elif Example == 3
+    const char* resumable::recent_val(){
+        return handle_.promise().string_;
+    }
+#endif
+
 resumable foo(){
-#if Example < 3
+#if Example == 1
   std::cout << "Hello" << std::endl;
   co_await std::experimental::suspend_always();
-
   std::cout << "World" << std::endl;
-#elif Example == 2
-  std::cout << res.return_val() << std::endl;
+#endif
+#if Example == 2
+  std::cout << "Hello" << std::endl;
+  co_await std::experimental::suspend_always();
+    co_return "Coroutine";
 #elif Example == 3
   while(true){
     co_yield "Hello";
-    co_yeild "Coroutine";
+    co_yield "Coroutine";
   }
 #endif
 }
 
 int main(){
   resumable res = foo();
+#if Example <3
   while (res.resume()){};
+#endif
+#if Example == 2
+  std::cout << res.return_val() << std::endl;
+#elif Example == 3
+    int i=10;
+    while (i--){
+        res.resume();
+        std::cout << res.recent_val() << std::endl;
+  }
+#endif
     return 0;
 }
 
