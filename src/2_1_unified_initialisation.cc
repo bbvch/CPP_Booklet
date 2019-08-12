@@ -1,7 +1,7 @@
 /**
-* Example for section 2.1  
+* Example for section 2.1
 * of the C++ Booklet (https://goo.gl/VJ4T3A)
-* published by bbv software services AG (c) 2017
+* published by bbv software services AG (c) 2020
 *
 * This example illustrates the unified syntax for initializing stuff in
 * C++11/14/17

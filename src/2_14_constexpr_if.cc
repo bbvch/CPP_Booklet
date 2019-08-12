@@ -1,7 +1,7 @@
 /**
  * Example for section 2.14
  * of the C++ Booklet (https://goo.gl/VJ4T3A)
- * published by bbv software services AG (c) 2017
+* published by bbv software services AG (c) 2020
  *
  * This example illustrates the use of constexpr if
  *

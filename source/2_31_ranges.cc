@@ -1,3 +1,14 @@
+/**
+* Example for section ...
+* of the C++ Booklet (https://goo.gl/VJ4T3A)
+* published by bbv software services AG (c) 2020
+*
+*  This example illustrates ...
+*
+* SPDX-License-Identifier: GPL-3.0
+*
+**/
+
 // ranges was not included yet..and has no feature test macro
  #if __cplusplus > 201908L
 

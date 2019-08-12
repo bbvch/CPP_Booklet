@@ -1,7 +1,7 @@
 /**
  * Example for section 2.13
  * of the C++ Booklet (https://goo.gl/VJ4T3A)
- * published by bbv software services AG (c) 2017
+* published by bbv software services AG (c) 2020
  *
  * This example illustrates how 'this' can be passed to a lambda function.
  * This example is no longer available in the print version of the booklet

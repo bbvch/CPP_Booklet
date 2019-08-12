@@ -1,7 +1,7 @@
 /**
 * Example for section 2.10
 * of the C++ Booklet (https://goo.gl/VJ4T3A)
-* published by bbv software services AG (c) 2017
+* published by bbv software services AG (c) 2020
 *
 * This exampple illustrates the use of a range based for loop
 *
