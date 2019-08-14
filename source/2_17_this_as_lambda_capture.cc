@@ -38,6 +38,14 @@ public:
     }; // OK, creates a copy of 'this'
     const_func();
 
+#if __cplusplus > 201908L
+  // supposed to work with any recent compiler
+  auto allowedWithCpp20 = [=, this] () {
+    return this->magic();
+  };
+  allowedWithCpp20();
+#endif
+
     // this->_a is still the same values as before the call, as the lamdda
     // creates a copy in the caputure
     // deleting the copy ctor will break compilation

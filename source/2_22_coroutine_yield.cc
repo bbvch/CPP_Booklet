@@ -3,7 +3,7 @@
 * of the C++ Booklet (https://goo.gl/VJ4T3A)
 * published by bbv software services AG (c) 2020
 *
-*  This example illustrates ...
+*  This example illustrates the use of a coroutine using co_yield
 *
 * SPDX-License-Identifier: GPL-3.0
 *
@@ -15,12 +15,7 @@
 #include <type_traits>
 
 
-// 1 == co_await
-// 2 == co_return
-// 3 == co_yield
-
 // experimental ..?
-// #include <coroutine>
 #include <experimental/coroutine>
 
     class resumable {

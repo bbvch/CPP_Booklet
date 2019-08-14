@@ -3,7 +3,7 @@
 * of the C++ Booklet (https://goo.gl/VJ4T3A)
 * published by bbv software services AG (c) 2020
 *
-*  This example illustrates ...
+*  This example illustrates the use of the three-way-comparison operator <=>
 *
 * SPDX-License-Identifier: GPL-3.0
 *

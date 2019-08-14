@@ -3,7 +3,7 @@
 * of the C++ Booklet (https://goo.gl/VJ4T3A)
 * published by bbv software services AG (c) 2020
 *
-*  This example illustrates ...
+*  This example illustrates the use of a coroutine using co_await
 *
 * SPDX-License-Identifier: GPL-3.0
 *
@@ -14,18 +14,12 @@
 #include <iostream>
 #include <type_traits>
 
-// 1 == co_await
-// 2 == co_return
-// 3 == co_yield
-
-// verbose option?
-
 // experimental ..?
-// #include <coroutine>
 #include <experimental/coroutine>
 
     class resumable {
     public:
+      // forward declare promise_type
       struct promise_type;
       using coroutine_handle = std::experimental::coroutine_handle<promise_type>;
       resumable(coroutine_handle handle) : mhandle(handle) { assert(handle); }
@@ -33,8 +27,6 @@
       // don't want to copy, don't want to move
       resumable(resumable&) = delete;
       resumable(resumable&&) = delete;
-
-      const char* return_val();
 
       // returns true if coroutine can be resumed
       bool resume() {
@@ -62,11 +54,11 @@
         return coroutine_handle::from_promise(*this);
       }
       // after each suspend resume has to be called
+      // suspend_always was chosen arbitrarily
       auto initial_suspend() { return std::experimental::suspend_always(); }
       auto final_suspend() { return std::experimental::suspend_always(); }
 
       // needed for co_await (otherwise undefined behaviour)
-      // in case of co_return: define return_value
       void return_void() {}
 
       void unhandled_exception() {
