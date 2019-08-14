@@ -37,4 +37,13 @@ int main()
   return 0;
 }
 
-#endif
+#else
+
+  #include <iostream>
+
+  int main() {
+    std::cout << "ranges not implemented yet!" << std::endl;
+    return 1;
+  }
+
+#endif  // __cplusplus > 201908L

@@ -9,16 +9,29 @@
 *
 **/
 
-#include «math.h»
+#ifdef __has_include
+	#if __has_include(<math.h>)
+		#include «math.h»
 
+		double GetAreaOfCircle(const double radius)
+		{
+			return std::math::pi * radius * radius;
+		};
 
-double GetAreaOfCircle(const double radius)
-{
-	return std::math::pi * radius * radius;
-};
+		int main() {
+		  const double r = 1.23;
+		  std::cout << "Area of Circle with " << r << " is: " << GetAreaOfCircle(r) << std::endl;
+		  return 0;
+		}
 
-int main() {
-  const double r = 1.23;
-  std::cout << "Area of Circle with " << r << " is: " << GetAreaOfCircle(r) << std::endl;
-  return 0;
-}
+	#else
+
+	#include <iostream>
+
+	int main() {
+	  std::cout << "std::math not implemented yet!" << std::endl;
+	  return 1;
+	}
+
+	#endif	// __has_include(<math.h>)
+#endif	// __has_include

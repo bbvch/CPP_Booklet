@@ -20,4 +20,14 @@ int main(){
   std::cout << "std.io module already loaded!" << std::endl;
   return 0;
 }
+
+#else
+
+  #include <iostream>
+
+  int main() {
+    std::cout << "modules not implemented yet!" << std::endl;
+    return 1;
+  }
+
 #endif
