@@ -10,8 +10,8 @@
 **/
 
 #ifdef __has_include
-	#if __has_include(<math.h>)
-		#include «math.h»
+	#if __has_include(<math>)
+		#include <math>
 
 		double GetAreaOfCircle(const double radius)
 		{
