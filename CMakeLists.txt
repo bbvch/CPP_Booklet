@@ -185,10 +185,6 @@ if(VIM_PATH)
       WARNING "Python3 not found, will not build target to separate examples")
   endif()
 
-  configure_file(generate_html.cmake.in ${CMAKE_BINARY_DIR}/generate_html.cmake
-                 @ONLY)
-  include(${CMAKE_BINARY_DIR}/generate_html.cmake)
-
 else()
   message(WARNING "Vim not found, will not add target to build html output")
 endif()
