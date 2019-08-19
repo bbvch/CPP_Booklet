@@ -164,7 +164,7 @@ if(VIM_PATH)
 
   message("Vim found in ${VIM_PATH}")
 
-  find_program(PYTHON_EXECUTABLE python)
+  find_program(PYTHON_EXECUTABLE python3)
 
   # if Python is available the .cc files will be split into chunks for each
   # example in the print version of the booklet. The newly generated files will
@@ -172,15 +172,17 @@ if(VIM_PATH)
   # caveat is that if new examples are added/configured in existing files cmake
   # needs to be run again
   if(PYTHON_EXECUTABLE)
-    message("found Python; Splitting cc files into individual examples")
+    message("found Python3; Splitting cc files into individual examples")
     execute_process(COMMAND ${PYTHON_EXECUTABLE}
-                            ${CMAKE_CURRENT_LIST_DIR}/separate_into_examples.py)
+                            ${CMAKE_CURRENT_LIST_DIR}/separate_into_examples.py
+                            -s ${CMAKE_CURRENT_LIST_DIR}/src -t
+                            ${CMAKE_CURRENT_LIST_DIR}/examples)
     file(GLOB SOURCE_FILES_EXAMPLES examples/*.cc)
     set(SOURCE_FILES ${SOURCE_FILES} ${SOURCE_FILES_EXAMPLES})
 
   else()
     message(
-      WARNING "Python not found, will not build target to separate examples")
+      WARNING "Python3 not found, will not build target to separate examples")
   endif()
 
   configure_file(generate_html.cmake.in ${CMAKE_BINARY_DIR}/generate_html.cmake

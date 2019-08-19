@@ -1,13 +1,20 @@
 import glob
 import os
+import argparse
 
-if not os.path.exists("./examples"):
-    os.makedirs("./examples")
+parser = argparse.ArgumentParser(description="Split *.cc files in examples by searching for //@")
+parser.add_argument('--sourcedir', '-s', dest="source_dir", help='source directory containing the .cc files', required=True)
+parser.add_argument('--targetdir', '-t' , dest='target_dir', help="target directory for the split examples", required=True)
+args = parser.parse_args()
+
+
+if not os.path.exists(args.target_dir):
+    os.makedirs(args.target_dir)
 
 num_examples = 0
 example_files = []
 
-for f in glob.glob("src/*.cc"):
+for f in glob.glob(os.path.join(args.source_dir + "/*.cc")):
     f_in = open(f)
 
     lines = f_in.readlines()
