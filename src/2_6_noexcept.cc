@@ -1,12 +1,12 @@
 /**
-* Example for section 2.6
-* of the C++ Booklet (https://goo.gl/VJ4T3A)
-* published by bbv software services AG (c) 2017
-*
-*
-* SPDX-License-Identifier: GPL-3.0
-*
-**/
+ * Example for section 2.6
+ * of the C++ Booklet (https://goo.gl/VJ4T3A)
+ * published by bbv software services AG (c) 2017
+ *
+ *
+ * SPDX-License-Identifier: GPL-3.0
+ *
+ **/
 
 #include <exception>
 
@@ -14,7 +14,7 @@ namespace {
 class myException : std::exception {
   virtual const char *what() const noexcept { return "myException happened"; }
 };
-}
+} // namespace
 
 //@16
 class A {
@@ -26,8 +26,8 @@ public:
   }
   void exceptionless_func() noexcept {}
   void bad_func() noexcept {
-    // putting a throw-statement here will NOT break compilation
-    // even if it violates the noexcept specifier
+    // putting a throw-statement here will NOT break compilation but result in a
+    // warning even if it violates the noexcept specifier
     throw myException();
   }
 
