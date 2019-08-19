@@ -176,9 +176,11 @@ if(VIM_PATH)
     execute_process(COMMAND ${PYTHON_EXECUTABLE}
                             ${CMAKE_CURRENT_LIST_DIR}/separate_into_examples.py
                             -s ${CMAKE_CURRENT_LIST_DIR}/src -t
-                            ${CMAKE_CURRENT_LIST_DIR}/examples)
-    file(GLOB SOURCE_FILES_EXAMPLES examples/*.cc)
-    set(SOURCE_FILES ${SOURCE_FILES} ${SOURCE_FILES_EXAMPLES})
+                            ${PROJECT_BINARY_DIR}/examples)
+    execute_process(COMMAND ${PYTHON_EXECUTABLE}
+                            ${CMAKE_CURRENT_LIST_DIR}/highlight_files.py -s
+                            ${PROJECT_BINARY_DIR}/examples -t
+                            ${PROJECT_BINARY_DIR}/html)
 
   else()
     message(

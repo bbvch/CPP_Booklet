@@ -50,5 +50,5 @@ for f in glob.glob(os.path.join(args.source_dir + "/*.cc")):
             f_out.writelines(examples[k])
             f_out.close()
 
-print("split examples into " + str(num_examples) + " files")
+print("split examples into " + str(num_examples) + " files into " + str(args.target_dir))
 # print example_files
