@@ -18,7 +18,7 @@ for f in glob.glob("src/*.cc"):
         if l.startswith("//@"):
             prefix, num = l.strip().split('@')
             if current_example is not None and num != current_example:
-                print "Error: Previous example did not end"
+                print("Error: Previous example did not end")
             elif current_example is None:
                 current_example = num
                 if current_example not in examples:
@@ -27,7 +27,7 @@ for f in glob.glob("src/*.cc"):
             elif current_example == num:  # end
                 current_example = None
             else:
-                print "I forgot to implement something"
+                print("I forgot to implement something")
         elif current_example is not None:
             # filter out non-compilation warnings
             if not l.startswith("#ifdef") and not l.startswith("#endif"):
@@ -43,5 +43,5 @@ for f in glob.glob("src/*.cc"):
             f_out.writelines(examples[k])
             f_out.close()
 
-print "split examples into " + str(num_examples) + " files"
+print("split examples into " + str(num_examples) + " files")
 # print example_files
