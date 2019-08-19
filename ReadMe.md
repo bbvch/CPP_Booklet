@@ -5,7 +5,7 @@ These are examples illustrating the use of some of the C++11/14/17 features used
 # Supported Compilers
 
  * g++ 7.0.1 - All examples compile and run
- * clang 5.0.0 - All examples compile and run
+ * clang 5.0.0 and newer - All examples compile and run
  * MSVC 14.1 (Visual Studio 2017) - C++14 complete, missing most of the C++17 features 
  
 
@@ -34,10 +34,11 @@ Or
 
 ## Generating HTML output for examples
 In order to link the examples in the .cc files to the printed version of the booklet the examples are annotated in code with ```\\@<number```
-CMake will parse the .cc files in the 'src' folder for annotations for the example numbers in the print version of the booklet and split these files into files to create a syntax highlighted html file for each example. To build the html files from the splitted files run ```$>make html```
+CMake will parse the .cc files in the 'src' folder for annotations for the example numbers in the print version of the booklet and split these files into files to create a syntax highlighted html file for each example. 
 
 *Note* whenever a new example is annotated in a .cc file cmake needs to be run again to separate the files again. 
 Alternatively the run ```separate_into_examples.py``` to split the files manually. 
+To generate syntax highlighed html manually run `highlight_files.py -s <examples_dir> -t <target_dir>` (requires the ```pygments``` python package)
 
 ### building and compiling with non-feature complete compilers
 As most make tools (GNU make, nmake) exit if a target fails to build additional options have to be passed to make to continue even on a failed target
@@ -62,5 +63,3 @@ use `$>clang++ -std=c++1z -S` to compile to assembler code
 All examples are formatted using clang-format
 `$>clang-format -i file.cc` for formatting
 
-# generating html output manually
-to generate syntax highlighed html files for each file in './src' you need ```vim``` with syntax highlighting and a colorscheme enabledd. if you have this simply run ```generate_html.sh``` and it will drop the generated files into the folder /html
