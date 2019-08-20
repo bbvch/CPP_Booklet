@@ -47,8 +47,10 @@ matrix:
 
 before_install:
   - eval "${MATRIX_EVAL}"
+  
 
 script: 
+  - pip install -r requirements.txt
   - cmake --version
   - mkdir build && cd build && cmake .. -G Ninja 
   - cmake --build . --config Debug
