@@ -1,16 +1,14 @@
 /**
-* Example for section 2.13
-* of the C++ Booklet (https://goo.gl/VJ4T3A)
-* published by bbv software services AG (c) 2017
-*
-* This example illustrates how 'this' can be passed to a lambda function. 
-* This example is no longer available in the print version of the booklet 
-*
-* SPDX-License-Identifier: GPL-3.0
-*
-**/
-
-#include <iostream>
+ * Example for section 2.13
+ * of the C++ Booklet (https://goo.gl/VJ4T3A)
+ * published by bbv software services AG (c) 2017
+ *
+ * This example illustrates how 'this' can be passed to a lambda function.
+ * This example is no longer available in the print version of the booklet
+ *
+ * SPDX-License-Identifier: GPL-3.0
+ *
+ **/
 
 class LambdaContainer {
 
@@ -27,14 +25,13 @@ public:
 
   void pass_this_by_value() {
     // possible since C++17
-    auto func = [*this]() mutable {
-      this->doMagic();
-    }; // needs mutable to acces non-const functions, also 'func' cannot be
-       // const in this case
+    // needs mutable to acces non-const functions, also 'func' cannot be
+    // const in this case
+    auto func = [*this]() mutable { doMagic(); };
     func();
 
     const auto const_func = [*this] {
-      return this->magic();
+      return magic();
     }; // OK, creates a copy of 'this'
     const_func();
 

@@ -1,18 +1,18 @@
 /**
-* Example for section 2.17
-* of the C++ Booklet (https://goo.gl/VJ4T3A)
-* published by bbv software services AG (c) 2017
-*
-* This example illustrates the usage of variadic templates
-*
-* SPDX-License-Identifier: GPL-3.0
-*
-**/
+ * Example for section 2.17
+ * of the C++ Booklet (https://goo.gl/VJ4T3A)
+ * published by bbv software services AG (c) 2017
+ *
+ * This example illustrates the usage of variadic templates
+ *
+ * SPDX-License-Identifier: GPL-3.0
+ *
+ **/
 
 #include <algorithm>
 #include <iostream>
 #include <memory>
-
+#include <string>
 struct Dummy {
   int x;
   char c;
@@ -77,18 +77,18 @@ template <typename... Args> void unpack(Args... args) {
 }
 
 int main(int, char **) {
-//@33
+  //@33
   aFunction(42, 1.14159, "Hello", Dummy());
   aFunction(1, 2, 3, 4, 5);
-//@33
+  //@33
 
-//@34
+  //@34
   aClass<std::string, int> ac1;
   aClass<char, char, double, std::string> ac2;
   aClass<> ac3;
-//@34
+  //@34
 
-//@35
+  //@35
   // returns "ABC"
   std::cout << reorder_and_concat("CBA") << "\n";
 
@@ -97,9 +97,9 @@ int main(int, char **) {
 
   // returns ABCJKLXYZ
   std::cout << reorder_and_concat("CBA", std::string("KLJ"), "ZYX") << "\n";
-//@35
+  //@35
 
-//@36
+  //@36
   std::cout << binary_left_fold(1) << "\n";       // 11 (10 + 1)
   std::cout << binary_left_fold(1, 2, 3) << "\n"; // 16 (10 + 1 + 2 +3)
 
@@ -108,7 +108,7 @@ int main(int, char **) {
 
   std::cout << unary_left_fold(10, 3, 2) << "\n";  // (10 - 3) -2 = 5
   std::cout << unary_right_fold(10, 3, 2) << "\n"; // 10 - (3 -2) = 9
- 
-//@36
- unpack("ABC", 55, 1.345f);
+
+  //@36
+  unpack("ABC", 55, 1.345f);
 }

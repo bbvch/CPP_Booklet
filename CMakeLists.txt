@@ -1,10 +1,8 @@
 cmake_minimum_required(VERSION 3.12)
 project("CPP_Booklet"
         VERSION 1.1.0
-                DESCRIPTION
-                "C++ source files for the CPP booklet from bbv"
-                HOMEPAGE_URL
-                "https://github.com/bbvch/CPP_Booklet")
+        DESCRIPTION "C++ source files for the CPP booklet from bbv"
+        HOMEPAGE_URL "https://github.com/bbvch/CPP_Booklet")
 
 # this is a workaround because MSVC is a CMake internal variable which leads to
 # confusion when doing STREQUAL on it
@@ -49,7 +47,10 @@ target_compile_features(2_12_trailing_return_types PRIVATE
                         cxx_trailing_return_types)
 
 add_executable(2_13_lambdas src/2_13_lambdas.cc)
-target_compile_features(2_13_lambdas PRIVATE cxx_lambdas cxx_generic_lambdas)
+target_compile_features(2_13_lambdas
+                        PRIVATE
+                        cxx_lambdas
+                        cxx_generic_lambdas)
 
 add_executable(2_13_this_as_lambda_capture src/2_13_this_as_lambda_capture.cc)
 target_compile_features(2_13_this_as_lambda_capture
@@ -57,6 +58,8 @@ target_compile_features(2_13_this_as_lambda_capture
                         cxx_lambdas
                         cxx_generic_lambdas
                         cxx_std_17)
+target_compile_options(2_13_this_as_lambda_capture
+                       PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/std:c++17>)
 
 add_executable(2_14_1_constexpr_lambda src/2_14_1_constexpr_lambda.cc)
 # needs cxx_std_17 because passing this as capture is not available else
@@ -66,15 +69,25 @@ target_compile_features(2_14_1_constexpr_lambda
                         cxx_generic_lambdas
                         cxx_constexpr
                         cxx_std_17)
+target_compile_options(2_14_1_constexpr_lambda
+                       PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/std:c++17>)
 
 add_executable(2_14_constexpr src/2_14_constexpr.cc)
 target_compile_features(2_14_constexpr PRIVATE cxx_constexpr)
 
 add_executable(2_14_constexpr_if src/2_14_constexpr_if.cc)
-target_compile_features(2_14_constexpr_if PRIVATE cxx_constexpr cxx_std_17)
+target_compile_features(2_14_constexpr_if
+                        PRIVATE
+                        cxx_constexpr
+                        cxx_std_17)
+target_compile_options(2_14_constexpr_if
+                       PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/std:c++17>)
 
 add_executable(2_15_alignment src/2_15_alignment.cc)
-target_compile_features(2_15_alignment PRIVATE cxx_alignas cxx_alignof)
+target_compile_features(2_15_alignment
+                        PRIVATE
+                        cxx_alignas
+                        cxx_alignof)
 
 add_executable(2_16_move_semantics src/2_16_move_semantics.cc)
 target_compile_features(2_16_move_semantics PRIVATE cxx_std_17)
@@ -106,6 +119,8 @@ target_compile_features(2_20_selection_statements_with_initializers PRIVATE
 
 add_executable(2_21_standard_attributes src/2_21_standard_attributes.cc)
 target_compile_features(2_21_standard_attributes PRIVATE cxx_attributes)
+target_compile_options(2_21_standard_attributes
+                       PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/std:c++17>)
 
 add_executable(2_22_hex_float_literals src/2_22_hex_float_literals.cc)
 target_compile_features(2_22_hex_float_literals
@@ -175,11 +190,15 @@ if(VIM_PATH)
     message("found Python3; Splitting cc files into individual examples")
     execute_process(COMMAND ${PYTHON_EXECUTABLE}
                             ${CMAKE_CURRENT_LIST_DIR}/separate_into_examples.py
-                            -s ${CMAKE_CURRENT_LIST_DIR}/src -t
+                            -s
+                            ${CMAKE_CURRENT_LIST_DIR}/src
+                            -t
                             ${PROJECT_BINARY_DIR}/examples)
     execute_process(COMMAND ${PYTHON_EXECUTABLE}
-                            ${CMAKE_CURRENT_LIST_DIR}/highlight_files.py -s
-                            ${PROJECT_BINARY_DIR}/examples -t
+                            ${CMAKE_CURRENT_LIST_DIR}/highlight_files.py
+                            -s
+                            ${PROJECT_BINARY_DIR}/examples
+                            -t
                             ${PROJECT_BINARY_DIR}/html)
 
   else()

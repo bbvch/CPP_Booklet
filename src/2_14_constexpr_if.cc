@@ -1,30 +1,31 @@
 /**
-* Example for section 2.14
-* of the C++ Booklet (https://goo.gl/VJ4T3A)
-* published by bbv software services AG (c) 2017
-*
-* This example illustrates the use of constexpr if
-*
-* SPDX-License-Identifier: GPL-3.0
-*
-**/
+ * Example for section 2.14
+ * of the C++ Booklet (https://goo.gl/VJ4T3A)
+ * published by bbv software services AG (c) 2017
+ *
+ * This example illustrates the use of constexpr if
+ *
+ * SPDX-License-Identifier: GPL-3.0
+ *
+ **/
 
 #include <algorithm>
 #include <array>
 #include <iostream>
+#include <string>
 #include <vector>
 //@27
 // Here Constexpr is used to facilitate template specialisation 'in-place'
 template <typename T> class NameByType {
 public:
   std::string to_string() {
-    if
-      constexpr(std::is_pointer<T>::value) { return "Pointer"; }
-    else if
-      constexpr(std::is_integral<T>::value) { return "Integral"; }
-    else if
-      constexpr(std::is_same<T, float>::value) { return "Float"; }
-    else {
+    if constexpr (std::is_pointer<T>::value) {
+      return "Pointer";
+    } else if constexpr (std::is_integral<T>::value) {
+      return "Integral";
+    } else if constexpr (std::is_same<T, float>::value) {
+      return "Float";
+    } else {
       return "Unknown";
     }
   }
@@ -35,20 +36,24 @@ public:
 class MixedStorage {
 public:
   template <std::size_t N> auto access() {
-    if
-      constexpr(N == 0) { return a; } // int
-    if
-      constexpr(N == 1) { return b; } // char
-    if
-      constexpr(N == 2) { return c; } // string
-    if
-      constexpr(N == 3) { return d; } // vector
-    else if                           // return a fixed size array of size N
-      constexpr(N > 3) { // Condition needs explicit specification or else
-                         // return type cannot be deducted correctly
-        std::array<int, N> r;
-        return std::move(r);
-      }
+    if constexpr (N == 0) {
+      return a;
+    } // int
+    if constexpr (N == 1) {
+      return b;
+    } // char
+    if constexpr (N == 2) {
+      return c;
+    } // string
+    if constexpr (N == 3) {
+      return d;
+    }                       // vector
+    else if                 // return a fixed size array of size N
+        constexpr (N > 3) { // Condition needs explicit specification or else
+                            // return type cannot be deducted correctly
+      std::array<int, N> r;
+      return std::move(r);
+    }
 
 #ifdef EXPECT_FAILED_COMPILATION
     else {
