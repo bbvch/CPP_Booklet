@@ -23,6 +23,8 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "^[cC]lang.*")
       WARNING
         "Insufficient clang version - use 5.0.0 or above to compile all examples"
       )
+  elseif(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL "8.0.0")
+    set(ENABLE_CPP20_FEATURES TRUE)
   endif()
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "^AppleClang.*")
   if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "10.0")
@@ -30,6 +32,7 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "^AppleClang.*")
       WARNING
         "Insufficient AppleClang version - use 10.0 or above to compile all examples"
       )
+
   endif()
 
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "${MSVC_COMPILER_NAME}")
@@ -187,6 +190,50 @@ target_compile_features(2_11_nullptr PRIVATE cxx_nullptr)
 add_executable(2_12_right_angle_brackets src/2_12_right_angle_brackets.cc)
 target_compile_features(2_12_right_angle_brackets PRIVATE
                         cxx_right_angle_brackets)
+
+if(DEFINED ENABLE_CPP20_FEATURES)
+  message(INFO "Building C++20 features (Not supported by all compilers)")
+  add_executable(2_10_three_way_comparison src/2_10_three_way_comparison.cc)
+  target_compile_options(2_10_three_way_comparison
+                         PRIVATE $<$<CXX_COMPILER_ID:Clang>: --std=c++2a>)
+
+  add_executable(2_14_ranges src/2_14_ranges.cc)
+  target_compile_options(2_14_ranges
+                         PRIVATE $<$<CXX_COMPILER_ID:Clang>: --std=c++2a>)
+
+  add_executable(2_1_math_includes src/2_1_math_includes.cc)
+  target_compile_options(2_1_math_includes
+                         PRIVATE $<$<CXX_COMPILER_ID:Clang>: --std=c++2a>)
+
+  add_executable(2_20_stdspan src/2_20_stdspan.cc)
+  target_compile_options(2_20_stdspan
+                         PRIVATE $<$<CXX_COMPILER_ID:Clang>: --std=c++2a>)
+
+  add_executable(2_22_coroutine_await src/2_22_coroutine_await.cc)
+  target_compile_options(2_22_coroutine_await
+                         PRIVATE $<$<CXX_COMPILER_ID:Clang>: --std=c++2a>)
+
+  add_executable(2_22_coroutine_return src/2_22_coroutine_return.cc)
+  target_compile_options(2_22_coroutine_return
+                         PRIVATE $<$<CXX_COMPILER_ID:Clang>: --std=c++2a>)
+
+  add_executable(2_22_coroutine_yield src/2_22_coroutine_yield.cc)
+  target_compile_options(2_22_coroutine_yield
+                         PRIVATE $<$<CXX_COMPILER_ID:Clang>: --std=c++2a>)
+
+  add_executable(2_24_concepts src/2_24_concepts.cc)
+  target_compile_options(2_24_concepts
+                         PRIVATE $<$<CXX_COMPILER_ID:Clang>: --std=c++2a>)
+
+  add_executable(2_31_modules src/2_31_modules.cc)
+  target_compile_options(2_31_modules
+                         PRIVATE $<$<CXX_COMPILER_ID:Clang>: --std=c++2a>)
+
+  add_executable(2_4_std_format src/2_4_std_format.cc)
+  target_compile_options(2_4_std_format
+                         PRIVATE $<$<CXX_COMPILER_ID:Clang>: --std=c++2a>)
+
+endif()
 
 # if vi improved is detected add a target for generating html output
 find_program(VIM_PATH vim)
