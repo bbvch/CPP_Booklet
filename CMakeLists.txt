@@ -17,13 +17,20 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
       WARNING "Insufficient g++ version - use 7.0.1 to compile all examples")
   endif()
 
-elseif(CMAKE_CXX_COMPILER_ID MATCHES "^clang.*"
-       OR CMAKE_CXX_COMPILER_ID MATCHES "^Clang.*")
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "^[cC]lang.*")
 
   if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "4.0.0")
     message(
       WARNING
         "Insufficient clang version - use 4.0.0 or above to compile all examples"
+      )
+  endif()
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "${MSVC_COMPILER_NAME}")
+  message(WARNING "Insufficient msvc version ${CMAKE_CXX_COMPILER_VERSION}")
+  if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "19.16")
+    message(
+      WARNING
+        "Insufficient MSCV version - use 16.16 or above to compile all examples"
       )
   endif()
 else()

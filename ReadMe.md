@@ -6,7 +6,7 @@ These are examples illustrating the use of some of the C++11/14/17 features used
 
  * g++ 7.0.1 - All examples compile and run
  * clang 5.0.0 and newer - All examples compile and run
- * MSVC 14.1 (Visual Studio 2017) - C++14 complete, missing most of the C++17 features 
+ * MSVC 19.16 (Visual Studio 15 2017) - All examples compile and run
  
 
 Tip: use  https://godbolt.org/ to test various other compilers
