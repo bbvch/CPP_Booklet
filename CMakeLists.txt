@@ -18,13 +18,20 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
   endif()
 
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "^[cC]lang.*")
-
-  if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "4.0.0")
+  if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "5.0.0")
     message(
       WARNING
-        "Insufficient clang version - use 4.0.0 or above to compile all examples"
+        "Insufficient clang version - use 5.0.0 or above to compile all examples"
       )
   endif()
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "^AppleClang.*")
+  if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "10.0")
+    message(
+      WARNING
+        "Insufficient AppleClang version - use 10.0 or above to compile all examples"
+      )
+  endif()
+
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "${MSVC_COMPILER_NAME}")
   message(WARNING "Insufficient msvc version ${CMAKE_CXX_COMPILER_VERSION}")
   if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "19.16")
