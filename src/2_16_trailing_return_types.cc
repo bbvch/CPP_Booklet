@@ -1,13 +1,13 @@
 /**
-* Example for section @section @title
-* of the C++ Booklet (https://goo.gl/VJ4T3A)
-* published by bbv software services AG (c) 2020
-*
-* This example illustrates the usage of trailing return types
-*
-* SPDX-License-Identifier: GPL-3.0
-*
-**/
+ * Example for section 2.16
+ * of the C++ Booklet (https://goo.gl/VJ4T3A)
+ * published by bbv software services AG (c) 2020
+ *
+ * This example illustrates the usage of trailing return types
+ *
+ * SPDX-License-Identifier: GPL-3.0
+ *
+ **/
 
 //@22
 struct A {
@@ -20,7 +20,6 @@ struct A {
     };
   };
 };
-
 
 // Standard, the scope of D has to be specified
 A::B::C::D A::B::C::foo(const C &) { return D(); };

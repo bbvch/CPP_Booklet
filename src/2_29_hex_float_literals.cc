@@ -1,5 +1,5 @@
 /**
-* Example for section 2.22
+* Example for section 2.29
 * of the C++ Booklet (https://goo.gl/VJ4T3A)
 * published by bbv software services AG (c) 2020
 *
