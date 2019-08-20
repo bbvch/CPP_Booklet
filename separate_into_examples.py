@@ -2,9 +2,12 @@ import glob
 import os
 import argparse
 
-parser = argparse.ArgumentParser(description="Split *.cc files in examples by searching for //@")
-parser.add_argument('--sourcedir', '-s', dest="source_dir", help='source directory containing the .cc files', required=True)
-parser.add_argument('--targetdir', '-t' , dest='target_dir', help="target directory for the split examples", required=True)
+parser = argparse.ArgumentParser(
+    description="Split *.cc files in examples by searching for //@")
+parser.add_argument('--sourcedir', '-s', dest="source_dir",
+                    help='source directory containing the .cc files', required=True)
+parser.add_argument('--targetdir', '-t', dest='target_dir',
+                    help="target directory for the split examples", required=True)
 args = parser.parse_args()
 
 
@@ -22,7 +25,7 @@ for f in glob.glob(os.path.join(args.source_dir + "/*.cc")):
     current_example = None
     for l in lines:
 
-        if l.startswith("//@"):
+        if l.lstrip().startswith("//@"):
             prefix, num = l.strip().split('@')
             if current_example is not None and num != current_example:
                 print("Error: Previous example did not end")
@@ -50,5 +53,6 @@ for f in glob.glob(os.path.join(args.source_dir + "/*.cc")):
             f_out.writelines(examples[k])
             f_out.close()
 
-print("split examples into " + str(num_examples) + " files into " + str(args.target_dir))
+print("split examples into " + str(num_examples) +
+      " files into " + str(args.target_dir))
 # print example_files
