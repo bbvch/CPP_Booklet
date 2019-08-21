@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.12)
 project("CPP_Booklet"
-        VERSION 1.1.0
+        VERSION 1.0.0
         DESCRIPTION "C++ source files for the CPP booklet from bbv"
         HOMEPAGE_URL "https://github.com/bbvch/CPP_Booklet")
 
