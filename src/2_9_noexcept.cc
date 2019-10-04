@@ -38,7 +38,7 @@ public:
   void old_syntax_func() throw() {}
 
   // deprecated since C++11 but the same as noexcept(false)
-  // dynamic exception specifications are no longer allowe in C++17
+  // dynamic exception specifications are no longer allowed in C++17
   // void old_syntax_throwing_func() throw(myException) { throw myException(); }
 
 private:

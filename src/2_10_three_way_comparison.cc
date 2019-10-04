@@ -16,7 +16,7 @@ public:
     Circle(float r) : radius(r) {};
     float GetRadius() { return radius; };
     std::partial_ordering operator<=> (Circle& rhs) {
-      // just compare by radius
+        // compare by radius
         return radius <=> rhs.GetRadius();
     }
 private:
@@ -28,7 +28,13 @@ public:
     Rectangle(unsigned int a, unsigned int b) : length(a), width(b) {};
     unsigned int GetArea() { return length * width; };
 
-    std::weak_ordering operator<=> (Rectangle& rhs) {
+    /*
+        Note:
+        No need to define any other compare operator anymore
+    */    
+    std::weak_ordering operator<=> (Rectangle& rhs)
+    {
+        // compare by Area
         return GetArea()<=>rhs.GetArea();
     };
 private:

@@ -10,28 +10,28 @@
 **/
 
 #ifdef __has_include
-	#if __has_include(<math>)
-		#include <math>
 
-		double GetAreaOfCircle(const double radius)
-		{
-			return std::math::pi * radius * radius;
-		};
+#include <iostream>
+#if __has_include(<numbers>)
+#include <numbers>
 
-		int main() {
-		  const double r = 1.23;
-		  std::cout << "Area of Circle with " << r << " is: " << GetAreaOfCircle(r) << std::endl;
-		  return 0;
-		}
-
-	#else
-
-	#include <iostream>
+	double GetAreaOfCircle(const double radius)
+	{
+		return std::numbers::pi * radius * radius;
+	};
 
 	int main() {
-	  std::cout << "std::math not implemented yet!" << std::endl;
-	  return 1;
+	const double r = 1.23;
+	std::cout << "Area of Circle with Radius " << r << " is: " << GetAreaOfCircle(r) << std::endl;
+	    return 0;
 	}
 
-	#endif	// __has_include(<math.h>)
+#else
+
+	int main() {
+	    std::cout << "Could not include std::numbers" << std::endl;
+	    return 1;
+	}
+
+#endif	// __has_include(<numbers.h>)
 #endif	// __has_include

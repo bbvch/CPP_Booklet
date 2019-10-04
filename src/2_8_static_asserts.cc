@@ -15,7 +15,7 @@ static_assert((sizeof(long) == 8), "64 bit code not supported!");
 #endif
 
 template <typename T> struct Dummy {
-  static_assert(sizeof(int) >= sizeof(T), "Dummy<T>: T is too small!");
+    static_assert(sizeof(int) >= sizeof(T), "Dummy<T>: T is too small!");
 };
 //@17
 
