@@ -30,7 +30,7 @@ public:
 
     /*
         Note:
-        No need to define any other compare operator anymore
+        No need to define any other compare operator other than <=>
     */    
     std::weak_ordering operator<=> (Rectangle& rhs)
     {
