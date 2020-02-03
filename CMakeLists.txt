@@ -106,22 +106,22 @@ target_compile_features(2_19_alignment
                         cxx_alignas
                         cxx_alignof)
 
-add_executable(2_21_move_semantics src/2_21_move_semantics.cc)
-target_compile_features(2_21_move_semantics PRIVATE cxx_std_17)
+add_executable(2_20_move_semantics src/2_20_move_semantics.cc)
+target_compile_features(2_20_move_semantics PRIVATE cxx_std_17)
 
-add_executable(2_23_variadic_templates src/2_23_variadic_templates.cc)
+add_executable(2_22_variadic_templates src/2_22_variadic_templates.cc)
 # needs cxx_std_17 because of fold expressions
-target_compile_features(2_23_variadic_templates
+target_compile_features(2_22_variadic_templates
                         PRIVATE
                         cxx_variadic_templates
                         cxx_std_17)
 
-add_executable(2_25_return_type_deduction src/2_25_return_type_deduction.cc)
-target_compile_features(2_25_return_type_deduction PRIVATE
+add_executable(2_24_return_type_deduction src/2_24_return_type_deduction.cc)
+target_compile_features(2_24_return_type_deduction PRIVATE
                         cxx_return_type_deduction)
 
-add_executable(2_26_structured_bindings src/2_26_structured_bindings.cc)
-target_compile_features(2_26_structured_bindings PRIVATE cxx_std_17)
+add_executable(2_25_structured_bindings src/2_25_structured_bindings.cc)
+target_compile_features(2_25_structured_bindings PRIVATE cxx_std_17)
 
 add_executable(2_2_unified_initialisation src/2_2_unified_initialisation.cc)
 target_compile_features(2_2_unified_initialisation
@@ -129,28 +129,28 @@ target_compile_features(2_2_unified_initialisation
                         cxx_uniform_initialization
                         cxx_aggregate_default_initializers)
 
-add_executable(2_27_selection_statements_with_initializers
-               src/2_27_selection_statements_with_initializers.cc)
-target_compile_features(2_27_selection_statements_with_initializers PRIVATE
+add_executable(2_26_selection_statements_with_initializers
+               src/2_26_selection_statements_with_initializers.cc)
+target_compile_features(2_26_selection_statements_with_initializers PRIVATE
                         cxx_std_17)
 
-add_executable(2_28_standard_attributes src/2_28_standard_attributes.cc)
-target_compile_features(2_28_standard_attributes PRIVATE cxx_attributes)
-target_compile_options(2_28_standard_attributes
+add_executable(2_27_standard_attributes src/2_27_standard_attributes.cc)
+target_compile_features(2_27_standard_attributes PRIVATE cxx_attributes)
+target_compile_options(2_27_standard_attributes
                        PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/std:c++17>)
 
-add_executable(2_29_hex_float_literals src/2_29_hex_float_literals.cc)
-target_compile_features(2_29_hex_float_literals
+add_executable(2_28_hex_float_literals src/2_28_hex_float_literals.cc)
+target_compile_features(2_28_hex_float_literals
                         PRIVATE
                         cxx_raw_string_literals
                         cxx_digit_separators)
 
-add_executable(2_32_has_include src/2_32_has_include.cc)
-target_compile_features(2_32_has_include PRIVATE cxx_std_17)
+add_executable(2_31_has_include src/2_31_has_include.cc)
+target_compile_features(2_31_has_include PRIVATE cxx_std_17)
 
-add_executable(2_32_1_guaranteed_copy_elision
-               src/2_32_1_guaranteed_copy_elision.cc)
-target_compile_features(2_32_1_guaranteed_copy_elision PRIVATE cxx_std_17)
+add_executable(2_31_1_guaranteed_copy_elision
+               src/2_31_1_guaranteed_copy_elision.cc)
+target_compile_features(2_31_1_guaranteed_copy_elision PRIVATE cxx_std_17)
 
 add_executable(2_32_1_variable_templates src/2_32_1_variable_templates.cc)
 target_compile_features(2_32_1_variable_templates PRIVATE
@@ -205,28 +205,24 @@ if(DEFINED ENABLE_CPP20_FEATURES)
   target_compile_options(2_1_math_includes
                          PRIVATE $<$<CXX_COMPILER_ID:Clang>: --std=c++2a>)
 
-  add_executable(2_20_stdspan src/2_20_stdspan.cc)
-  target_compile_options(2_20_stdspan
+  add_executable(2_21_coroutine_await src/2_21_coroutine_await.cc)
+  target_compile_options(2_21_coroutine_await
                          PRIVATE $<$<CXX_COMPILER_ID:Clang>: --std=c++2a>)
 
-  add_executable(2_22_coroutine_await src/2_22_coroutine_await.cc)
-  target_compile_options(2_22_coroutine_await
+  add_executable(2_21_coroutine_return src/2_21_coroutine_return.cc)
+  target_compile_options(2_21_coroutine_return
                          PRIVATE $<$<CXX_COMPILER_ID:Clang>: --std=c++2a>)
 
-  add_executable(2_22_coroutine_return src/2_22_coroutine_return.cc)
-  target_compile_options(2_22_coroutine_return
+  add_executable(2_21_coroutine_yield src/2_21_coroutine_yield.cc)
+  target_compile_options(2_21_coroutine_yield
                          PRIVATE $<$<CXX_COMPILER_ID:Clang>: --std=c++2a>)
 
-  add_executable(2_22_coroutine_yield src/2_22_coroutine_yield.cc)
-  target_compile_options(2_22_coroutine_yield
+  add_executable(2_23_concepts src/2_23_concepts.cc)
+  target_compile_options(2_23_concepts
                          PRIVATE $<$<CXX_COMPILER_ID:Clang>: --std=c++2a>)
 
-  add_executable(2_24_concepts src/2_24_concepts.cc)
-  target_compile_options(2_24_concepts
-                         PRIVATE $<$<CXX_COMPILER_ID:Clang>: --std=c++2a>)
-
-  add_executable(2_31_modules src/2_31_modules.cc)
-  target_compile_options(2_31_modules
+  add_executable(2_30_modules src/2_30_modules.cc)
+  target_compile_options(2_30_modules
                          PRIVATE $<$<CXX_COMPILER_ID:Clang>: --std=c++2a>)
 
   add_executable(2_4_std_format src/2_4_std_format.cc)
