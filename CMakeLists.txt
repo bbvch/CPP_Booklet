@@ -152,8 +152,8 @@ add_executable(2_31_1_guaranteed_copy_elision
                src/2_31_1_guaranteed_copy_elision.cc)
 target_compile_features(2_31_1_guaranteed_copy_elision PRIVATE cxx_std_17)
 
-add_executable(2_32_1_variable_templates src/2_32_1_variable_templates.cc)
-target_compile_features(2_32_1_variable_templates PRIVATE
+add_executable(2_31_1_variable_templates src/2_31_1_variable_templates.cc)
+target_compile_features(2_31_1_variable_templates PRIVATE
                         cxx_variable_templates)
 
 add_executable(2_3_2_decltype src/2_3_2_decltype.cc)
