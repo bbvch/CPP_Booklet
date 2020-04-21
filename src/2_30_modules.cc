@@ -11,7 +11,7 @@
 **/
 
 
-#ifdef _­_­cpp_­modules
+#ifdef __cpp_modules
 
 // at given time frame partial modules were not implemented yet
 import std;

@@ -108,5 +108,32 @@ void illustrate_carries_dependency() {
     transparent_func(atomic); // marked as to work in the same memory-dependency
                               // tree, compiler can omit the memory fence
 }
+
+// Example for unlikely
+void copy_from_buffer(char * buffer, size_t size)
+{
+	// function is called very often, and pointer is almost always valid
+	if(nullptr == buffer) [[unlikely]]
+	{
+		return;
+	}
+}
+
+enum class ErrorCode {
+    NoError,
+    OutOfMemory,
+    InvalidSize,
+    // ...
+};
+
+// Example for likely
+void check_result(ErrorCode error)
+{
+    switch(error)
+    case ErrorCode::NoError: [[likely]]
+        break;
+    // ...
+}
+
 //@46
 int main(int argc, char **argv) {}
