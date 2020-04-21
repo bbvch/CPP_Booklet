@@ -19,6 +19,7 @@ addons:
     packages:
       - ninja
       - shunit2
+    update: true
 
 os: linux
 env:
