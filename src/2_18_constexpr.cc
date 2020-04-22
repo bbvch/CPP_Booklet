@@ -29,7 +29,7 @@ struct Dummy {
 #ifdef EXPECT_FAILED_COMPILATION
 // fails because 'new' is a non-const operation
 constexpr Dummy *construct(int x, int y) { return new Dummy(x, y); }
-#endif
+#endif // EXPECT_FAILED_COMPILATION
 
 constexpr Dummy d{3, 4};
 // d.m_a is transformed to a constant expression 3
@@ -52,7 +52,7 @@ void local_function() {
 #ifdef EXPECT_FAILED_COMPILATION
     // Error: local variable cannot be declared
     constinit auto tmp = 0;
-#endif
+#endif // EXPECT_FAILED_COMPILATION
 }
 
 const char * g() {
@@ -68,8 +68,8 @@ constinit const char * c = f(true);
 #ifdef EXPECT_FAILED_COMPILATION
 // Error: does not have a constant initializer
 constinit const char * d = f(false);
-#endif
-#endif
+#endif // EXPECT_FAILED_COMPILATION
+#endif // __cpp_constinit
 
 #ifdef __cpp_consteval
 // Immediate Function, requires compile-time constants
@@ -93,7 +93,7 @@ int square3 = square(const_ten);
 // Error: call to square is not a constant expression
 int ten = 10;
 int square4 = square(ten);
-#endif
+#endif // EXPECT_FAILED_COMPILATION
 
 constinit int fourty_two = 42;
 struct CompileTimeInt {
@@ -103,9 +103,9 @@ struct CompileTimeInt {
 #ifdef EXPECT_FAILED_COMPILATION
 // Error: call to CompileTimeInt is not a constant expression
 CompileTimeInt FourtyTwo(fourty_two);
-#endif
+#endif // EXPECT_FAILED_COMPILATION
 
-#endif
+#endif // __cpp_consteval
 
 
 int main(int, char **) {}
