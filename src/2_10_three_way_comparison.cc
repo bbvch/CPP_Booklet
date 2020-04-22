@@ -42,6 +42,14 @@ private:
     unsigned int width;
 };
 
+struct ClassWithLotsOfMembers {
+	// usually a definition to compare all members would be
+	// necessary, simplified with operator <=> as default
+	auto operator<=>(const ClassWithLotsOfMembers &rhs) const = default;
+	// can now be compared by ==, !=, <=, >=, <, >
+};
+
+
 int main(int, char **) {
   Circle circle_a(1/3.14);
   Circle circle_b(1.234);
