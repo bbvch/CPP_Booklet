@@ -34,6 +34,38 @@ int main()
     // output is 0 4 16
   }
 
+  /*
+   * Get the first 12 Fibonacci Numbers
+   */
+  std::function<int(int)> fibo;
+  fibo = [&fibo] (int i) -> int { return i > 1? i* fibo(i-1) : 1;};
+
+  for(int i: std::views::iota(0) | std::views::transform(fibo)
+								| std::views::take(12))
+  {
+      std::cerr << i << std::endl;
+  }
+
+  /*
+   * Get all people with big feet
+   *
+   */
+
+  std::map <std::string, unsigned int> people_shoe_size_map = {
+          {"Alf", 40},
+          {"SuzyQ", 36},
+          {"Alain", 42},
+          {"Luci Fer", 37},
+          {"Christian", 47}
+      };
+
+  auto bigfoot = [] (const std::pair<std::string, unsigned int>& people_shoe) { return people_shoe.second > 46; };
+  for(const auto& el : people_shoe_size_map
+                     | std::views::filter(bigfoot))
+  {
+     std::cout << el.first << " has size " << el.second << std::endl;
+  }
+
   return 0;
 }
 

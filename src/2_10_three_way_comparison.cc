@@ -11,35 +11,34 @@
 
 #ifdef __cpp_impl_three_way_comparison
 
-class Circle {
+#include <compare>
+#include <iostream>
+
+struct Circle {
 public:
     Circle(float r) : radius(r) {};
-    float GetRadius() { return radius; };
     std::partial_ordering operator<=> (Circle& rhs) {
         // compare by radius
-        return radius <=> rhs.GetRadius();
+        return radius <=> rhs.radius;
     }
-private:
     float radius;
 };
 
-class Rectangle {
-public:
-    Rectangle(unsigned int a, unsigned int b) : length(a), width(b) {};
-    unsigned int GetArea() { return length * width; };
-
-    /*
-        Note:
-        No need to define any other compare operator other than <=>
-    */    
-    std::weak_ordering operator<=> (Rectangle& rhs)
-    {
-        // compare by Area
-        return GetArea()<=>rhs.GetArea();
-    };
-private:
-    unsigned int length;
-    unsigned int width;
+struct Rectangle {
+   Rectangle(int length, int height) : a(length), b(height), area(a*b){ };
+   const int a;
+   const int b;
+   const int area;
+	std::weak_ordering operator<=>( const  Rectangle &rhs)
+   {
+       if(a <=> rhs.a != 0
+       && b <=> rhs.b != 0
+       && area <=> rhs.area == 0)
+       {
+           return std::weak_ordering::equivalent;
+       }
+       return area <=> rhs.area;
+   }
 };
 
 struct ClassWithLotsOfMembers {
@@ -51,10 +50,13 @@ struct ClassWithLotsOfMembers {
 
 
 int main(int, char **) {
-  Circle circle_a(1/3.14);
-  Circle circle_b(1.234);
+  Circle circle_a(1.42f);
+  Circle circle_b(1.23f);
+
+  std::cout << std::boolalpha;
   std::cout << "Comparing Two Circles a and b: \n" << std::endl;
-  std::cout << " a <=> b : " << circle_a <==> circle_b << std::endl;
+  std::cout << " a <=> b  > 0: " << (circle_a <=> circle_b > 0) << std::endl;
+
 
   Rectangle rectangle_a(4,6);
   Rectangle rectangle_b(6,4);

@@ -11,42 +11,43 @@
 
 #ifdef __cpp_coroutines
 
+#include <assert>
+#include <coroutine>
+#include <functional>
 #include <iostream>
 #include <type_traits>
 
-// experimental ..?
-#include <experimental/coroutine>
 
-    class resumable {
+class resumable {
     public:
       // forward declare promise_type
       struct promise_type;
-      using coroutine_handle = std::experimental::coroutine_handle<promise_type>;
+      using coroutine_handle = std::coroutine_handle<promise_type>;
       resumable(coroutine_handle handle) : mhandle(handle) { assert(handle); }
 
-      // don't want to copy, don't want to move
+      // don't allow to copy and move
       resumable(resumable&) = delete;
       resumable(resumable&&) = delete;
 
       // returns true if coroutine can be resumed
       bool resume() {
-        if (not mhandle.done())
+        if (!mhandle.done())
           mhandle.resume();
           // if and only if the coroutine has reached the final suspend:
           // done returns true
-        return not mhandle.done();
+        return !mhandle.done();
       }
       // coroutine destruction => destroy handle
       ~resumable() { mhandle.destroy(); }
 
     private:
       // the coroutine_handle will be created by compiler
-      // side note: it's NOT threadsafe!!
+      // side note: it's NOT thread safe!!
       coroutine_handle mhandle;
-    };
+};
 
-    struct resumable::promise_type {
-      using coroutine_handle = std::experimental::coroutine_handle<promise_type>;
+struct resumable::promise_type {
+      using coroutine_handle = std::coroutine_handle<promise_type>;
 
       // called to create the resumable object
       // needs the handle which can be created from *this promise
@@ -55,8 +56,8 @@
       }
       // after each suspend resume has to be called
       // suspend_always was chosen arbitrarily
-      auto initial_suspend() { return std::experimental::suspend_always(); }
-      auto final_suspend() { return std::experimental::suspend_always(); }
+      auto initial_suspend() { return std::suspend_always(); }
+      auto final_suspend() { return std::suspend_always(); }
 
       // needed for co_await (otherwise undefined behaviour)
       void return_void() {}
@@ -65,18 +66,21 @@
         // must be defined how an exception is handled
         std::terminate();
       }
-    };
+};
 
 resumable foo_await()
 {
   std::cout << "Hello" << std::endl;
-  co_await std::experimental::suspend_always();
-  std::cout << "Coroutine co_await" << std::endl;
+  co_await std::suspend_always();
+  std::cout << "World!" << std::endl;
 }
+
 void example_co_await()
 {
   resumable res = foo_await();
-  while (res.resume()){};
+  while (res.resume() {
+      std::cout << " Coroutine suspended.." << std::endl;
+  };
 }
 
 

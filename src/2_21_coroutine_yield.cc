@@ -11,20 +11,20 @@
 
 #ifdef __cpp_coroutines
 
+#include <cassert>
+#include <functional>
 #include <iostream>
+#include <coroutine>
+#include <string>
 #include <type_traits>
 
-
-// experimental ..?
-#include <experimental/coroutine>
-
-    class resumable {
+class resumable {
     public:
       struct promise_type;
-      using coroutine_handle = std::experimental::coroutine_handle<promise_type>;
+      using coroutine_handle = std::coroutine_handle<promise_type>;
       resumable(coroutine_handle handle) : mhandle(handle) { assert(handle); }
 
-      // don't want to copy, don't want to move
+      // don't allow to copy and move
       resumable(resumable&) = delete;
       resumable(resumable&&) = delete;
 
@@ -33,23 +33,23 @@
 
       // returns true if coroutine can be resumed
       bool resume() {
-        if (not mhandle.done())
+        if (!mhandle.done())
           mhandle.resume();
           // if and only if the coroutine has reached the final suspend:
           // done returns true
-        return not mhandle.done();
+        return !mhandle.done();
       }
       // coroutine destruction => destroy handle
       ~resumable() { mhandle.destroy(); }
 
     private:
       // the coroutine_handle will be created by compiler
-      // side note: it's NOT threadsafe!!
+      // side note: it's NOT thread safe!!
       coroutine_handle mhandle;
-    };
+};
 
-    struct resumable::promise_type {
-      using coroutine_handle = std::experimental::coroutine_handle<promise_type>;
+struct resumable::promise_type {
+      using coroutine_handle = std::coroutine_handle<promise_type>;
 
       // called to create the resumable object
       // needs the handle which can be created from *this promise
@@ -57,33 +57,34 @@
         return coroutine_handle::from_promise(*this);
       }
       // after each suspend resume has to be called
-      auto initial_suspend() { return std::experimental::suspend_always(); }
-      auto final_suspend() { return std::experimental::suspend_always(); }
+      auto initial_suspend() { return std::suspend_always(); }
+      auto final_suspend() { return std::suspend_always(); }
 
       const char * mstring;
 
-       void return_void() {};
+      void return_void() {};
+
       auto yield_value(const char* string){
         mstring=string;
-        return std::experimental::suspend_always();
+        return std::suspend_always();
       }
 
       void unhandled_exception() {
         // must be defined how an exception is handled
         std::terminate();
       }
-    };
+};
 
 
-    const char* resumable::recent_val(){
-        return mhandle.promise().mstring;
-    }
+const char* resumable::recent_val(){
+	return mhandle.promise().mstring;
+}
 
 resumable foo_yield()
 {
-  while(true){
+  while(true) {
     co_yield "Hello";
-    co_yield "Coroutine co_yield";
+    co_yield "World!";
   }
 }
 
@@ -93,7 +94,7 @@ void example_co_yield()
   int i=10;
   while (i--) {
       res.resume();
-      std::cout << res.recent_val() << std::endl;
+      std::cout << i << " " << res.recent_val() << std::endl;
   }
 }
 
@@ -104,11 +105,11 @@ int main(){
 
 #else
 
-  #include <iostream>
+#include <iostream>
 
-  int main() {
-    std::cout << "coroutines not implemented yet!" << std::endl;
-    return 1;
-  }
+int main() {
+	std::cout << "coroutines not implemented yet!" << std::endl;
+	return 1;
+}
 
 #endif // __cpp_coroutines
