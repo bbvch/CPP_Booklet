@@ -37,7 +37,7 @@ struct Rectangle {
        {
            return std::weak_ordering::equivalent;
        }
-       return area <=> rhs.area;
+       return a <=> rhs.a;
    }
 };
 
@@ -61,7 +61,7 @@ int main(int, char **) {
   Rectangle rectangle_a(4,6);
   Rectangle rectangle_b(6,4);
   std::cout << "Comparing Two Rectangles a and b: \n" << std::endl;
-  std::cout << " a <=> b : " << rectangle_a <==> rectangle_b << std::endl;
+  std::cout << " a <=> b : " << (rectangle_a <=> rectangle_b == 0) << std::endl;
 
   return 0;
 }

@@ -18,18 +18,41 @@
 #include <string>
 #include <type_traits>
 
-class resumable {
+class Generator {
     public:
-      struct promise_type;
+    struct promise_type {
+      // called to create the Generator object
+      // needs the handle which can be created from *this promise
+      auto get_return_object() {
+        return coroutine_handle::from_promise(*this);
+      }
+      // after each suspend resume has to be called
+      auto initial_suspend() { return std::suspend_always(); }
+      auto final_suspend() { return std::suspend_always(); }
+
+      int m_number;
+
+      void return_void() {};
+
+      auto yield_value(int number){
+        m_number=number;
+        return std::suspend_always();
+      }
+
+      void unhandled_exception() {
+        // must be defined how an exception is handled
+        std::terminate();
+      }
+     };
       using coroutine_handle = std::coroutine_handle<promise_type>;
-      resumable(coroutine_handle handle) : mhandle(handle) { assert(handle); }
+      Generator(coroutine_handle handle) : mhandle(handle) { assert(handle); }
 
       // don't allow to copy and move
-      resumable(resumable&) = delete;
-      resumable(resumable&&) = delete;
+      Generator(Generator&) = delete;
+      Generator(Generator&&) = delete;
 
       // necessary for co_yield
-      const char* recent_val();
+      int recent_val(){	return mhandle.promise().m_number; }
 
       // returns true if coroutine can be resumed
       bool resume() {
@@ -40,7 +63,7 @@ class resumable {
         return !mhandle.done();
       }
       // coroutine destruction => destroy handle
-      ~resumable() { mhandle.destroy(); }
+      ~Generator() { mhandle.destroy(); }
 
     private:
       // the coroutine_handle will be created by compiler
@@ -48,53 +71,23 @@ class resumable {
       coroutine_handle mhandle;
 };
 
-struct resumable::promise_type {
-      using coroutine_handle = std::coroutine_handle<promise_type>;
-
-      // called to create the resumable object
-      // needs the handle which can be created from *this promise
-      auto get_return_object() {
-        return coroutine_handle::from_promise(*this);
-      }
-      // after each suspend resume has to be called
-      auto initial_suspend() { return std::suspend_always(); }
-      auto final_suspend() { return std::suspend_always(); }
-
-      const char * mstring;
-
-      void return_void() {};
-
-      auto yield_value(const char* string){
-        mstring=string;
-        return std::suspend_always();
-      }
-
-      void unhandled_exception() {
-        // must be defined how an exception is handled
-        std::terminate();
-      }
-};
 
 
-const char* resumable::recent_val(){
-	return mhandle.promise().mstring;
-}
-
-resumable foo_yield()
+Generator get_number(int start, int stepsize)
 {
-  while(true) {
-    co_yield "Hello";
-    co_yield "World!";
+  for(int i = start;;i += stepsize) {
+    co_yield i;
   }
 }
 
+
 void example_co_yield()
 {
-  resumable res = foo_yield();
+  Generator gen = get_number(100, 12);
   int i=10;
   while (i--) {
-      res.resume();
-      std::cout << i << " " << res.recent_val() << std::endl;
+      gen.resume();
+      std::cout << " " << gen.recent_val() << std::endl;
   }
 }
 
