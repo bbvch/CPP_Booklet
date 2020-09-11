@@ -59,7 +59,7 @@ add_executable(2_12_nested_namespace_definitions
                src/2_12_nested_namespace_definitions.cc)
 target_compile_features(2_12_nested_namespace_definitions PRIVATE cxx_std_17)
 
-add_executable(2_13_trailing_return_types src/2_16_trailing_return_types.cc)
+add_executable(2_13_trailing_return_types src/2_13_trailing_return_types.cc)
 target_compile_features(2_13_trailing_return_types PRIVATE
                         cxx_trailing_return_types)
 
