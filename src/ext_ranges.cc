@@ -44,7 +44,7 @@ int main()
   for(int i: std::views::iota(0) | std::views::transform(fibo)
 								| std::views::take(12))
   {
-      std::cerr << i << std::endl;
+      std::cout << i << std::endl;
   }
 
   /*
