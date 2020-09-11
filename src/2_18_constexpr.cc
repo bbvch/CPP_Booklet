@@ -1,6 +1,6 @@
 /**
 * Example for section 2.18
-* of the C++ Booklet (https://goo.gl/VJ4T3A)
+* of the C++ Booklet
 * published by bbv software services AG (c) 2020
 *
 *  This example illustrates the use of constexpr for simple expressions
@@ -16,7 +16,7 @@ constexpr double pi{
     3.1416}; // const floating point instead of a #define PI 3.1416
 constexpr int square(int x) { return x * x; }
 
-// constant expressions and functions can be used in arrays and simuliar
+// constant expressions and functions can be used in arrays and similar
 float fArray[square(5)];
 
 // constant expressions can be used as template arguments
@@ -31,21 +31,21 @@ struct Dummy {
 constexpr Dummy *construct(int x, int y) { return new Dummy(x, y); }
 #endif // EXPECT_FAILED_COMPILATION
 
-constexpr Dummy d{3, 4};
+constexpr Dummy dy{3, 4};
 // d.m_a is transformed to a constant expression 3
-int iArray[d.m_a];
+int iArray[dy.m_a];
 //@26
 
 #ifdef __cpp_constinit
 // OK, initialized at compile-time
 constinit auto GlobalPhrase = "Work's fine";
 
-struct Dummy {
-    constinit static int MagicNumber;
+struct Magic {
+    constinit static int Number;
 };
 
 // OK
-constinit int Dummy::MagicNumber = 42;
+constinit int Magic::Number = 42;
 
 
 void local_function() {
@@ -73,26 +73,26 @@ constinit const char * d = f(false);
 
 #ifdef __cpp_consteval
 // Immediate Function, requires compile-time constants
-consteval int square(int n) {
+consteval int square_consteval(int n) {
     return n*n;
 }
 
 // OK
-int square1 = square(10);
+int square1 = square_consteval(10);
 
 // OK
 constexpr int constexpr_ten = 10;
-int square2 = square(constexpr_ten);
+int square2 = square_consteval(constexpr_ten);
 
 // OK
 const int const_ten = 10;
-int square3 = square(const_ten);
+int square3 = square_consteval(const_ten);
 
 
 #ifdef EXPECT_FAILED_COMPILATION
 // Error: call to square is not a constant expression
 int ten = 10;
-int square4 = square(ten);
+int square4 = square_consteval(ten);
 #endif // EXPECT_FAILED_COMPILATION
 
 constinit int fourty_two = 42;
