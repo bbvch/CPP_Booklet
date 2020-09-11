@@ -9,6 +9,8 @@
 *
 **/
 
+#include <string>
+#include <iostream>
 //@8
 // non scoped enum
 enum Color { Cyan, Magenta, Yellow, Black };
@@ -54,6 +56,7 @@ int main(int, char **) {
   }
 
 #ifdef __cpp_using_enum
+// MSVC 19.24 only, compile with /std:c++latest
   std::cout << "Apple and " << GetFruitName(Fruit::Pear) << std::endl;
 #endif
 //@8
