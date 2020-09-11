@@ -1,6 +1,6 @@
 /**
 * Example for section 2.5
-* of the C++ Booklet (https://goo.gl/VJ4T3A)
+* of the C++ Booklet
 * published by bbv software services AG (c) 2020
 *
 * this examples illustrates the extended syntax available for enums since C++11

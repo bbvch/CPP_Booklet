@@ -1,6 +1,6 @@
 /**
 * Example for section 2.13
-* of the C++ Booklet (https://goo.gl/VJ4T3A)
+* of the C++ Booklet
 * published by bbv software services AG (c) 2020
 *
 * This exampple illustrates the use of a range based for loop

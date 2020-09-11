@@ -1,9 +1,9 @@
 /**
 * Example for section 2.1
-* of the C++ Booklet (https://goo.gl/VJ4T3A)
+* of the C++ Booklet
 * published by bbv software services AG (c) 2020
 *
-*  This example illustrates the use of mathetmatical symbols defined in std library
+*  This example illustrates the use of mathematical symbols defined in std library
 *
 * SPDX-License-Identifier: GPL-3.0
 *

@@ -1,6 +1,6 @@
 /**
  * Example for section 2.26
- * of the C++ Booklet (https://goo.gl/VJ4T3A)
+ * of the C++ Booklet
  * published by bbv software services AG (c) 2017
  *
  * This example illustrates the use of structured bindings

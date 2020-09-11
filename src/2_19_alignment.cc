@@ -1,6 +1,6 @@
 /**
 * Example for section 2.19
-* of the C++ Booklet (https://goo.gl/VJ4T3A)
+* of the C++ Booklet
 * published by bbv software services AG (c) 2020
 *
 * this example illustrates the usage of alignof, alignas and offsetof operators
