@@ -9,9 +9,9 @@
 *
 **/
 
-#ifdef __cpp_coroutines
+#ifdef __cpp_impl_coroutine
 
-#include <assert>
+#include <cassert>
 #include <coroutine>
 #include <functional>
 #include <iostream>
@@ -78,7 +78,7 @@ resumable foo_await()
 void example_co_await()
 {
   resumable res = foo_await();
-  while (res.resume() {
+  while (res.resume()) {
       std::cout << " Coroutine suspended.." << std::endl;
   };
 }

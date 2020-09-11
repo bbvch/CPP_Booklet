@@ -9,7 +9,7 @@
 *
 **/
 
-#ifdef __cpp_coroutines
+#ifdef __cpp_impl_coroutine
 
 #include <cassert>
 #include <functional>
