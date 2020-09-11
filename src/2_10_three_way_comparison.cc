@@ -29,11 +29,9 @@ struct Rectangle {
    const int a;
    const int b;
    const int area;
-	std::weak_ordering operator<=>( const  Rectangle &rhs)
+   std::weak_ordering operator<=>(const Rectangle &rhs)
    {
-       if(a <=> rhs.a != 0
-       && b <=> rhs.b != 0
-       && area <=> rhs.area == 0)
+       if((a <=> rhs.a != 0 || b <=> rhs.b != 0) && area <=> rhs.area == 0)
        {
            return std::weak_ordering::equivalent;
        }
