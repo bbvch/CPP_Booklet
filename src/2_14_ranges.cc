@@ -12,7 +12,8 @@
 // ranges was not included yet..and has no feature test macro
 #ifdef __has_include
 #if __has_include (<ranges>)
-
+ #include <functional>
+ #include <map>
  #include <vector>
  #include <ranges>
  #include <iostream>
@@ -29,7 +30,7 @@ int main()
   // just plug in and combine adaptors as necessary
   for (int i : std::views::iota(0, 5) | std::views::filter(even)
    	   	   	   	   	   	   	   	      | std::views::transform(square)) {
-    std::cout << i << ' ';
+    std::cout << i << ' ' << std::endl;
 
     // output is 0 4 16
   }
