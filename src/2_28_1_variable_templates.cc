@@ -1,7 +1,7 @@
 /**
-* Example for section 2.26
-* of the C++ Booklet (https://goo.gl/VJ4T3A)
-* published by bbv software services AG (c) 2017
+* Example for section 2.32.1
+* of the C++ Booklet
+* published by bbv software services AG (c) 2020
 *
 *  This example illustrates the definition of variable templates
 *
@@ -21,4 +21,3 @@ int main(int, char**)
 {
 return 0;
 }
-

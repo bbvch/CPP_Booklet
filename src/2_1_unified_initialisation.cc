@@ -1,10 +1,10 @@
 /**
-* Example for section 2.1  
-* of the C++ Booklet (https://goo.gl/VJ4T3A)
-* published by bbv software services AG (c) 2017
+* Example for section 2.2
+* of the C++ Booklet
+* published by bbv software services AG (c) 2020
 *
-* This example illustrates the unified syntax for initializing stuff in
-* C++11/14/17
+* This example illustrates the unified syntax for initializing different types in
+* C++11/14/17/20
 *
 * SPDX-License-Identifier: GPL-3.0
 *

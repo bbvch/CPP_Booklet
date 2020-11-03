@@ -1,7 +1,7 @@
 /**
- * Example for section 2.6
- * of the C++ Booklet (https://goo.gl/VJ4T3A)
- * published by bbv software services AG (c) 2017
+ * Example for section 2.9
+ * of the C++ Booklet
+* published by bbv software services AG (c) 2020
  *
  *
  * SPDX-License-Identifier: GPL-3.0
@@ -38,7 +38,7 @@ public:
   void old_syntax_func() throw() {}
 
   // deprecated since C++11 but the same as noexcept(false)
-  // dynamic exception specifications are no longer allowe in C++17
+  // dynamic exception specifications are no longer allowed in C++17
   // void old_syntax_throwing_func() throw(myException) { throw myException(); }
 
 private:

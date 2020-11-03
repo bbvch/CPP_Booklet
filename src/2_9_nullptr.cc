@@ -1,7 +1,7 @@
 /**
-* Example for section 2.8
-* of the C++ Booklet (https://goo.gl/VJ4T3A)
-* published by bbv software services AG (c) 2017
+* Example for section 2.11
+* of the C++ Booklet
+* published by bbv software services AG (c) 2020
 *
 *
 * SPDX-License-Identifier: GPL-3.0

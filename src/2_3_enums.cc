@@ -1,7 +1,7 @@
 /**
-* Example for section 2.3
-* of the C++ Booklet (https://goo.gl/VJ4T3A)
-* published by bbv software services AG (c) 2017
+* Example for section 2.5
+* of the C++ Booklet
+* published by bbv software services AG (c) 2020
 *
 * this examples illustrates the extended syntax available for enums since C++11
 *
@@ -9,6 +9,8 @@
 *
 **/
 
+#include <string>
+#include <iostream>
 //@8
 // non scoped enum
 enum Color { Cyan, Magenta, Yellow, Black };
@@ -19,8 +21,18 @@ enum class RGB { Red, Green, Blue, Black };
 enum class CMY { Cyan, Magenta, Yello, Black };
 
 // scoped enum with explicit type specifier
-enum class Fruits : unsigned int { Apples, Pears };
+enum class Fruit : unsigned int { Apple, Pear };
 //@8
+
+#ifdef __cpp_using_enum
+std::string GetFruitName(Fruit fruit) {
+  switch (fruit) {
+    using enum Fruit;     // ok with C++20
+    case Apple:     return "Apple";
+    case Pear:      return "Pear";
+  }
+}
+#endif
 
 int main(int, char **) {
 //@8
@@ -42,5 +54,10 @@ int main(int, char **) {
   // Compiles with only a warning but is semantically incorrect
   if (Sound::Boing == Color::Yellow) {
   }
+
+#ifdef __cpp_using_enum
+// MSVC 19.24 only, compile with /std:c++latest
+  std::cout << "Apple and " << GetFruitName(Fruit::Pear) << std::endl;
+#endif
 //@8
 }

@@ -1,7 +1,7 @@
 /**
-* Example for section 2.21
-* of the C++ Booklet (https://goo.gl/VJ4T3A)
-* published by bbv software services AG (c) 2017
+* Example for section 2.28
+* of the C++ Booklet
+* published by bbv software services AG (c) 2020
 *
 * This example illustrates the usage of standard-attributes
 *
@@ -108,5 +108,32 @@ void illustrate_carries_dependency() {
     transparent_func(atomic); // marked as to work in the same memory-dependency
                               // tree, compiler can omit the memory fence
 }
+
+// Example for unlikely
+void copy_from_buffer(char * buffer, size_t size)
+{
+	// function is called very often, and pointer is almost always valid
+	if(nullptr == buffer) [[unlikely]]
+	{
+		return;
+	}
+}
+
+enum class ErrorCode {
+    NoError,
+    OutOfMemory,
+    InvalidSize,
+    // ...
+};
+
+// Example for likely
+void check_result(ErrorCode error)
+{
+    switch(error)
+    case ErrorCode::NoError: [[likely]]
+        break;
+    // ...
+}
+
 //@46
 int main(int argc, char **argv) {}

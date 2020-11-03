@@ -1,7 +1,7 @@
 /**
-* Example for section 2.24
-* of the C++ Booklet (https://goo.gl/VJ4T3A)
-* published by bbv software services AG (c) 2017
+* Example for section 2.32
+* of the C++ Booklet
+* published by bbv software services AG (c) 2020
 *
 * This exmaple illustrates the use of the __has_include preprocessor directive
 *

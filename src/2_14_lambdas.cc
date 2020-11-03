@@ -1,7 +1,7 @@
 /**
-* Example for section 2.13
-* of the C++ Booklet (https://goo.gl/VJ4T3A)
-* published by bbv software services AG (c) 2017
+* Example for section 2.17
+* of the C++ Booklet
+* published by bbv software services AG (c) 2020
 *
 * This example illustrates the usage of lambda functions
 *
@@ -53,6 +53,15 @@ int main(int, char **) {
     r += 2;
     return x + 2;
   };
+#if __cplusplus > 201907L
+  // c++20 capture allows the following:
+struct test {
+  void myFunc() {
+    const auto capture_also_this_pointer = [=, this](){};
+  };
+};
+
+#endif
 //@24
 
 //@25

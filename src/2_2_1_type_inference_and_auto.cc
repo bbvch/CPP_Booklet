@@ -1,9 +1,9 @@
 /**
-* Example for section 2.2
-* of the C++ Booklet (https://goo.gl/VJ4T3A)
-* published by bbv software services AG (c) 2017
+* Example for section 2.3
+* of the C++ Booklet
+* published by bbv software services AG (c) 2020
 *
-* This example illustrates the use of the 'auto' keyword and type infrence
+* This example illustrates the use of the 'auto' keyword and type inference
 *
 * SPDX-License-Identifier: GPL-3.0
 *

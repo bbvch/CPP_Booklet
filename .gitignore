@@ -15,3 +15,6 @@ examples
 html/
 build/
 .vscode
+/src/.cproject
+/src/.project
+/.gitignore

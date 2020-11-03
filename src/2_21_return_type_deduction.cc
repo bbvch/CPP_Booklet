@@ -1,7 +1,7 @@
 /**
-* Example for section 2.18
-* of the C++ Booklet (https://goo.gl/VJ4T3A)
-* published by bbv software services AG (c) 2017
+* Example for section 2.25
+* of the C++ Booklet
+* published by bbv software services AG (c) 2020
 *
 * This example illustrates the usage of return type deduction
 *
@@ -43,7 +43,7 @@ decltype(auto) func1() {
 decltype(auto) func2() {
   static int x = 777;
   return (x); // decltype( (x) ) is int&
-  // func2 returns now "int&”
+  // func2 returns now "int&"
 }
 
 int main(int, char **) {

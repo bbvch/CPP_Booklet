@@ -1,7 +1,7 @@
 /**
- * Example for section 2.7
- * of the C++ Booklet (https://goo.gl/VJ4T3A)
- * published by bbv software services AG (c) 2017
+ * Example for section 2.8
+ * of the C++ Booklet
+* published by bbv software services AG (c) 2020
  *
  * This example illustrates the usage of static_asserts
  *
@@ -15,7 +15,7 @@ static_assert((sizeof(long) == 8), "64 bit code not supported!");
 #endif
 
 template <typename T> struct Dummy {
-  static_assert(sizeof(int) >= sizeof(T), "Dummy<T>: T is too small!");
+    static_assert(sizeof(int) >= sizeof(T), "Dummy<T>: T is too small!");
 };
 //@17
 
